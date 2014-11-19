@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		A6E23C9B1A154E350057DB7B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E23C9A1A154E350057DB7B /* main.swift */; };
+		A6E2B0701A15EB7C0025C2E9 /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */; };
+		A6E2B0731A162D200025C2E9 /* codeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2B0721A162D200025C2E9 /* codeScreen.swift */; };
+		A6E2B0751A162D530025C2E9 /* Arendelle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2B0741A162D530025C2E9 /* Arendelle.swift */; };
+		A6E7EA311A19D07600192409 /* P.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7EA301A19D07600192409 /* P.swift */; };
+		A6E7EA341A1A317100192409 /* OpenCloseLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7EA331A1A317100192409 /* OpenCloseLexer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +30,11 @@
 /* Begin PBXFileReference section */
 		A6E23C971A154E350057DB7B /* Swifty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Swifty; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E23C9A1A154E350057DB7B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eval.swift; sourceTree = "<group>"; };
+		A6E2B0721A162D200025C2E9 /* codeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = codeScreen.swift; sourceTree = "<group>"; };
+		A6E2B0741A162D530025C2E9 /* Arendelle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arendelle.swift; sourceTree = "<group>"; };
+		A6E7EA301A19D07600192409 /* P.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P.swift; sourceTree = "<group>"; };
+		A6E7EA331A1A317100192409 /* OpenCloseLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenCloseLexer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +51,7 @@
 		A6E23C8E1A154E350057DB7B = {
 			isa = PBXGroup;
 			children = (
+				A6E7EA301A19D07600192409 /* P.swift */,
 				A6E23C991A154E350057DB7B /* Swifty */,
 				A6E23C981A154E350057DB7B /* Products */,
 			);
@@ -57,9 +68,45 @@
 		A6E23C991A154E350057DB7B /* Swifty */ = {
 			isa = PBXGroup;
 			children = (
+				A6E2B06D1A15EB390025C2E9 /* Engine */,
 				A6E23C9A1A154E350057DB7B /* main.swift */,
 			);
 			path = Swifty;
+			sourceTree = "<group>";
+		};
+		A6E2B06D1A15EB390025C2E9 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				A6E7EA321A1A2E3400192409 /* Lexers */,
+				A6E2B06E1A15EB450025C2E9 /* Kernel */,
+				A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */,
+			);
+			name = Engine;
+			sourceTree = "<group>";
+		};
+		A6E2B06E1A15EB450025C2E9 /* Kernel */ = {
+			isa = PBXGroup;
+			children = (
+				A6E2B0711A162D090025C2E9 /* Structs */,
+			);
+			name = Kernel;
+			sourceTree = "<group>";
+		};
+		A6E2B0711A162D090025C2E9 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				A6E2B0721A162D200025C2E9 /* codeScreen.swift */,
+				A6E2B0741A162D530025C2E9 /* Arendelle.swift */,
+			);
+			name = Structs;
+			sourceTree = "<group>";
+		};
+		A6E7EA321A1A2E3400192409 /* Lexers */ = {
+			isa = PBXGroup;
+			children = (
+				A6E7EA331A1A317100192409 /* OpenCloseLexer.swift */,
+			);
+			name = Lexers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +166,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6E23C9B1A154E350057DB7B /* main.swift in Sources */,
+				A6E7EA311A19D07600192409 /* P.swift in Sources */,
+				A6E2B0751A162D530025C2E9 /* Arendelle.swift in Sources */,
+				A6E2B0731A162D200025C2E9 /* codeScreen.swift in Sources */,
+				A6E2B0701A15EB7C0025C2E9 /* Eval.swift in Sources */,
+				A6E7EA341A1A317100192409 /* OpenCloseLexer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +285,7 @@
 				A6E23CA01A154E350057DB7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

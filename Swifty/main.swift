@@ -8,20 +8,29 @@
 
 import Foundation
 
-let x = 43 , y = 7, code = "[ 10 , [ 6 , pr ] pd ] [ 20 , pr ] 'hello'"
+var whileControl = true
 
-let result = masterEvaluator(code: code, screenWidth: x, screenHeight: y)
+while whileControl {
+    
+    println("Enter a code: ")
+    let x = 43 , y = 7, code = readLine()
+    
+    if code == "exit" { whileControl = false; break }
 
-println("Final Matrix:")
+    let result = masterEvaluator(code: code, screenWidth: x, screenHeight: y)
 
-//println("Matrix for the code \'" + arendelle.code + "\':")
-for var i = 0; i < y; i++ {
-    print("\n   ")
-    for var j = 0; j < x; j++ {
-        var color = result.screen[j,i]
-        print(color)
+    println("\n\nFinal Matrix:")
+
+    //println("Matrix for the code \'" + arendelle.code + "\':")
+    for var i = 0; i < y; i++ {
+        print("\n   ")
+        for var j = 0; j < x; j++ {
+            var color = result.screen[j,i]
+            print(color)
+        }
     }
+
+    println("\n\nFinal title: '\(result.title)'\n\n")
 }
 
-println("\n\nFinal title: '\(result.title)'")
-
+// done

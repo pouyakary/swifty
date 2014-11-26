@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */; };
+		A6897EC81A263D850074966A /* commandLineTools.m in Sources */ = {isa = PBXBuildFile; fileRef = A6897EC71A263D850074966A /* commandLineTools.m */; };
 		A6E23C9B1A154E350057DB7B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E23C9A1A154E350057DB7B /* main.swift */; };
 		A6E2B0701A15EB7C0025C2E9 /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */; };
 		A6E2B0731A162D200025C2E9 /* codeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2B0721A162D200025C2E9 /* codeScreen.swift */; };
@@ -31,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePartOpenCloseParser.swift; sourceTree = "<group>"; };
+		A6897EC61A263D840074966A /* Swifty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swifty-Bridging-Header.h"; sourceTree = "<group>"; };
+		A6897EC71A263D850074966A /* commandLineTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commandLineTools.m; sourceTree = "<group>"; };
 		A6E23C971A154E350057DB7B /* Swifty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Swifty; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E23C9A1A154E350057DB7B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eval.swift; sourceTree = "<group>"; };
@@ -52,12 +55,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A6E23C8E1A154E350057DB7B = {
+		A6897EC91A263E600074966A /* P-Framework */ = {
 			isa = PBXGroup;
 			children = (
 				A6E7EA301A19D07600192409 /* P.swift */,
+				A6897EC71A263D850074966A /* commandLineTools.m */,
+			);
+			name = "P-Framework";
+			sourceTree = "<group>";
+		};
+		A6E23C8E1A154E350057DB7B = {
+			isa = PBXGroup;
+			children = (
+				A6897EC91A263E600074966A /* P-Framework */,
 				A6E23C991A154E350057DB7B /* Swifty */,
 				A6E23C981A154E350057DB7B /* Products */,
+				A6897EC61A263D840074966A /* Swifty-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +188,7 @@
 				A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */,
 				A6E7EA311A19D07600192409 /* P.swift in Sources */,
 				A6E2B0751A162D530025C2E9 /* Arendelle.swift in Sources */,
+				A6897EC81A263D850074966A /* commandLineTools.m in Sources */,
 				A6E2B0731A162D200025C2E9 /* codeScreen.swift in Sources */,
 				A6E2B0701A15EB7C0025C2E9 /* Eval.swift in Sources */,
 				A6E7EA341A1A317100192409 /* OpenCloseLexer.swift in Sources */,
@@ -263,14 +277,21 @@
 		A6E23C9F1A154E350057DB7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swifty-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		A6E23CA01A154E350057DB7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swifty-Bridging-Header.h";
 			};
 			name = Release;
 		};

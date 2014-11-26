@@ -47,6 +47,7 @@ import Foundation
                 
             case "'" :
                 screen.title = onePartOpenCloseParser(openCloseCommand: "'", arendelle: &arendelle, screen: &screen)
+                --arendelle.i
                 
             // commands
                 

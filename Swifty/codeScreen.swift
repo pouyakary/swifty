@@ -19,6 +19,9 @@ struct codeScreen {
         
     }
     
+    // title
+    var title:String = ""
+    
     // Ordinations
     var x = 0
     var y = 0

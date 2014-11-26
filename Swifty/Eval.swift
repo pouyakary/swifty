@@ -8,9 +8,6 @@
 
 import Foundation
 
-
-    
-    
     /// Kernel of Arendelle which evaluates the given code
     /// :param Arendelle a given Arendelle instance
     /// :param
@@ -20,30 +17,38 @@ import Foundation
         var command:Character
         
         func paintInDot (color: Int) {
-            if ( screen.x < screen.screen.colCount() && screen.y < screen.screen.rowCount()
-                && screen.x >= 0 && screen.y >= 0) {
+            if screen.x < screen.screen.colCount() && screen.y < screen.screen.rowCount()
+                && screen.x >= 0 && screen.y >= 0 {
                     screen.screen[screen.x, screen.y] = color
             }
         }
         
-        for command in arendelle.code {
+        while arendelle.i < arendelle.code.utf16Count {
+            
+            command = Array(arendelle.code.lowercaseString)[arendelle.i]
             
             switch command {
                 
-            case "[":
+            // grammars
+                
+            case "[" :
                 var grammarParts = openCloseLexer(openCommand: "[", arendelle: &arendelle, screen: &screen)
-                
                 let LoopNum:Int? = grammarParts[0].toInt()
-                
+                            
                 for var i = 0; i < LoopNum ; i++ {
-                
+                    
                     var loopCode = Arendelle()
-                        loopCode.code = grammarParts[1]
-                                    
+                    loopCode.code = grammarParts[1]
+
                     eval(&loopCode, &screen, &spaces)
                 }
                 
-                arendelle.i++
+                --arendelle.i
+                
+            case "'" :
+                screen.title = onePartOpenCloseParser(openCloseCommand: "'", arendelle: &arendelle, screen: &screen)
+                
+            // commands
                 
             case "p":
                 paintInDot(screen.n)
@@ -67,10 +72,10 @@ import Foundation
                 screen.y++
                 
             default:
-                print("")
+                break
             }
             
-            
+            arendelle.i++
         
         }
         

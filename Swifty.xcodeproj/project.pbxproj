@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */; };
 		A6E23C9B1A154E350057DB7B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E23C9A1A154E350057DB7B /* main.swift */; };
 		A6E2B0701A15EB7C0025C2E9 /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */; };
 		A6E2B0731A162D200025C2E9 /* codeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2B0721A162D200025C2E9 /* codeScreen.swift */; };
 		A6E2B0751A162D530025C2E9 /* Arendelle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2B0741A162D530025C2E9 /* Arendelle.swift */; };
 		A6E7EA311A19D07600192409 /* P.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7EA301A19D07600192409 /* P.swift */; };
 		A6E7EA341A1A317100192409 /* OpenCloseLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7EA331A1A317100192409 /* OpenCloseLexer.swift */; };
+		A6ECE7631A2450C200B09103 /* masterEval.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6ECE7621A2450C200B09103 /* masterEval.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePartOpenCloseParser.swift; sourceTree = "<group>"; };
 		A6E23C971A154E350057DB7B /* Swifty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Swifty; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E23C9A1A154E350057DB7B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eval.swift; sourceTree = "<group>"; };
@@ -35,6 +38,7 @@
 		A6E2B0741A162D530025C2E9 /* Arendelle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arendelle.swift; sourceTree = "<group>"; };
 		A6E7EA301A19D07600192409 /* P.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P.swift; sourceTree = "<group>"; };
 		A6E7EA331A1A317100192409 /* OpenCloseLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenCloseLexer.swift; sourceTree = "<group>"; };
+		A6ECE7621A2450C200B09103 /* masterEval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = masterEval.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 				A6E7EA321A1A2E3400192409 /* Lexers */,
 				A6E2B06E1A15EB450025C2E9 /* Kernel */,
 				A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */,
+				A6ECE7621A2450C200B09103 /* masterEval.swift */,
 			);
 			name = Engine;
 			sourceTree = "<group>";
@@ -105,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				A6E7EA331A1A317100192409 /* OpenCloseLexer.swift */,
+				A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */,
 			);
 			name = Lexers;
 			sourceTree = "<group>";
@@ -166,11 +172,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6E23C9B1A154E350057DB7B /* main.swift in Sources */,
+				A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */,
 				A6E7EA311A19D07600192409 /* P.swift in Sources */,
 				A6E2B0751A162D530025C2E9 /* Arendelle.swift in Sources */,
 				A6E2B0731A162D200025C2E9 /* codeScreen.swift in Sources */,
 				A6E2B0701A15EB7C0025C2E9 /* Eval.swift in Sources */,
 				A6E7EA341A1A317100192409 /* OpenCloseLexer.swift in Sources */,
+				A6ECE7631A2450C200B09103 /* masterEval.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

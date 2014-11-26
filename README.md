@@ -1,10 +1,10 @@
 # Swifty
 Apple based port of Arendelle written in Swift / Objective-C and C/C++<br>
-By [Pouya Kary](http://kary.us)
+By [Pouya Kary](http://kary.us)<br><br>
 
 ```
 Swifty - Apple based port of Arendelle
-Copyright (c) 2014 Pouya Kary <a@arendelle.org>
+Copyright (c) 2014 Pouya Kary <k@arendelle.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

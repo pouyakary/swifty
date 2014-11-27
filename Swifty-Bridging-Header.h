@@ -3,3 +3,6 @@
 //
 
 #import "commandLineTools.m"
+#import "DDMathParser.h"
+#import "DDMathStringTokenizer.h"
+#import "DDMathOperator.h"

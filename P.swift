@@ -47,7 +47,6 @@ class P2DArray {
 }
 
 
-
 extension Character
 {
     func toString () -> String {

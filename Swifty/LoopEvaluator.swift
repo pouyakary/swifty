@@ -13,7 +13,7 @@ func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces:
 
     if grammarParts.count == 2 {
         
-        let LoopNum:Int? = grammarParts[0].toInt()
+        let LoopNum:Int? = DDEvaluatorSwiftBridge(stringExpression: grammarParts[0]).toInt()
         
         // using this line we only get erros of a loop for one time!
         let numberOfErrorsBeforeTheLoopGetsStarted = screen.errors.count
@@ -31,4 +31,16 @@ func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces:
     }
 }
 
+func DDEvaluatorSwiftBridge(#stringExpression: String) -> String {
+
+    var eval = DDMathEvaluator()
+    var errors:NSError?
+    var tokenizer = DDMathStringTokenizer(string: stringExpression, operatorSet:nil, error: &errors)
+    var parser:DDParser = DDParser(tokenizer: tokenizer, error: &errors)
+    var experssion:DDExpression! = parser.parsedExpressionWithError(&errors)
+    var rewritten:DDExpression = DDExpressionRewriter.defaultRewriter().expressionByRewritingExpression(experssion, withEvaluator: eval)
+    let result = eval.evaluateExpression(experssion, withSubstitutions: nil, error: &errors)
+    
+    return "\(result)"
+}
 

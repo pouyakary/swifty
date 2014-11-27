@@ -18,19 +18,37 @@ while whileControl {
     if code == "exit" { whileControl = false; break }
 
     let result = masterEvaluator(code: code, screenWidth: x, screenHeight: y)
-
-    println("\n\nFinal Matrix:")
-
-    //println("Matrix for the code \'" + arendelle.code + "\':")
-    for var i = 0; i < y; i++ {
-        print("\n   ")
-        for var j = 0; j < x; j++ {
-            var color = result.screen[j,i]
-            print(color)
+    
+    
+    if result.errors.count > 0 {
+        
+        println("\n\nCompilation Failed: \n")
+        var i = 1;
+        for error in result.errors {
+            
+            println(" \(i): \(error)")
+            i++
+            
         }
-    }
+        
+        println("\n")
 
-    println("\n\nFinal title: '\(result.title)'\n\n")
+    } else {
+        
+        println("\n\nFinal Matrix:")
+        
+        //println("Matrix for the code \'" + arendelle.code + "\':")
+        for var i = 0; i < y; i++ {
+            print("\n   ")
+            for var j = 0; j < x; j++ {
+                var color = result.screen[j,i]
+                print(color)
+            }
+        }
+        
+        println("\n\nFinal title: '\(result.title)'\n\n")
+
+    }
 }
 
 // done

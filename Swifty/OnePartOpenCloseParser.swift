@@ -48,12 +48,16 @@ func onePartOpenCloseParser (#openCloseCommand: Character, inout #arendelle: Are
                 case "'"  :
                     result += "'"
                     
+                case "\\" :
+                    result += "\\"
+                    
                 default:
-                    result += "\\\(charToRead)"
+                    screen.errors.append("Bad escape sequence: '\\\(charToRead)'")
                 }
             
             } else {
             
+                screen.errors.append("Unfinished \(openCloseCommand)...\(openCloseCommand) grammar found")
                 return "BadGrammar"
             
             }
@@ -67,5 +71,6 @@ func onePartOpenCloseParser (#openCloseCommand: Character, inout #arendelle: Are
     
     }
     
+    screen.errors.append("Unfinished \(openCloseCommand)...\(openCloseCommand) grammar found")
     return "BadGrammar"
 }

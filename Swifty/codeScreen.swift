@@ -22,6 +22,9 @@ struct codeScreen {
     // title
     var title:String = ""
     
+    // errors
+    var errors:[String] = []
+    
     // Ordinations
     var x = 0
     var y = 0

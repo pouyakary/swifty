@@ -16,7 +16,7 @@ NSString* readLine() {
         if ([[NSCharacterSet newlineCharacterSet] characterIsMember:(unichar)c]) { break; }
         
         [data appendBytes:&c length:sizeof(char)];
-    } while (1);
+    } while (true);
     
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     

@@ -83,7 +83,7 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
                         
                             theCode.i++
                             
-                            if theCode.i + 1 < theCode.code.utf16Count {
+                            if theCode.i < theCode.code.utf16Count {
                             
                                 currentChar = Array(theCode.code)[theCode.i]
                                 
@@ -97,14 +97,13 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
                                     currentChar = Array(theCode.code)[theCode.i]
                                 
                                 }
-                            
                             }
-                        
                         }
                         
                         theCode.i++
-                    
                     }
+                    
+                    if whileControl == true { screen.errors.append("Unfinished /* ... */ comment") }
                 
                 //
                 // ARE WE WRONG

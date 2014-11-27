@@ -34,9 +34,6 @@ func openCloseLexer ( #openCommand: Character,
             args.append(arg)
             arg=""
             
-        case " " :
-            break
-            
         case "[", "(", "<", "{" :
                                 
             let innerOpenCommand = command
@@ -56,6 +53,7 @@ func openCloseLexer ( #openCommand: Character,
                 result = newCode[0] + "," + newCode[1] + "," + newCode[2]
                                     
             default:
+                screen.errors.append("Grammar with more than 3 parts")
                 return["BadGrammar"]
                                     
             }
@@ -71,9 +69,11 @@ func openCloseLexer ( #openCommand: Character,
             arg.append(command)
                                 
         }
+        
         arendelle.i++
-                            
     }
+                        
+    if whileControl == true { screen.errors.append ("Unfinished gramamr found") }
                         
 return args
 

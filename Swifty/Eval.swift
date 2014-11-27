@@ -33,17 +33,7 @@ import Foundation
                 
             case "[" :
                 var grammarParts = openCloseLexer(openCommand: "[", arendelle: &arendelle, screen: &screen)
-                let LoopNum:Int? = grammarParts[0].toInt()
-                            
-                for var i = 0; i < LoopNum ; i++ {
-                    
-                    var loopCode = Arendelle()
-                    loopCode.code = grammarParts[1]
-
-                    eval(&loopCode, &screen, &spaces)
-                }
-                
-                --arendelle.i
+                loopEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
                 
             case "'" :
                 screen.title = onePartOpenCloseParser(openCloseCommand: "'", arendelle: &arendelle, screen: &screen)
@@ -72,8 +62,17 @@ import Foundation
             case "d":
                 screen.y++
                 
+            case ",":
+                screen.errors.append("Using gramamr divider ',' out of grammars")
+                
+            case "<", ">":
+                screen.errors.append("Using function grammar in the middel of the app")
+                
+            case "]", "}", ")" :
+                screen.errors.append("Grammar closer: '\(command)' is used for an undifined grammar")
+                
             default:
-                break
+                screen.errors.append("Unknown command: '\(command)'")
             }
             
             arendelle.i++

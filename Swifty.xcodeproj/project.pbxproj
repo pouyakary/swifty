@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */; };
 		A6897EC81A263D850074966A /* commandLineTools.m in Sources */ = {isa = PBXBuildFile; fileRef = A6897EC71A263D850074966A /* commandLineTools.m */; };
+		A6DC03311A275948008DD558 /* LoopEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DC03301A275948008DD558 /* LoopEvaluator.swift */; };
 		A6E23C9B1A154E350057DB7B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E23C9A1A154E350057DB7B /* main.swift */; };
 		A6E2B0701A15EB7C0025C2E9 /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */; };
 		A6E2B0731A162D200025C2E9 /* codeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E2B0721A162D200025C2E9 /* codeScreen.swift */; };
@@ -34,6 +35,7 @@
 		A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePartOpenCloseParser.swift; sourceTree = "<group>"; };
 		A6897EC61A263D840074966A /* Swifty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swifty-Bridging-Header.h"; sourceTree = "<group>"; };
 		A6897EC71A263D850074966A /* commandLineTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commandLineTools.m; sourceTree = "<group>"; };
+		A6DC03301A275948008DD558 /* LoopEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopEvaluator.swift; sourceTree = "<group>"; };
 		A6E23C971A154E350057DB7B /* Swifty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Swifty; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E23C9A1A154E350057DB7B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eval.swift; sourceTree = "<group>"; };
@@ -62,6 +64,14 @@
 				A6897EC71A263D850074966A /* commandLineTools.m */,
 			);
 			name = "P-Framework";
+			sourceTree = "<group>";
+		};
+		A6DC032F1A275923008DD558 /* Grammars */ = {
+			isa = PBXGroup;
+			children = (
+				A6DC03301A275948008DD558 /* LoopEvaluator.swift */,
+			);
+			name = Grammars;
 			sourceTree = "<group>";
 		};
 		A6E23C8E1A154E350057DB7B = {
@@ -105,6 +115,7 @@
 		A6E2B06E1A15EB450025C2E9 /* Kernel */ = {
 			isa = PBXGroup;
 			children = (
+				A6DC032F1A275923008DD558 /* Grammars */,
 				A6E2B0711A162D090025C2E9 /* Structs */,
 			);
 			name = Kernel;
@@ -185,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6E23C9B1A154E350057DB7B /* main.swift in Sources */,
+				A6DC03311A275948008DD558 /* LoopEvaluator.swift in Sources */,
 				A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */,
 				A6E7EA311A19D07600192409 /* P.swift in Sources */,
 				A6E2B0751A162D530025C2E9 /* Arendelle.swift in Sources */,

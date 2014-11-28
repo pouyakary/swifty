@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Arendelle Language. All rights reserved.
 //
 
+// the very starting point
+
 import Foundation
 
 println("Arendelle Swift Core Based REPL")
@@ -16,7 +18,7 @@ var whileControl = true
 while whileControl {
     
     print("λ ")
-    let x = 43 , y = 7, code = readLine()
+    let x = 42 , y = 7, code = readLine()
     
     if code == "exit" { whileControl = false; break }
 

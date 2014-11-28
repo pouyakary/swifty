@@ -112,11 +112,28 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
                 } else {
                 
                     result += "/"
-                    result.append(currentChar)
                     
                 }
                 
                 theCode.i--
+                
+            case "÷":
+                result += "÷"
+                
+            case "×":
+                result += "*"
+                
+            case "→":
+                result += "r"
+                
+            case "←":
+                result += "l"
+                
+            case "↑":
+                result += "u"
+                
+            case "↓":
+                result += "d"
                 
             case " ", "\n", "\t" :
                 break
@@ -139,8 +156,7 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
     var arendelle = Arendelle()
     arendelle.i = 0
     arendelle.code = preprocessor(codeToBeSpaceFixed: code)
-    
-    
+        
     //
     // EVALUATION
     //

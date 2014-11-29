@@ -19,9 +19,8 @@ func openCloseLexer ( #openCommand: Character,
     var arg:String = ""
     var args:[String] = []
     var whileControl = true
-    let openCommand:Character = "["
-    var openCloseDictionary:[Character:Character] = [ "{":"}", "(":")", "[":"]", "<":">" ]
-    let closeCommand = openCloseDictionary[openCommand]
+    var openCloseDictionary:[Character:Character] = [ "{":"}", "(":")", "[":"]" ]
+    let closeCommand = openCloseDictionary[openCommand]!
                         
                         
     while arendelle.i < arendelle.code.utf16Count && whileControl {
@@ -34,7 +33,7 @@ func openCloseLexer ( #openCommand: Character,
             args.append(arg)
             arg=""
             
-        case "[", "(", "<", "{" :
+        case "[", "(", "{" :
                                 
             let innerOpenCommand = command
             let innerCloseCommand = openCloseDictionary[innerOpenCommand]
@@ -61,7 +60,7 @@ func openCloseLexer ( #openCommand: Character,
             arg += String(innerOpenCommand) + result + String(innerCloseCommand!)
             --arendelle.i
                                 
-        case "]" :
+        case closeCommand :
             args.append(arg)
             whileControl = false
                                 

@@ -13,6 +13,19 @@ import Foundation
 // post blog of the Trolieb LLC : 
 // http://blog.trolieb.com/trouble-multidimensional-arrays-swift/
 
+func endS (#number: Int) -> String {
+
+    if number > 1 {
+    
+        return "s"
+    
+    } else {
+    
+        return ""
+    
+    }
+
+}
 
 /// 2D Matrix-Like Array for Swift
 class P2DArray {

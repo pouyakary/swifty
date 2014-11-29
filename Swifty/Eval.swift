@@ -12,8 +12,7 @@ import Foundation
     /// :param Arendelle a given Arendelle instance
     /// :param
     func eval (inout arendelle: Arendelle, inout screen: codeScreen, inout spaces: [String:String]) -> [String] {
-    
-        var spacesToRemove:[String] = []
+                var spacesToRemove:[String] = []
         var command:Character
         
         func paintInDot (color: Int) {
@@ -34,6 +33,10 @@ import Foundation
             case "[" :
                 var grammarParts = openCloseLexer(openCommand: "[", arendelle: &arendelle, screen: &screen)
                 loopEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
+                
+            case "{" :
+                var grammarParts = openCloseLexer(openCommand: "{", arendelle: &arendelle, screen: &screen)
+               conditionEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
                 
             case "'" :
                 screen.title = onePartOpenCloseParser(openCloseCommand: "'", arendelle: &arendelle, screen: &screen)
@@ -78,7 +81,7 @@ import Foundation
             arendelle.i++
         
         }
-        
+    
         return spacesToRemove
 
 }

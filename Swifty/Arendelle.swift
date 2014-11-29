@@ -13,4 +13,10 @@ struct Arendelle {
     var code:String = ""
     var i:Int = 0
     
+    init (code: String) {
+    
+        self.code = code
+    
+    }
+    
 }

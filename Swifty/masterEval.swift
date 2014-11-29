@@ -22,8 +22,7 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
     /// the code for performance
     func preprocessor (#codeToBeSpaceFixed: String) -> String {
     
-        var theCode = Arendelle ()
-        theCode.code = codeToBeSpaceFixed
+        var theCode = Arendelle (code: codeToBeSpaceFixed)
         var result : String = ""
         
         while theCode.i < theCode.code.utf16Count {
@@ -153,9 +152,7 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
     // Rest of initilization
     //
     
-    var arendelle = Arendelle()
-    arendelle.i = 0
-    arendelle.code = preprocessor(codeToBeSpaceFixed: code)
+    var arendelle = Arendelle(code: preprocessor(codeToBeSpaceFixed: code))
         
     //
     // EVALUATION

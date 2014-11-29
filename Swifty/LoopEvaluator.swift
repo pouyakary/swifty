@@ -14,26 +14,32 @@ func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces:
 
     if grammarParts.count == 2 {
         
-        let loopExperssion =  mathEval(stringExpression: grammarParts[0], screen: &screen)
+        var loopExperssion =  mathEval(stringExpression: grammarParts[0], screen: &screen)
+            
+        if loopExperssion.itsNotACondition == true {
         
-        if loopExperssion != "t" && loopExperssion != "f" {
-        
-            let LoopNum:Int? = loopExperssion.toInt()
+            let LoopNum = floor(Double(loopExperssion.result))
             
             // using this line we only get erros of a loop for one time!
             let numberOfErrorsBeforeTheLoopGetsStarted = screen.errors.count
             
-            for var i = 0; i < LoopNum && screen.errors.count == numberOfErrorsBeforeTheLoopGetsStarted; i++ {
+            for var i:Double = 0; i < LoopNum && screen.errors.count == numberOfErrorsBeforeTheLoopGetsStarted ; i++ {
                 
-                var loopCode = Arendelle()
-                loopCode.code = grammarParts[1]
+                var loopCode = Arendelle(code: grammarParts[1])
                 
                 eval(&loopCode, &screen, &spaces)
             }
         
         } else {
-        
-            println("we reached conditions")
+            
+            let condition = grammarParts[0]
+            
+            while ( mathEval(stringExpression: condition, screen: &screen).result == 1) {
+            
+                var conditionalLoopsCode = Arendelle(code: grammarParts[1])
+                eval(&conditionalLoopsCode, &screen, &spaces)
+            
+            }
         
         }
     

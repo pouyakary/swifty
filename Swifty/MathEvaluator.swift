@@ -8,12 +8,26 @@
 
 import Foundation
 
-func mathEval (#stringExpression: String, inout #screen: codeScreen) -> String {
+struct mathResult {
+    
+    var result : NSNumber = 0
+    var itsNotACondition : Bool = true
+    
+    init (number:NSNumber, isItCondition:Bool) {
+        
+        self.result = number
+        self.itsNotACondition = isItCondition
+        
+    }
+    
+}
+
+func mathEval (#stringExpression: String, inout #screen: codeScreen) -> mathResult {
+    
+    if stringExpression.toInt() != nil { return mathResult(number: Double(stringExpression.toInt()!), isItCondition: true) }
     
     var mathExpression = sourceReplacer(screen: &screen, expression: stringExpression)
-    
-    println("source replacer worked and returned : '\(mathExpression)'")
-    
+   
     // checks to see if it's a condition we're running
     var itsNotCondition = true
     for var i=0; i < mathExpression.utf16Count && itsNotCondition; i++ {
@@ -29,13 +43,10 @@ func mathEval (#stringExpression: String, inout #screen: codeScreen) -> String {
     var experssion:DDExpression! = parser.parsedExpressionWithError(&errors)
     var rewritten:DDExpression = DDExpressionRewriter.defaultRewriter().expressionByRewritingExpression(experssion, withEvaluator: eval)
     let result = eval.evaluateExpression(experssion, withSubstitutions: nil, error: &errors)
-
     
-    // returns the result:
-    
-    if itsNotCondition {
-        return "\(result)"
-    } else {
-        if result == 0 { return "f" } else { return "t" }
-    }
+    // returning point
+    return mathResult (number: result, isItCondition: itsNotCondition)
 }
+
+
+

@@ -15,18 +15,22 @@ println("Copyright 2014 Pouya Kary <k@arendelle.org>\n")
 
 var whileControl = true
 
-while whileControl {
+while true {
     
     print("λ ")
-    let x = 42 , y = 7, code = readLine()
     
-    if code == "exit" { whileControl = false; break }
-
+    let x = 30, y = 10, code = readLine()
+    
+    clean()
+    println("\n=> '\(code)' :")
+    
+    if code == "exit" { clean(); break }
+    
     let result = masterEvaluator(code: code, screenWidth: x, screenHeight: y)
 
     if result.errors.count > 0 {
         
-        println("\n\nCompilation Failed: \n")
+        println("\nCompilation Failed: \n")
         var i = 1;
         for error in result.errors {
             println("-> \(i): \(error)")
@@ -37,14 +41,19 @@ while whileControl {
 
     } else {
         
-        println("\n\nFinal Matrix:")
+        println("\nFinal Matrix in size of x=\(x) and y=\(y) :")
         
         //println("Matrix for the code \'" + arendelle.code + "\':")
         for var i = 0; i < y; i++ {
             print("\n   ")
             for var j = 0; j < x; j++ {
                 var color = result.screen[j,i]
-                print(color)
+                
+                if color != 0 {
+                    print("\(color) ")
+                } else {
+                    print(". ")
+                }
             }
         }
         

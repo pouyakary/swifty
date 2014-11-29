@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A60A75091A29B85C00576F13 /* ConditonEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A75081A29B85C00576F13 /* ConditonEvaluator.swift */; };
 		A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */; };
-		A6897EC81A263D850074966A /* commandLineTools.m in Sources */ = {isa = PBXBuildFile; fileRef = A6897EC71A263D850074966A /* commandLineTools.m */; };
+		A6897EC81A263D850074966A /* console.m in Sources */ = {isa = PBXBuildFile; fileRef = A6897EC71A263D850074966A /* console.m */; };
 		A6A506DC1A285D3500962A9B /* MathEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A506DB1A285D3500962A9B /* MathEvaluator.swift */; };
 		A6DC03311A275948008DD558 /* LoopEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DC03301A275948008DD558 /* LoopEvaluator.swift */; };
 		A6E23C9B1A154E350057DB7B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E23C9A1A154E350057DB7B /* main.swift */; };
@@ -57,9 +58,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A60A75081A29B85C00576F13 /* ConditonEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditonEvaluator.swift; sourceTree = "<group>"; };
 		A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePartOpenCloseParser.swift; sourceTree = "<group>"; };
 		A6897EC61A263D840074966A /* Swifty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swifty-Bridging-Header.h"; sourceTree = "<group>"; };
-		A6897EC71A263D850074966A /* commandLineTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commandLineTools.m; sourceTree = "<group>"; };
+		A6897EC71A263D850074966A /* console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = console.m; sourceTree = "<group>"; };
 		A6A506DB1A285D3500962A9B /* MathEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathEvaluator.swift; sourceTree = "<group>"; };
 		A6DC03301A275948008DD558 /* LoopEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopEvaluator.swift; sourceTree = "<group>"; };
 		A6E23C971A154E350057DB7B /* Swifty */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Swifty; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,7 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				A6E7EA301A19D07600192409 /* P.swift */,
-				A6897EC71A263D850074966A /* commandLineTools.m */,
+				A6897EC71A263D850074966A /* console.m */,
 			);
 			name = "P-Framework";
 			sourceTree = "<group>";
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				A6DC03301A275948008DD558 /* LoopEvaluator.swift */,
+				A60A75081A29B85C00576F13 /* ConditonEvaluator.swift */,
 			);
 			name = Grammars;
 			sourceTree = "<group>";
@@ -192,7 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				A6E7EA321A1A2E3400192409 /* Lexers */,
-				A6E2B06E1A15EB450025C2E9 /* Kernel */,
 				A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */,
 				A6ECE7621A2450C200B09103 /* masterEval.swift */,
 			);
@@ -223,6 +225,7 @@
 			children = (
 				A6E7EA331A1A317100192409 /* OpenCloseLexer.swift */,
 				A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */,
+				A6E2B06E1A15EB450025C2E9 /* Kernel */,
 			);
 			name = Lexers;
 			sourceTree = "<group>";
@@ -359,7 +362,8 @@
 				A6FB5EF51A27AA8700FE7161 /* _DDFunctionTerm.m in Sources */,
 				A6FB5EFB1A27AA8700FE7161 /* _DDPrecisionFunctionEvaluator.m in Sources */,
 				A6A506DC1A285D3500962A9B /* MathEvaluator.swift in Sources */,
-				A6897EC81A263D850074966A /* commandLineTools.m in Sources */,
+				A60A75091A29B85C00576F13 /* ConditonEvaluator.swift in Sources */,
+				A6897EC81A263D850074966A /* console.m in Sources */,
 				A6FB5F021A27AA8700FE7161 /* DDMathOperator.m in Sources */,
 				A6FB5EF61A27AA8700FE7161 /* _DDGroupTerm.m in Sources */,
 				A6FB5EF21A27AA8700FE7161 /* _DDDecimalFunctions.m in Sources */,

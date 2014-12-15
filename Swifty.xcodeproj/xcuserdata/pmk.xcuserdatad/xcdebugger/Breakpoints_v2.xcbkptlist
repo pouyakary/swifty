@@ -95,5 +95,65 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty/SpaceEvaluator.swift"
+            timestampString = "440325645.389017"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "spaceEval(grammarParts:screen:spaces:arendelle:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swifty.spaceEval (grammarParts : Swift.Array&lt;Swift.String&gt;, screen : inout Swifty.codeScreen, spaces : inout Swift.Dictionary&lt;Swift.String, ObjectiveC.NSNumber&gt;, arendelle : inout Swifty.Arendelle) -&gt; ()"
+                  moduleName = "Swifty"
+                  urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/SpaceEvaluator.swift"
+                  timestampString = "440325843.229213"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "3207">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swifty.spaceEval (grammarParts : Swift.Array&lt;Swift.String&gt;, screen : inout Swifty.codeScreen, spaces : inout Swift.Dictionary&lt;Swift.String, ObjectiveC.NSNumber&gt;, arendelle : inout Swifty.Arendelle) -&gt; ()"
+                  moduleName = "Swifty"
+                  urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/SpaceEvaluator.swift"
+                  timestampString = "440325843.229333"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "4500">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swifty.spaceEval (grammarParts : Swift.Array&lt;Swift.String&gt;, screen : inout Swifty.codeScreen, spaces : inout Swift.Dictionary&lt;Swift.String, ObjectiveC.NSNumber&gt;, arendelle : inout Swifty.Arendelle) -&gt; ()"
+                  moduleName = "Swifty"
+                  urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/SpaceEvaluator.swift"
+                  timestampString = "440325843.229517"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "4815">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

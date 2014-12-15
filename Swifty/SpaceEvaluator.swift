@@ -52,6 +52,33 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
                 spaces["@\(grammarParts[0])"] = spaceValue
                 
             //
+            // SHORTCUTS
+            //
+                
+            } else if grammarParts[1].hasPrefix("+") || grammarParts[1].hasPrefix("-") || grammarParts[1].hasPrefix("/") || grammarParts[1].hasPrefix("*") {
+                
+                if spaces["@\(grammarParts[0])"] != nil {
+                    
+                    let result = mathEval(stringExpression: "@\(grammarParts[0]) \(grammarParts[1])", screen: &screen, spaces: &spaces)
+
+                    if result.doesItHaveErros == false && result.itsNotACondition == true {
+                    
+                        spaces["@\(grammarParts[0])"] = result.result
+                    
+                    } else {
+                    
+                        if result.itsNotACondition == false {
+                            screen.errors.append("Unaccepted using of conditions in space value: '\(grammarParts[1])'")
+                        } else {
+                            screen.errors.append("Bad expression: '\(grammarParts[1])'")
+                        }
+                    }
+                
+                } else {
+                    screen.errors.append("No space as '@\(grammarParts[0])' found.")
+                }
+            
+            //
             // STANDARD INIT OF SPACE
             //
                 
@@ -91,5 +118,7 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
     }
     
     --arendelle.i
-
 }
+
+
+// done

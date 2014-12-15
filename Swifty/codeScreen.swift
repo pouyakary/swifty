@@ -11,11 +11,11 @@ import Foundation
 struct codeScreen {
     
     // Screen
-    var screen = P2DArray(cols: 10, rows: 10)
+    var screen = PIArray2D (cols: 10, rows: 10)
     
     init (xsize:Int, ysize: Int) {
         
-        self.screen = P2DArray(cols: xsize, rows: ysize)
+        self.screen = PIArray2D (cols: xsize, rows: ysize)
         
     }
     

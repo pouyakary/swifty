@@ -14,7 +14,9 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
     // Initing the first spaces
     //
     
-    var spaces: [String: String] = ["@return":"0"]
+    var spaces: [String: NSNumber] = ["@return":0]
+    
+
     var screen = codeScreen(xsize: screenWidth, ysize: screenHeight)
     
     
@@ -33,6 +35,10 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
                 
             case "'" :
                 result += "'" + onePartOpenCloseParser(openCloseCommand: "'", arendelle: &theCode, screen: &screen) + "'"
+                --theCode.i
+                
+            case "\"" :
+                result += "\"" + onePartOpenCloseParser(openCloseCommand: "\"", arendelle: &theCode, screen: &screen) + "\""
                 --theCode.i
                 
             case "/" :
@@ -160,6 +166,7 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
 
     eval(&arendelle, &screen, &spaces)
     
+
     
     // done
     return screen

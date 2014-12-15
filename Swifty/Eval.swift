@@ -11,7 +11,7 @@ import Foundation
     /// Kernel of Arendelle which evaluates the given code
     /// :param Arendelle a given Arendelle instance
     /// :param
-    func eval (inout arendelle: Arendelle, inout screen: codeScreen, inout spaces: [String:String]) -> [String] {
+    func eval (inout arendelle: Arendelle, inout screen: codeScreen, inout spaces: [String:NSNumber]) -> [String] {
                 var spacesToRemove:[String] = []
         var command:Character
         
@@ -30,6 +30,10 @@ import Foundation
                 
             // grammars
                 
+            case "(" :
+                var grammarParts = openCloseLexer(openCommand: "(", arendelle: &arendelle, screen: &screen)
+                spaceEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
+                
             case "[" :
                 var grammarParts = openCloseLexer(openCommand: "[", arendelle: &arendelle, screen: &screen)
                 loopEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
@@ -39,7 +43,7 @@ import Foundation
                conditionEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
                 
             case "'" :
-                screen.title = onePartOpenCloseParser(openCloseCommand: "'", arendelle: &arendelle, screen: &screen)
+                screen.title = spaceReplacer(expressionString: onePartOpenCloseParser(openCloseCommand: "'", arendelle: &arendelle, screen: &screen), spaces: spaces, screen: &screen)
                 --arendelle.i
                 
             // commands

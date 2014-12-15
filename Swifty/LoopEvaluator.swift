@@ -10,13 +10,24 @@ import Foundation
 import Darwin
 
 /// evaluates a loop grammar
-func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:String], inout #arendelle: Arendelle) -> Void {
-
+func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) -> Void {
+    
     if grammarParts.count == 2 {
+
         
-        var loopExperssion =  mathEval(stringExpression: grammarParts[0], screen: &screen)
+        var loopExperssion = mathResult(number: 0, itIsNotCondition: true)
+        
+        let ifCheckingReg = grammarParts[0] =~ "[0-9]*"
+        
+        if ifCheckingReg.items.count == 1 && ifCheckingReg.items[0] == grammarParts [0] {
+            loopExperssion.result = grammarParts[0].toInt()
+            loopExperssion.itsNotACondition = true
+        } else {
+
+            loopExperssion  =  mathEval(stringExpression: grammarParts[0], screen: &screen, spaces: &spaces)
+        }
             
-        if loopExperssion.itsNotACondition == true {
+        if loopExperssion.itsNotACondition == true && loopExperssion.doesItHaveErros == false {
         
             let LoopNum = floor(Double(loopExperssion.result))
             
@@ -32,15 +43,22 @@ func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces:
         
         } else {
             
-            let condition = grammarParts[0]
+            if loopExperssion.doesItHaveErros == false {
+                
+                let condition = grammarParts[0]
             
-            while ( mathEval(stringExpression: condition, screen: &screen).result == 1) {
+                while ( mathEval(stringExpression: condition, screen: &screen, spaces: &spaces).result == 1) {
             
-                var conditionalLoopsCode = Arendelle(code: grammarParts[1])
-                eval(&conditionalLoopsCode, &screen, &spaces)
+                    var conditionalLoopsCode = Arendelle(code: grammarParts[1])
+                    eval(&conditionalLoopsCode, &screen, &spaces)
+            
+                }
+                
+            } else {
+            
+                screen.errors.append("Bad expression: '\(grammarParts[0])'")
             
             }
-        
         }
     
         // this fixes many problems!

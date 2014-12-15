@@ -8,13 +8,13 @@
 
 import Foundation
 
-func conditionEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:String], inout #arendelle: Arendelle) -> Void {
+func conditionEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) -> Void {
 
     if grammarParts.count == 2 {
     
-        let condtionResult =  mathEval(stringExpression: grammarParts[0], screen: &screen)
+        let condtionResult =  mathEval(stringExpression: grammarParts[0], screen: &screen, spaces: &spaces)
         
-        if condtionResult.result != 0 || condtionResult.itsNotACondition == true {
+        if ( condtionResult.result != 0 || condtionResult.itsNotACondition == true ) && condtionResult.doesItHaveErros == true {
         
             var conditonCode = Arendelle(code: grammarParts[1])
             eval(&conditonCode, &screen, &spaces)
@@ -23,24 +23,29 @@ func conditionEval (#grammarParts:[String], inout #screen: codeScreen, inout #sp
         
     } else if grammarParts.count == 3 {
         
-        let condtionResult =  mathEval(stringExpression: grammarParts[0], screen: &screen)
+        let condtionResult =  mathEval(stringExpression: grammarParts[0], screen: &screen, spaces: &spaces)
         
-        if condtionResult.result != 0 || condtionResult.itsNotACondition == true {
+        if (condtionResult.result != 0 || condtionResult.itsNotACondition == true )  && condtionResult.doesItHaveErros == true {
             
             var conditonCode = Arendelle(code: grammarParts[1])
             eval(&conditonCode, &screen, &spaces)
             
         } else {
         
-            var conditonCode = Arendelle(code: grammarParts[2])
-            eval(&conditonCode, &screen, &spaces)
-        
+            if condtionResult.doesItHaveErros == true {
+                var conditonCode = Arendelle(code: grammarParts[2])
+                eval(&conditonCode, &screen, &spaces)
+            } else {
+            
+                screen.errors.append("Bad loop expression: '\(grammarParts[0])'")
+                
+            }
         }
     
     
     } else {
         
-        screen.errors.append("Loop grammar with \(grammarParts.count) part\(endS(number: grammarParts.count)) found")
+        screen.errors.append("Loop grammar with \(grammarParts.count) part\(PIEndS(number: grammarParts.count)) found")
     
     }
     

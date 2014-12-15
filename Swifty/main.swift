@@ -22,7 +22,7 @@ while true {
     let x = 30, y = 10, code = readLine()
     
     clean()
-    println("\n=> '\(code)' :")
+    println("\nBlueprint: '\(code)' :")
     
     if code == "exit" { clean(); break }
     
@@ -41,7 +41,7 @@ while true {
 
     } else {
         
-        println("\nFinal Matrix in size of x=\(x) and y=\(y) :")
+        println("\nFinal Matrix in size of x=\(x) and y=\(y) (finished at \(result.x):\(result.y)) :")
         
         //println("Matrix for the code \'" + arendelle.code + "\':")
         for var i = 0; i < y; i++ {

@@ -52,8 +52,13 @@ func mathEval (#stringExpression: String, inout #screen: codeScreen, inout #spac
         var rewritten:DDExpression = DDExpressionRewriter.defaultRewriter().expressionByRewritingExpression(experssion, withEvaluator: eval)
         let result = eval.evaluateExpression(experssion, withSubstitutions: nil, error: &errors)
         
-        // returning point
-        return mathResult (number: result, itIsNotCondition: itsNotCondition)
+        if result == nil {
+            var errorResult = mathResult(number: 0, itIsNotCondition: false)
+            errorResult.doesItHaveErros = true
+            return errorResult
+        } else {
+            return mathResult (number: result, itIsNotCondition: itsNotCondition)
+        }
         
     } else {
     

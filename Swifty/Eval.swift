@@ -54,6 +54,10 @@ import Foundation
             case "c":
                 paintInDot(0)
                 
+            case "i":
+                screen.x = 0
+                screen.y = 0
+                
             case "n":
                 if screen.n == 4 { screen.n = 1 } else { screen.n++ }
                 

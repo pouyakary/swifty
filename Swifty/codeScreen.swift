@@ -20,7 +20,7 @@ struct codeScreen {
     }
     
     // title
-    var title:String = ""
+    var title:String = "Arendelle"
     
     // errors
     var errors:[String] = []

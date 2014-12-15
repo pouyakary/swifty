@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #include <stdlib.h>
+#include <editline/readline.h>
 
 NSString* readLine() {
     
     NSMutableData *data = [NSMutableData data];
-    
+
     do {
         char c = getchar();
         if ([[NSCharacterSet newlineCharacterSet] characterIsMember:(unichar)c]) { break; }
@@ -21,7 +22,6 @@ NSString* readLine() {
     } while (true);
     
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
 }
 
 void clean () { system("clear"); }

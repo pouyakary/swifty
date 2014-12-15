@@ -10,55 +10,166 @@
 
 import Foundation
 
-println("Arendelle Swift Core Based REPL")
-println("Copyright 2014 Pouya Kary <k@arendelle.org>\n")
+//
+// REPL INPUT
+//
 
-var whileControl = true
+func replInput () -> String {
 
-while true {
+    var whileControlForREPLInput = true
+    var result = ""
+    var specialCharactersNumbers = [ "(":0 , "[":0, "{":0 , ")":0 , "]":0, "}":0 ]
     
-    print("λ ")
+    print("\nλ ")
     
-    let x = 30, y = 10, code = readLine()
+    while whileControlForREPLInput {
     
-    clean()
-    println("\nBlueprint: '\(code)' :")
-    
-    if code == "exit" { clean(); break }
-    
-    let result = masterEvaluator(code: code, screenWidth: x, screenHeight: y)
-
-    if result.errors.count > 0 {
+        let tempInput = readLine()
+        result += tempInput
         
-        println("\nCompilation Failed: \n")
-        var i = 1;
-        for error in result.errors {
-            println("-> \(i): \(error)")
-            i++
+        for specialChar in specialCharactersNumbers {
+        
+            let number = (result =~ "\\\(specialChar.0)").items.count
+            let name = specialChar.0
+            specialCharactersNumbers[name] = number
+        
         }
         
-        println("\n")
+        if specialCharactersNumbers["("] == specialCharactersNumbers[")"] && specialCharactersNumbers ["["] == specialCharactersNumbers ["]"] && specialCharactersNumbers["{"] == specialCharactersNumbers["}"] {
+            
+            whileControlForREPLInput = false
+            
+        } else {
+            print("→ ")
+        }
+    }
+    return result
+}
 
-    } else {
-        
-        println("\nFinal Matrix in size of x=\(x) and y=\(y) (finished at \(result.x):\(result.y)) :")
-        
-        //println("Matrix for the code \'" + arendelle.code + "\':")
-        for var i = 0; i < y; i++ {
-            print("\n   ")
-            for var j = 0; j < x; j++ {
-                var color = result.screen[j,i]
-                
-                if color != 0 {
-                    print("\(color) ")
-                } else {
-                    print(". ")
-                }
+
+//
+// PRINT MATRIX
+//
+
+func printMatrix (#result: codeScreen) -> Void {
+
+    clean()
+    println("\nFinal Matrix in size of #i=\(x) and #j=\(y) (finished at #x:\(result.x) #y:\(result.y)) :")
+    
+    //println("Matrix for the code \'" + arendelle.code + "\':")
+    for var i = 0; i < y; i++ {
+        print("\n   ")
+        for var j = 0; j < x; j++ {
+            var color = result.screen[j,i]
+            
+            if color != 0 {
+                print("\(color) ")
+            } else {
+                print("  ")
             }
         }
-        
-        println("\n\nFinal title: '\(result.title)'\n\n")
+    }
+    
+    println("\n\nFinal title: '\(result.title)'\n\n")
+}
+
+
+//
+// PRINT ERROR
+//
+
+func printError (#result: codeScreen) -> Void {
+
+    var i = 1;
+    for error in result.errors {
+        println("-> \(i): \(error)")
+        i++
     }
 }
 
-// done
+
+//
+// PRINT SPACES:
+//
+
+func printSpaces (#spaces: [String:NSNumber]) {
+    if spaces.count > 0 {
+        for space in spaces {
+            println("=> \(space.0) -> \(space.1)")
+        }
+    } else {
+        println("=> no space found")
+    }
+}
+
+
+
+
+//
+// REPL
+//
+
+let x = 30, y = 10
+var masterScreen = codeScreen(xsize: x, ysize: y)
+var whileControl = true
+var masterSpaces: [String: NSNumber] = ["kary":10]
+masterSpaces.removeAll(keepCapacity: false)
+
+println("Arendelle Swift Core Based REPL")
+println("Copyright 2014 Pouya Kary <k@arendelle.org>\n")
+
+while true {
+    
+    var code = replInput()
+    
+    if code == "clean" {
+    
+        clean()
+        
+        masterSpaces.removeAll(keepCapacity: false)
+        masterScreen = codeScreen(xsize: x, ysize: y)
+        
+    } else if code == "cls" {
+        
+        clean()
+    
+    } else if code == "exit" {
+     
+        clean(); break
+    
+    } else if code == "print" {
+    
+        printMatrix(result: masterScreen)
+        
+    } else if code == "spaces" {
+        
+        printSpaces(spaces: masterSpaces)
+        
+    } else if code.hasPrefix("=") {
+        
+        println("  \(replacer(expressionString: code, spaces: masterSpaces, screen: &masterScreen))")
+    
+    } else {
+    
+        var tempScreen = masterScreen
+        var tempArendelle = Arendelle(code: preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen))
+        var tempSpaces = masterSpaces
+        eval(&tempArendelle, &tempScreen, &tempSpaces)
+        
+        if tempScreen.errors.count > 0 {
+        
+            printError(result: tempScreen)
+        
+        } else {
+        
+            masterSpaces = tempSpaces
+            masterScreen = tempScreen
+        
+        }
+    }
+}
+
+
+//
+// DONE
+//

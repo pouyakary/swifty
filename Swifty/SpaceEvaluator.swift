@@ -14,7 +14,7 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
         screen.errors.append("Unaccepted space name : '\(grammarParts[0])'")
     }
     
-    let regexMathes = grammarParts[0] =~  "([A-Z]|[a-z]|[0-9])+"
+    let regexMathes = grammarParts[0] =~  "([A-Z]|[a-z])([A-Z]|[a-z]|[0-9])*"
     
     if grammarParts.count == 1 {
     

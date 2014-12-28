@@ -20,6 +20,7 @@ func replInput () -> String {
     var result = ""
     var specialCharactersNumbers = [ "(":0 , "[":0, "{":0 , ")":0 , "]":0, "}":0 ]
     
+    
     print("\nλ ")
     
     while whileControlForREPLInput {
@@ -51,7 +52,7 @@ func replInput () -> String {
 // PRINT MATRIX
 //
 
-func printMatrix (#result: codeScreen) -> Void {
+func printMatrix (#result: codeScreen) {
 
     clean()
     println("\nFinal Matrix in size of #i=\(x) and #j=\(y) (finished at #x:\(result.x) #y:\(result.y)) :")
@@ -78,11 +79,13 @@ func printMatrix (#result: codeScreen) -> Void {
 // PRINT ERROR
 //
 
-func printError (#result: codeScreen) -> Void {
+func printError (#result: codeScreen) {
 
     var i = 1;
+
+    println("\n  ⎪ ✖︎ Compilation Failed Because Of \(result.errors.count) Known Error\(PIEndS(number: result.errors.count))")
     for error in result.errors {
-        println("-> \(i): \(error)")
+        println("  ⎪ → \(error.lowercaseString)")
         i++
     }
 }
@@ -95,14 +98,12 @@ func printError (#result: codeScreen) -> Void {
 func printSpaces (#spaces: [String:NSNumber]) {
     if spaces.count > 0 {
         for space in spaces {
-            println("=> \(space.0) -> \(space.1)")
+            println("• \(space.0) → \(space.1)")
         }
     } else {
         println("=> no space found")
     }
 }
-
-
 
 
 //
@@ -129,6 +130,10 @@ while true {
         masterSpaces.removeAll(keepCapacity: false)
         masterScreen = codeScreen(xsize: x, ysize: y)
         
+    } else if code == "pwd" {
+        
+        println("\(masterScreen.mainPath)")
+    
     } else if code == "cls" {
         
         clean()
@@ -145,9 +150,23 @@ while true {
         
         printSpaces(spaces: masterSpaces)
         
-    } else if code.hasPrefix("=") {
+    } else if code.hasPrefix("= ") {
         
-        println("  \(replacer(expressionString: code, spaces: masterSpaces, screen: &masterScreen))")
+        var tempScreen = codeScreen(xsize: x, ysize: y)
+        var replacing = replacer(expressionString: code, spaces: masterSpaces, screen: &tempScreen)
+        var expr = code.stringByReplacingOccurrencesOfString("=", withString: "", options: NSStringCompareOptions.allZeros, range:
+            nil)
+        var tempResult = mathEval(stringExpression: expr, screen: &tempScreen, spaces: &masterSpaces).result
+        
+        if ( tempScreen.errors.count > 0 ) {
+        
+            printError(result: tempScreen)
+        
+        } else {
+            
+            println("  \(replacing)\n  = \(tempResult)")
+        
+        }
     
     } else {
     
@@ -169,7 +188,4 @@ while true {
     }
 }
 
-
-//
-// DONE
-//
+// done

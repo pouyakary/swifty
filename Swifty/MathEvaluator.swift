@@ -44,29 +44,41 @@ func mathEval (#stringExpression: String, inout #screen: codeScreen, inout #spac
         }
         
         // evaluates the expression
-        var eval = DDMathEvaluator()
-        var errors:NSError?
-        var tokenizer = DDMathStringTokenizer(string: mathExpression, operatorSet:nil, error: &errors)
-        var parser:DDParser = DDParser(tokenizer: tokenizer, error: &errors)
-        var experssion:DDExpression! = parser.parsedExpressionWithError(&errors)
-        var rewritten:DDExpression = DDExpressionRewriter.defaultRewriter().expressionByRewritingExpression(experssion, withEvaluator: eval)
-        let result = eval.evaluateExpression(experssion, withSubstitutions: nil, error: &errors)
         
-        if result == nil {
-            var errorResult = mathResult(number: 0, itIsNotCondition: false)
-            errorResult.doesItHaveErros = true
-            return errorResult
-        } else {
-            return mathResult (number: result, itIsNotCondition: itsNotCondition)
-        }
+        var totalResult = mathResult(number: 0, itIsNotCondition: itsNotCondition)
+    
+        PiTryCatch.try({ () -> Void in
+            
+            var eval = DDMathEvaluator()
+            var errors:NSError?
+            var tokenizer = DDMathStringTokenizer(string: mathExpression, operatorSet:nil, error: &errors)
+            var parser:DDParser = DDParser(tokenizer: tokenizer, error: &errors)
+            var experssion:DDExpression! = parser.parsedExpressionWithError(&errors)
+            var rewritten:DDExpression = DDExpressionRewriter.defaultRewriter().expressionByRewritingExpression(experssion, withEvaluator: eval)
+            let result = eval.evaluateExpression(experssion, withSubstitutions: nil, error: &errors)
+            
+            if result != nil {
+                totalResult.result = result
+            } else {
+                screen.errors.append("Bad expression: \(stringExpression)")
+            }
+
+        }, catch: { (var ex:NSException!) -> Void in
+            
+            totalResult.result = 0
+            totalResult.doesItHaveErros = true
+            screen.errors.append("Bad expression: \(stringExpression)")
+            
+        }, finally: { () -> Void in })
+        
+        
+        return totalResult
         
     } else {
     
         var errorResult = mathResult(number: 0, itIsNotCondition: false)
         errorResult.doesItHaveErros = true
         return errorResult
+
     }
 }
-
-
-

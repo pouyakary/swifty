@@ -8,12 +8,12 @@
 
 import Foundation
 
-    /// Kernel of Arendelle which evaluates the given code
-    /// :param Arendelle a given Arendelle instance
-    /// :param
+    /// Kernel of Arendelle which evaluates any given Arendelle Blueprint
     func eval (inout arendelle: Arendelle, inout screen: codeScreen, inout spaces: [String:NSNumber]) -> [String] {
                 var spacesToRemove:[String] = []
+        
         var command:Character
+    
         
         func paintInDot (color: Int) {
             if screen.x < screen.screen.colCount() && screen.y < screen.screen.rowCount()
@@ -77,13 +77,31 @@ import Foundation
                 screen.errors.append("Using gramamr divider ',' out of grammars")
                 
             case "<", ">":
-                screen.errors.append("Using function grammar in the middel of the app")
+                screen.errors.append("Using function header in middel of blueprint")
                 
             case "]", "}", ")" :
                 screen.errors.append("Grammar closer: '\(command)' is used for an undifined grammar")
                 
+            case ";":
+                screen.errors.append("Semicolons are not allowed in Arendelle")
+                
+            case "@":
+                screen.errors.append("Space sign found in command-only zone")
+                
+            case "#":
+                screen.errors.append("Source sign found in command-only zone")
+                
+            case "$":
+                screen.errors.append("Stored space sign found in command-only zone")
+                
+            case "*", "/", "^", "-", "+", "%" :
+                screen.errors.append("Arithmetic operator '\(command)' found in command-only zone")
+                
+            case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
+                screen.errors.append("Number '\(command)' found in command-only zone")
+                
             default:
-                screen.errors.append("Unknown command: '\(command)'")
+                screen.errors.append("Unknown command: \(command)")
             }
             
             arendelle.i++

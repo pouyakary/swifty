@@ -10,7 +10,7 @@ import Foundation
 import Darwin
 
 /// evaluates a loop grammar
-func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) -> Void {
+func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) {
     
     if grammarParts.count == 2 {
 
@@ -22,8 +22,8 @@ func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces:
         if ifCheckingReg.items.count == 1 && ifCheckingReg.items[0] == grammarParts [0] {
             loopExperssion.result = grammarParts[0].toInt()
             loopExperssion.itsNotACondition = true
+            
         } else {
-
             loopExperssion  =  mathEval(stringExpression: grammarParts[0], screen: &screen, spaces: &spaces)
         }
             
@@ -63,8 +63,18 @@ func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces:
     
         // this fixes many problems!
         --arendelle.i
+        
+    } else {
+    
+        if grammarParts.count == 1 {
+        
+            screen.errors.append("single part loop found")
+        
+        } else {
+        
+            screen.errors.append("Loop with \(grammarParts.count) parts found")
+        
+        }
+    
     }
 }
-
-
-

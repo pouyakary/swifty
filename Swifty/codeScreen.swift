@@ -10,6 +10,7 @@ import Foundation
 
 struct codeScreen {
     
+    
     // Screen
     var screen = PIArray2D (cols: 10, rows: 10)
     
@@ -18,6 +19,8 @@ struct codeScreen {
         self.screen = PIArray2D (cols: xsize, rows: ysize)
         
     }
+    
+    var mainPath = "."
     
     // title
     var title:String = "Arendelle"
@@ -37,7 +40,6 @@ struct codeScreen {
     // code controling
     var line = 1
     var line2 = 0
-    var mainPath = ""
     var funcName = "main"
     
 }

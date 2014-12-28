@@ -13,5 +13,6 @@ func spaceInput (#text: String) -> NSNumber {
     print(text)
     let result =  readLine().toFloat()
     clean()
+    
     return result
 }

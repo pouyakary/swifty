@@ -8,7 +8,8 @@
 
 import Foundation
 
-func conditionEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) -> Void {
+/// Evaluates a condition grammar
+func conditionEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) {
 
     if grammarParts.count == 2 {
     

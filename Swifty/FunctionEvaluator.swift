@@ -54,15 +54,18 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 // FUNCTION SPACE'S EVAL
                 //
                 
-                var specialNumber = 0; if grammarParts[1] == "" { specialNumber = 1 }
+                let matchInGerammarParts = grammarParts[1] =~ "( |\n|\t|)*"
+                var numberOfGrammarParts = grammarParts.count; if matchInGerammarParts[0] == grammarParts[1] { numberOfGrammarParts-- }
+                let matchInHeaderParts = headerParts[0] =~ "( |\n|\t|)*"
+                var numberOfHeaderParts = headerParts.count; if matchInHeaderParts[0] == headerParts[0] { numberOfHeaderParts-- }
                 
-                if headerParts.count == grammarParts.count - 1 - specialNumber {
-    
-                    
+                
+                if numberOfHeaderParts == numberOfGrammarParts - 1 && numberOfHeaderParts > 0 {
+
                     for var counter = 1; counter < grammarParts.count; counter++  {
                         
                         let spaceName = "@\(headerParts[counter-1])"
-                    
+
                         var spaceValue = mathEval(stringExpression: grammarParts[counter], screen: &screen, spaces: &spaces)
 
                         if spaceValue.itsNotACondition == true && spaceValue.doesItHaveErros == false {
@@ -76,8 +79,6 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                                 screen.errors.append("Conditional value fount for '\(spaceName)' of function: !\(grammarParts[0]) ()")
                             }
                         }
-                        
-                        counter++
                     }
                     
                 //
@@ -85,7 +86,7 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 //
                 
                 } else {
-                    switch (headerParts.count) {
+                    switch (numberOfHeaderParts) {
                     case 0:
                         screen.errors.append("Function: !\(grammarParts[0]) () takes no space")
                     case 1:

@@ -8,9 +8,11 @@
 
 import Foundation
 
+
 func arendellePathToNSURL (#arendellePath: String, #kind: String, inout #screen: codeScreen) -> NSURL {
     
-    let dotToSlash = arendellePath.stringByReplacingOccurrencesOfString(".", withString: "/", options: NSStringCompareOptions.allZeros, range: nil)
+    let dotToSlash = arendellePath.replace(".", withString: "/")
+    
     let pathString = "\(screen.mainPath)/\(dotToSlash).\(kind)"
     return NSURL(fileURLWithPath: pathString)!
 }

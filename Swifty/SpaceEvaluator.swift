@@ -11,13 +11,14 @@ import Foundation
 /// Reads a NSNumber from an Arendelle Stored Space
 func storedSpaceLoader (#spaceName: String, inout #screen: codeScreen) -> NSNumber {
 
-    let spaceURL = arendellePathToNSURL(arendellePath: spaceName.stringByReplacingOccurrencesOfString("$", withString: "", options: NSStringCompareOptions.allZeros, range: nil), kind: "space", screen: &screen)
-    
+    let spaceURL = arendellePathToNSURL(arendellePath: spaceName.replace("$", withString: ""), kind: "space", screen: &screen)
+
     let spaceValue = String(contentsOfURL: spaceURL, encoding: NSUTF8StringEncoding, error: nil)?.replace("\n", withString: "")
     
     if spaceValue != nil {
         
         return Int(NSInteger(NSString(string: spaceValue!).integerValue))
+        
     } else {
         screen.errors.append("No stored space as '\(spaceName)' found")
         return 0
@@ -28,14 +29,16 @@ func storedSpaceLoader (#spaceName: String, inout #screen: codeScreen) -> NSNumb
 /// Checks if a stored space exists
 func checkIfStoredSpaceExists (#spaceName: String, inout #screen: codeScreen) -> Bool {
 
-    let spaceURL = arendellePathToNSURL(arendellePath: spaceName.stringByReplacingOccurrencesOfString("$", withString: "", options: NSStringCompareOptions.allZeros, range: nil), kind: "space", screen: &screen)
+    let spaceURL = arendellePathToNSURL(arendellePath: spaceName.replace("$", withString: ""), kind: "space", screen: &screen)
     return checkIfURLExists(spaceURL)
 }
 
 
 /// Evaluates a space grammar
-func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) {
-
+func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) -> String {
+    
+    var spaceResult = "";
+    
     func spaceRegexNameError (#text: String) {
         screen.errors.append("Unaccepted space name : '\(grammarParts[0])'")
     }
@@ -44,7 +47,7 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
         
         let spaceURL = arendellePathToNSURL(arendellePath: space, kind: "space", screen: &screen)
         
-        let er = "\(number)".stringByReplacingOccurrencesOfString("\n", withString: "", options: NSStringCompareOptions.allZeros, range: nil).writeToURL(spaceURL, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+        let er = "\(number)".replace("\n", withString: "").writeToURL(spaceURL, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
         
         if !er {
             screen.errors.append("Storing space '\(space)' failed")
@@ -67,7 +70,7 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
             
                 let spaceValue = spaceInput(text: "Sign space '\(grammarParts[0])' with a number:")
  
-                saveNumberToStoredSpace(number: spaceValue, toSpace: grammarParts[0].stringByReplacingOccurrencesOfString("$", withString: "", options: NSStringCompareOptions.allZeros, range: nil))
+                saveNumberToStoredSpace(number: spaceValue, toSpace: grammarParts[0].replace("$", withString: ""))
             
             // simple space
                 
@@ -105,11 +108,15 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
                 
                 if grammarParts[0].hasPrefix("$") {
                     
-                    saveNumberToStoredSpace(number: spaceValue, toSpace: grammarParts[0].stringByReplacingOccurrencesOfString("$", withString: "", options: NSStringCompareOptions.allZeros, range: nil))
+                    saveNumberToStoredSpace(number: spaceValue, toSpace: grammarParts[0].replace("$", withString: ""))
                 
                 // simple space
                     
                 } else {
+                    
+                    if spaces["@\(grammarParts[0])"] == nil {
+                        spaceResult = "@\(grammarParts[0])"
+                    }
                 
                     spaces["@\(grammarParts[0])"] = spaceValue
                     
@@ -120,7 +127,7 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
             // SHORTCUTS
             //
                 
-            } else if grammarParts[1].hasPrefix("+") || grammarParts[1].hasPrefix("-") || grammarParts[1].hasPrefix("/") || grammarParts[1].hasPrefix("*") {
+            } else if grammarParts[1].hasPrefix("+") || grammarParts[1].hasPrefix("-") || grammarParts[1].hasPrefix("/") || grammarParts[1].hasPrefix("*")    {
                 
                 
                 //
@@ -136,7 +143,6 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
                         spaces["@\(grammarParts[0])"] = result.result
                     
                     } else {
-                    
                         if result.itsNotACondition == false {
                             screen.errors.append("Unaccepted using of conditions in space value: '\(grammarParts[1])'")
                         } else {
@@ -183,7 +189,7 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
                 
                     if checkIfStoredSpaceExists(spaceName: grammarParts[0], screen: &screen) {
                     
-                        let spaceURL = arendellePathToNSURL(arendellePath: grammarParts[0].stringByReplacingOccurrencesOfString("$", withString: "", options: NSStringCompareOptions.allZeros, range: nil), kind: "space", screen: &screen)
+                        let spaceURL = arendellePathToNSURL(arendellePath: grammarParts[0].replace("$", withString: ""), kind: "space", screen: &screen)
                         
                         removeFileWithURL(spaceURL)
                         
@@ -224,13 +230,14 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
                         
                             if grammarParts[0].hasPrefix("$") {
                             
-                                saveNumberToStoredSpace(number: spaceValue.result, toSpace: grammarParts[0].stringByReplacingOccurrencesOfString("$", withString: "", options: NSStringCompareOptions.allZeros, range: nil))
+                                saveNumberToStoredSpace(number: spaceValue.result, toSpace: grammarParts[0].replace("$", withString: ""))
                             
                             // simple space
                                 
                             } else {
                                 
                                 spaces["@\(grammarParts[0])"] = spaceValue.result
+                                spaceResult = "@\(grammarParts[0])"
                                 
                             }
                         
@@ -257,6 +264,7 @@ func spaceEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces
     }
     
     --arendelle.i
+    return spaceResult
 }
 
 // done

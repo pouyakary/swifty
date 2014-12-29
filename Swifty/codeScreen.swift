@@ -40,6 +40,5 @@ struct codeScreen {
     // code controling
     var line = 1
     var line2 = 0
-    var funcName = "main"
     
 }

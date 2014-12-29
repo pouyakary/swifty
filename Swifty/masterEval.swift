@@ -165,7 +165,8 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
     // EVALUATION
     //
 
-    eval(&arendelle, &screen, &spaces)
+    let toBeRemoved = eval(&arendelle, &screen, &spaces)
+    evalSpaceRemover(spaces: &spaces, spacesToBeRemoved: toBeRemoved)
     
     // done
     return screen

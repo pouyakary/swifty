@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/OnePartOpenCloseParser.swift"
-            timestampString = "438423724.870053"
+            timestampString = "441547178.800576"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "onePartOpenCloseParser(openCloseCommand:arendelle:screen:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,43 +58,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/SpaceEvaluator.swift"
-            timestampString = "441460231.396489"
+            timestampString = "441549245.316742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "spaceEval(grammarParts:screen:spaces:arendelle:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Swifty.spaceEval (grammarParts : Swift.Array&lt;Swift.String&gt;, screen : inout Swifty.codeScreen, spaces : inout Swift.Dictionary&lt;Swift.String, ObjectiveC.NSNumber&gt;, arendelle : inout Swifty.Arendelle) -&gt; ()"
-                  moduleName = "Swifty"
-                  urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/SpaceEvaluator.swift"
-                  timestampString = "441485369.876572"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "3978">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Swifty.spaceEval (grammarParts : Swift.Array&lt;Swift.String&gt;, screen : inout Swifty.codeScreen, spaces : inout Swift.Dictionary&lt;Swift.String, ObjectiveC.NSNumber&gt;, arendelle : inout Swifty.Arendelle) -&gt; ()"
-                  moduleName = "Swifty"
-                  urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/SpaceEvaluator.swift"
-                  timestampString = "441485369.876695"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "4795">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -116,22 +86,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifty/SpaceEvaluator.swift"
-            timestampString = "441459644.30401"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "storedSpaceLoader(spaceName:screen:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -143,6 +97,22 @@
             endingLineNumber = "14"
             landmarkName = "@implementation SwiftTryCatch"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty/OpenCloseLexer.swift"
+            timestampString = "441490749.361052"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "openCloseLexer(openCommand:arendelle:screen:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

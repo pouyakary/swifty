@@ -9,8 +9,9 @@
 import Foundation
 
 /// Evaluates a condition grammar
-func conditionEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) {
+func conditionEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) {
 
+                    
     if grammarParts.count == 2 {
     
         let condtionResult =  mathEval(stringExpression: grammarParts[0], screen: &screen, spaces: &spaces)
@@ -18,7 +19,8 @@ func conditionEval (#grammarParts:[String], inout #screen: codeScreen, inout #sp
         if ( condtionResult.result != 0 || condtionResult.itsNotACondition == true ) && condtionResult.doesItHaveErros == true {
         
             var conditonCode = Arendelle(code: grammarParts[1])
-            eval(&conditonCode, &screen, &spaces)
+            let toBeRemoved = eval(&conditonCode, &screen, &spaces)
+            evalSpaceRemover(spaces: &spaces, spacesToBeRemoved: toBeRemoved)
         
         }
         
@@ -29,13 +31,15 @@ func conditionEval (#grammarParts:[String], inout #screen: codeScreen, inout #sp
         if (condtionResult.result != 0 || condtionResult.itsNotACondition == true )  && condtionResult.doesItHaveErros == true {
             
             var conditonCode = Arendelle(code: grammarParts[1])
-            eval(&conditonCode, &screen, &spaces)
+            let toBeRemoved = eval(&conditonCode, &screen, &spaces)
+            evalSpaceRemover(spaces: &spaces, spacesToBeRemoved: toBeRemoved)
             
         } else {
         
             if condtionResult.doesItHaveErros == true {
                 var conditonCode = Arendelle(code: grammarParts[2])
-                eval(&conditonCode, &screen, &spaces)
+                let toBeRemoved = eval(&conditonCode, &screen, &spaces)
+                evalSpaceRemover(spaces: &spaces, spacesToBeRemoved: toBeRemoved)
             } else {
             
                 screen.errors.append("Bad loop expression: '\(grammarParts[0])'")

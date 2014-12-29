@@ -8,9 +8,7 @@
 
 import Foundation
 
-func openCloseLexer ( #openCommand: Character,
-                  inout #arendelle: Arendelle,
-                     inout #screen: codeScreen) -> [String] {
+func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inout #screen: codeScreen) -> [String] {
     
                         
     var command:Character
@@ -19,7 +17,7 @@ func openCloseLexer ( #openCommand: Character,
     var arg:String = ""
     var args:[String] = []
     var whileControl = true
-    var openCloseDictionary:[Character:Character] = [ "{":"}", "(":")", "[":"]" ]
+    var openCloseDictionary:[Character:Character] = [ "{":"}", "(":")", "[":"]" , "<":">" ]
     let closeCommand = openCloseDictionary[openCommand]!
                         
                         
@@ -32,6 +30,7 @@ func openCloseLexer ( #openCommand: Character,
         case "," :
             args.append(arg)
             arg=""
+
             
         case "[", "(", "{" :
                                 

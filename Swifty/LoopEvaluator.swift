@@ -10,10 +10,9 @@ import Foundation
 import Darwin
 
 /// evaluates a loop grammar
-func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) {
+func loopEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) {
     
     if grammarParts.count == 2 {
-
         
         var loopExperssion = mathResult(number: 0, itIsNotCondition: true)
         
@@ -38,7 +37,8 @@ func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces:
                 
                 var loopCode = Arendelle(code: grammarParts[1])
                 
-                eval(&loopCode, &screen, &spaces)
+                let toBeRemoved = eval(&loopCode, &screen, &spaces)
+                evalSpaceRemover(spaces: &spaces, spacesToBeRemoved: toBeRemoved)
             }
         
         } else {
@@ -50,7 +50,8 @@ func loopEval (#grammarParts:[String], inout #screen: codeScreen, inout #spaces:
                 while ( mathEval(stringExpression: condition, screen: &screen, spaces: &spaces).result == 1) {
             
                     var conditionalLoopsCode = Arendelle(code: grammarParts[1])
-                    eval(&conditionalLoopsCode, &screen, &spaces)
+                    let toBeRemoved = eval(&conditionalLoopsCode, &screen, &spaces)
+                    evalSpaceRemover(spaces: &spaces, spacesToBeRemoved: toBeRemoved)
             
                 }
                 

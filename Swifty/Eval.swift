@@ -8,19 +8,31 @@
 
 import Foundation
 
+
+    /// removes spaces defined eval
+    func evalSpaceRemover (inout #spaces: [String:NSNumber], #spacesToBeRemoved: [String]) {
+        for space in spacesToBeRemoved {
+            if spaces[space] != nil && space != "@return" {
+                spaces.removeValueForKey(space)
+            }
+        }
+    }
+
     /// Kernel of Arendelle which evaluates any given Arendelle Blueprint
     func eval (inout arendelle: Arendelle, inout screen: codeScreen, inout spaces: [String:NSNumber]) -> [String] {
-                var spacesToRemove:[String] = []
+                    
+        var spacesToRemove:[String] = []
         
         var command:Character
-    
         
+        /// Paints a dot in the matrix
         func paintInDot (color: Int) {
             if screen.x < screen.screen.colCount() && screen.y < screen.screen.rowCount()
                 && screen.x >= 0 && screen.y >= 0 {
                     screen.screen[screen.x, screen.y] = color
             }
         }
+        
         
         while arendelle.i < arendelle.code.utf16Count {
             
@@ -31,20 +43,26 @@ import Foundation
             // grammars
                 
             case "(" :
-                var grammarParts = openCloseLexer(openCommand: "(", arendelle: &arendelle, screen: &screen)
-                spaceEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
+                let grammarParts = openCloseLexer(openCommand: "(", arendelle: &arendelle, screen: &screen)
+                let spaceToBeRemoved = spaceEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
+                if spaceToBeRemoved != "" { spacesToRemove.append(spaceToBeRemoved) }
                 
             case "[" :
-                var grammarParts = openCloseLexer(openCommand: "[", arendelle: &arendelle, screen: &screen)
+                let grammarParts = openCloseLexer(openCommand: "[", arendelle: &arendelle, screen: &screen)
                 loopEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
                 
             case "{" :
-                var grammarParts = openCloseLexer(openCommand: "{", arendelle: &arendelle, screen: &screen)
+                let grammarParts = openCloseLexer(openCommand: "{", arendelle: &arendelle, screen: &screen)
                conditionEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
                 
             case "'" :
                 screen.title = spaceReplacer(expressionString: onePartOpenCloseParser(openCloseCommand: "'", arendelle: &arendelle, screen: &screen), spaces: spaces, screen: &screen)
                 --arendelle.i
+                
+            case "!" :
+                let grammarParts = funcLexer(arendelle: &arendelle, screen: &screen)
+                funcEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces)
+                
                 
             // commands
                 
@@ -77,7 +95,7 @@ import Foundation
                 screen.errors.append("Using gramamr divider ',' out of grammars")
                 
             case "<", ">":
-                screen.errors.append("Using function header in middel of blueprint")
+                screen.errors.append("Using function header in middle of blueprint")
                 
             case "]", "}", ")" :
                 screen.errors.append("Grammar closer: '\(command)' is used for an undifined grammar")
@@ -109,5 +127,4 @@ import Foundation
         }
     
         return spacesToRemove
-
 }

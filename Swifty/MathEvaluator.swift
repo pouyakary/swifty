@@ -26,10 +26,9 @@ func mathEval (#stringExpression: String, inout #screen: codeScreen, inout #spac
     
     if stringExpression.toInt() != nil { return mathResult(number: Double(stringExpression.toInt()!), itIsNotCondition: true) }
     
-    
     let numberOfGeneralErrors = screen.errors.count
     
-    var mathExpression = replacer(expressionString: stringExpression, spaces: spaces, screen: &screen)
+    var mathExpression = replacer(expressionString: stringExpression, spaces: &spaces, screen: &screen)
    
     
     // checking for erros
@@ -51,14 +50,21 @@ func mathEval (#stringExpression: String, inout #screen: codeScreen, inout #spac
             
             var eval = DDMathEvaluator()
             var errors:NSError?
+            
             var tokenizer = DDMathStringTokenizer(string: mathExpression, operatorSet:nil, error: &errors)
+            
             var parser:DDParser = DDParser(tokenizer: tokenizer, error: &errors)
+            
             var experssion:DDExpression! = parser.parsedExpressionWithError(&errors)
+            
             var rewritten:DDExpression = DDExpressionRewriter.defaultRewriter().expressionByRewritingExpression(experssion, withEvaluator: eval)
+            
             let result = eval.evaluateExpression(experssion, withSubstitutions: nil, error: &errors)
             
             if result != nil {
+                
                 totalResult.result = result
+                
             } else {
                 screen.errors.append("Bad expression: \(stringExpression)")
             }
@@ -77,6 +83,7 @@ func mathEval (#stringExpression: String, inout #screen: codeScreen, inout #spac
     } else {
     
         var errorResult = mathResult(number: 0, itIsNotCondition: false)
+        
         errorResult.doesItHaveErros = true
         return errorResult
 

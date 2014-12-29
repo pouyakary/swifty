@@ -113,10 +113,10 @@ func printSpaces (#spaces: [String:NSNumber]) {
 let x = 30, y = 10
 var masterScreen = codeScreen(xsize: x, ysize: y)
 var whileControl = true
-var masterSpaces: [String: NSNumber] = ["kary":10]
+var masterSpaces: [String: NSNumber] = ["arendelle":0]
 masterSpaces.removeAll(keepCapacity: false)
 
-println("Arendelle Swift Core Based REPL")
+println("\nArendelle Swift Core Based REPL")
 println("Copyright 2014 Pouya Kary <k@arendelle.org>\n")
 
 while true {
@@ -153,9 +153,10 @@ while true {
     } else if code.hasPrefix("= ") {
         
         var tempScreen = codeScreen(xsize: x, ysize: y)
-        var replacing = replacer(expressionString: code, spaces: masterSpaces, screen: &tempScreen)
-        var expr = code.stringByReplacingOccurrencesOfString("=", withString: "", options: NSStringCompareOptions.allZeros, range:
-            nil)
+        var replacing = replacer(expressionString: code, spaces: &masterSpaces, screen: &tempScreen)
+        
+        var expr = code.stringByReplacingOccurrencesOfString("=", withString: "", options: NSStringCompareOptions.allZeros, range: nil)
+        
         var tempResult = mathEval(stringExpression: expr, screen: &tempScreen, spaces: &masterSpaces).result
         
         if ( tempScreen.errors.count > 0 ) {

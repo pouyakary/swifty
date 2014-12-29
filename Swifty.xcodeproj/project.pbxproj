@@ -13,6 +13,7 @@
 		A6897EC81A263D850074966A /* console.m in Sources */ = {isa = PBXBuildFile; fileRef = A6897EC71A263D850074966A /* console.m */; };
 		A696E0B51A506B1D00E213D2 /* PiTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A696E0B41A506B1D00E213D2 /* PiTryCatch.m */; };
 		A696E0B71A508D8700E213D2 /* FunctionLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A696E0B61A508D8700E213D2 /* FunctionLexer.swift */; };
+		A69813241A517324000D67A4 /* FunctionEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69813231A517324000D67A4 /* FunctionEvaluator.swift */; };
 		A6A506DC1A285D3500962A9B /* MathEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A506DB1A285D3500962A9B /* MathEvaluator.swift */; };
 		A6C4AAB21A4D8C4E00516A8A /* ArendelleFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C4AAB11A4D8C4E00516A8A /* ArendelleFileSystem.swift */; };
 		A6D303F11A2B16560045D9A9 /* Replacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D303F01A2B16560045D9A9 /* Replacer.swift */; };
@@ -72,6 +73,7 @@
 		A696E0B31A506B1D00E213D2 /* PiTryCatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiTryCatch.h; sourceTree = "<group>"; };
 		A696E0B41A506B1D00E213D2 /* PiTryCatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiTryCatch.m; sourceTree = "<group>"; };
 		A696E0B61A508D8700E213D2 /* FunctionLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionLexer.swift; sourceTree = "<group>"; };
+		A69813231A517324000D67A4 /* FunctionEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionEvaluator.swift; sourceTree = "<group>"; };
 		A6A506DB1A285D3500962A9B /* MathEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathEvaluator.swift; sourceTree = "<group>"; };
 		A6C4AAB11A4D8C4E00516A8A /* ArendelleFileSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArendelleFileSystem.swift; sourceTree = "<group>"; };
 		A6D303F01A2B16560045D9A9 /* Replacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Replacer.swift; sourceTree = "<group>"; };
@@ -167,6 +169,14 @@
 			name = Pi;
 			sourceTree = "<group>";
 		};
+		A69813221A517307000D67A4 /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				A69813231A517324000D67A4 /* FunctionEvaluator.swift */,
+			);
+			name = Functions;
+			sourceTree = "<group>";
+		};
 		A6A506DA1A285CFB00962A9B /* Math Evaluator */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +241,7 @@
 		A6E2B06E1A15EB450025C2E9 /* Kernel */ = {
 			isa = PBXGroup;
 			children = (
+				A69813221A517307000D67A4 /* Functions */,
 				A662D7E41A49E5A900BEC447 /* File System */,
 				A6A506DA1A285CFB00962A9B /* Math Evaluator */,
 				A6DC032F1A275923008DD558 /* Grammars */,
@@ -387,6 +398,7 @@
 				A6D303F11A2B16560045D9A9 /* Replacer.swift in Sources */,
 				A6E23A461A3ECC35001581D5 /* CoreInterface.swift in Sources */,
 				A6FB5F051A27AA8700FE7161 /* DDParser.m in Sources */,
+				A69813241A517324000D67A4 /* FunctionEvaluator.swift in Sources */,
 				A6E7EA311A19D07600192409 /* PI.swift in Sources */,
 				A6E2B0751A162D530025C2E9 /* Arendelle.swift in Sources */,
 				A6FB5EF31A27AA8700FE7161 /* _DDFunctionEvaluator.m in Sources */,

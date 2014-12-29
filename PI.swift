@@ -175,14 +175,17 @@ extension String
     
     
     // MARK: - replace
-    func replaceCharactersInRange(range:Range<Int>, withString: String!) -> String {
+    func replaceCharactersInRange(range: Range<Int>,
+                             withString: String!) -> String {
+                                
         var result:NSMutableString = NSMutableString(string: self)
         result.replaceCharactersInRange(NSRange(range), withString: withString)
         return result
     }
     
-    func replace(target: String, withString: String) -> String
-    {
+    func replace(target: String,
+             withString: String) -> String {
+                
         return self.stringByReplacingOccurrencesOfString(target, withString: withString, options: NSStringCompareOptions.LiteralSearch, range: nil)
     }
 }

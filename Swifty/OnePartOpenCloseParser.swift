@@ -8,7 +8,7 @@
 
 import Foundation
 
-func onePartOpenCloseParser (#openCloseCommand: Character, inout #arendelle: Arendelle, inout #screen: codeScreen) -> String {
+func onePartOpenCloseParser (#openCloseCommand:Character, inout #arendelle: Arendelle, inout #screen: codeScreen) -> String {
 
     // going to the right char
     ++arendelle.i

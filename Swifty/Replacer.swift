@@ -27,7 +27,7 @@ func spaceReplacer (#expressionString: String, #spaces: [String:NSNumber], inout
 
 
 /// Arendelle Replacer that replaces Spaces / Stored Spaces / Sources / Functions
-func replacer (#expressionString: String, #spaces: [String:NSNumber], inout #screen: codeScreen) -> String {
+func replacer (#expressionString: String, inout #spaces: [String:NSNumber], inout #screen: codeScreen) -> String {
 
     var result = expressionString
     
@@ -91,6 +91,18 @@ func replacer (#expressionString: String, #spaces: [String:NSNumber], inout #scr
             
             result = result.replace(match, withString: "\(storedSpaceLoader(spaceName: match, screen: &screen))")
         
+        
+        
+        //
+        // FUNCTIONS
+        //
+        
+        } else if match.hasPrefix("!") {
+            
+            var funcArendelle = Arendelle(code: match)
+            let grammarParts = funcLexer(arendelle: &funcArendelle, screen: &screen)
+            result = result.replace(match, withString: "\(funcEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces))")
+    
         }
     }
 

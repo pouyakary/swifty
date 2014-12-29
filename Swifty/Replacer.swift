@@ -31,7 +31,7 @@ func replacer (#expressionString: String, inout #spaces: [String:NSNumber], inou
 
     var result = expressionString
     
-    for match in result =~ "((#|@)[a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)|(\\![a-zA-Z0-9\\.]+ *\\(.*\\))" {
+    for match in result =~ "((#|@)[a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)" {
 
         
         //
@@ -90,14 +90,17 @@ func replacer (#expressionString: String, inout #spaces: [String:NSNumber], inou
         } else if match.hasPrefix("$") {
             
             result = result.replace(match, withString: "\(storedSpaceLoader(spaceName: match, screen: &screen))")
+        }
+    }
         
         
+    //
+    // FUNCTIONS
+    //
         
-        //
-        // FUNCTIONS
-        //
-        
-        } else if match.hasPrefix("!") {
+    for match in result =~ "\\![a-zA-Z0-9\\.]+ *\\(.*\\)" {
+            
+        if match.hasPrefix("!") {
             
             var funcArendelle = Arendelle(code: match)
             let grammarParts = funcLexer(arendelle: &funcArendelle, screen: &screen)

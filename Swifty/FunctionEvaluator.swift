@@ -74,9 +74,9 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                             
                         } else {
                             if spaceValue.doesItHaveErros == true {
-                                screen.errors.append("Header value for '\(spaceName)' of function: !\(grammarParts[0]) () is broken")
+                                screen.errors.append("Header value for '\(spaceName)' of function: !\(grammarParts[0])() is broken")
                             } else {
-                                screen.errors.append("Conditional value fount for '\(spaceName)' of function: !\(grammarParts[0]) ()")
+                                screen.errors.append("Conditional value fount for '\(spaceName)' of function: !\(grammarParts[0])()")
                             }
                         }
                     }
@@ -88,11 +88,11 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 } else {
                     switch (numberOfHeaderParts) {
                     case 0:
-                        screen.errors.append("Function: !\(grammarParts[0]) () takes no space")
+                        screen.errors.append("Function: !\(grammarParts[0])() takes no space")
                     case 1:
-                        screen.errors.append("Function: !\(grammarParts[0]) () takes one space")
+                        screen.errors.append("Function: !\(grammarParts[0])() takes one space")
                     default:
-                        screen.errors.append("Function: !\(grammarParts[0]) () takes \(headerParts.count) spaces")
+                        screen.errors.append("Function: !\(grammarParts[0])() takes \(headerParts.count) spaces")
                     }
                 }
                 

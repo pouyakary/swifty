@@ -153,6 +153,7 @@ while true {
     } else if code.hasPrefix("= ") {
         
         var tempScreen = codeScreen(xsize: x, ysize: y)
+        code = preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen)
         var replacing = replacer(expressionString: code, spaces: &masterSpaces, screen: &tempScreen)
         
         var expr = code.stringByReplacingOccurrencesOfString("=", withString: "", options: NSStringCompareOptions.allZeros, range: nil)
@@ -165,7 +166,7 @@ while true {
         
         } else {
             
-            println("  \(replacing)\n  = \(tempResult)")
+            println("\n--> \(tempResult)")
         
         }
     

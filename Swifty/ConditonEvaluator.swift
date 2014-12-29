@@ -16,7 +16,7 @@ func conditionEval (#grammarParts: [String], inout #screen: codeScreen, inout #s
     
         let condtionResult =  mathEval(stringExpression: grammarParts[0], screen: &screen, spaces: &spaces)
         
-        if ( condtionResult.result != 0 || condtionResult.itsNotACondition == true ) && condtionResult.doesItHaveErros == true {
+        if condtionResult.itsNotACondition == false && condtionResult.result == 1 && condtionResult.doesItHaveErros == false {
         
             var conditonCode = Arendelle(code: grammarParts[1])
             let toBeRemoved = eval(&conditonCode, &screen, &spaces)
@@ -28,7 +28,7 @@ func conditionEval (#grammarParts: [String], inout #screen: codeScreen, inout #s
         
         let condtionResult =  mathEval(stringExpression: grammarParts[0], screen: &screen, spaces: &spaces)
         
-        if (condtionResult.result != 0 || condtionResult.itsNotACondition == true )  && condtionResult.doesItHaveErros == true {
+        if condtionResult.itsNotACondition == false && condtionResult.result == 1 && condtionResult.doesItHaveErros == false {
             
             var conditonCode = Arendelle(code: grammarParts[1])
             let toBeRemoved = eval(&conditonCode, &screen, &spaces)
@@ -36,22 +36,19 @@ func conditionEval (#grammarParts: [String], inout #screen: codeScreen, inout #s
             
         } else {
         
-            if condtionResult.doesItHaveErros == true {
+            if condtionResult.itsNotACondition == false && condtionResult.result == 0 && condtionResult.doesItHaveErros == false {
+                
                 var conditonCode = Arendelle(code: grammarParts[2])
                 let toBeRemoved = eval(&conditonCode, &screen, &spaces)
                 evalSpaceRemover(spaces: &spaces, spacesToBeRemoved: toBeRemoved)
-            } else {
-            
-                screen.errors.append("Bad loop expression: '\(grammarParts[0])'")
                 
+            } else {
+                screen.errors.append("Bad condition expression: '\(grammarParts[0])'")
             }
         }
-    
-    
-    } else {
         
-        screen.errors.append("Loop grammar with \(grammarParts.count) part\(PIEndS(number: grammarParts.count)) found")
-    
+    } else {
+        screen.errors.append("Condition with \(grammarParts.count) part\(PIEndS(number: grammarParts.count)) found")
     }
     
     arendelle.i--

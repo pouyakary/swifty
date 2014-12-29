@@ -40,7 +40,9 @@ import Foundation
             
             switch command {
                 
-            // grammars
+            //
+            // GRAMMARS
+            //
                 
             case "(" :
                 let grammarParts = openCloseLexer(openCommand: "(", arendelle: &arendelle, screen: &screen)
@@ -59,12 +61,19 @@ import Foundation
                 screen.title = spaceReplacer(expressionString: onePartOpenCloseParser(openCloseCommand: "'", arendelle: &arendelle, screen: &screen), spaces: spaces, screen: &screen)
                 --arendelle.i
                 
+                
+            //
+            // FUNCTION
+            //
+                
             case "!" :
                 let grammarParts = funcLexer(arendelle: &arendelle, screen: &screen)
                 funcEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces)
                 
                 
-            // commands
+            //
+            // COMMANDS
+            //
                 
             case "p":
                 paintInDot(screen.n)
@@ -90,6 +99,12 @@ import Foundation
                 
             case "d":
                 screen.y++
+                
+            case "w":
+                NSThread.sleepForTimeInterval(0.1)
+                
+            case "s":
+                screen.errors.append("Stop-Clean command is no longer supported by Arendelle compilers")
                 
             case ",":
                 screen.errors.append("Using gramamr divider ',' out of grammars")

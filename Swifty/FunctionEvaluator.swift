@@ -10,6 +10,7 @@ import Foundation
 
 func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:NSNumber]) -> NSNumber {
     
+    let numberOfErrorsInStart = screen.errors.count
     
     func funcHeaderReader (inout #code: Arendelle) -> [String] {
         
@@ -53,7 +54,10 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 // FUNCTION SPACE'S EVAL
                 //
                 
-                if headerParts.count == grammarParts.count - 1 {
+                var specialNumber = 0; if grammarParts[1] == "" { specialNumber = 1 }
+                
+                if headerParts.count == grammarParts.count - 1 - specialNumber {
+    
                     
                     for var counter = 1; counter < grammarParts.count; counter++  {
                         
@@ -96,11 +100,17 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 // FUNCTION EVAL
                 //
                 
-                let toBeRemoved = eval (&funcCode, &screen, &funcSpaces)
-                evalSpaceRemover(spaces: &funcSpaces, spacesToBeRemoved: toBeRemoved)
+                if numberOfErrorsInStart == screen.errors.count {
                 
-                return funcSpaces["@return"]!
+                    let toBeRemoved = eval (&funcCode, &screen, &funcSpaces)
+                    evalSpaceRemover(spaces: &funcSpaces, spacesToBeRemoved: toBeRemoved)
+                    return funcSpaces["@return"]!
+                    
+                } else {
                 
+                    return 0
+                
+                }
                 
                 //
                 // DONE

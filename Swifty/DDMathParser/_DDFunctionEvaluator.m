@@ -244,7 +244,7 @@ static NSString *const _DDFunctionSelectorSuffix = @":variables:error:";
 	RETURN_IF_NIL(first);
 	NSNumber *second = [[self evaluator] evaluateExpression:[arguments objectAtIndex:1] withSubstitutions:variables error:error];
 	RETURN_IF_NIL(second);
-    NSNumber *result = @([first integerValue] ^ [second integerValue]);
+    NSNumber *result = @(pow([first integerValue], [second integerValue]));
 	return [DDExpression numberExpressionWithNumber:result];
 }
 

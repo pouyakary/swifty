@@ -116,7 +116,7 @@ var whileControl = true
 var masterSpaces: [String: NSNumber] = ["arendelle":0]
 masterSpaces.removeAll(keepCapacity: false)
 
-println("\nArendelle Swift Core Based REPL")
+println("\nSwifty : Arendelle's Apple Core REPL")
 println("Copyright 2014 Pouya Kary <k@arendelle.org>\n")
 
 while true {

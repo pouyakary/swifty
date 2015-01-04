@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Arendelle Language. All rights reserved.
 //
 
+
 import Foundation
 
 /// The mini replacer used for the strings
@@ -21,9 +22,11 @@ func spaceReplacer (#expressionString: String, #spaces: [String:NSNumber], inout
             screen.errors.append("Space '\(match)' not found")
         }
     }
-    
+
     return result
 }
+
+
 
 
 /// Arendelle Replacer that replaces Spaces / Stored Spaces / Sources / Functions
@@ -66,8 +69,8 @@ func replacer (#expressionString: String, inout #spaces: [String:NSNumber], inou
             default:
                 screen.errors.append("No source as '\(match)' exists")
             }
-        
             
+        
         //
         // SPACE REPLACER
         //
@@ -92,8 +95,8 @@ func replacer (#expressionString: String, inout #spaces: [String:NSNumber], inou
             result = result.replace(match, withString: "\(storedSpaceLoader(spaceName: match, screen: &screen))")
         }
     }
-        
-        
+    
+    
     //
     // FUNCTIONS
     //
@@ -108,6 +111,16 @@ func replacer (#expressionString: String, inout #spaces: [String:NSNumber], inou
     
         }
     }
+    
+    
+    //
+    // AND / OR
+    //
+    
+    result = result.replace("floor", withString: "floo_r")
+    result = result.replace("or", withString: "||")
+    result = result.replace("floo_r", withString: "floor")
+    result = result.replace("and", withString: "&&")
 
     return result
 }

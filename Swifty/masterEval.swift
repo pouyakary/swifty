@@ -12,6 +12,13 @@ import Foundation
 /// the code for performance
 func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> String {
     
+    // checking for || and &&
+    if codeToBeSpaceFixed =~ "\\|\\||\\&\\&" {
+        
+        screen.errors.append("&& and || are not accepted by Arendelle, Use 'and' and 'or' instead")
+        
+    }
+    
     var theCode = Arendelle (code: codeToBeSpaceFixed)
     var result : String = ""
     
@@ -138,6 +145,8 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
         
         theCode.i++
     }
+    
+    
     
     return result
 }

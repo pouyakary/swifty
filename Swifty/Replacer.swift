@@ -112,7 +112,6 @@ func replacer (#expressionString: String, inout #spaces: [String:NSNumber], inou
         }
     }
     
-    
     //
     // AND / OR
     //

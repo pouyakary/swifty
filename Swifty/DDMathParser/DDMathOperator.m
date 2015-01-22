@@ -37,10 +37,10 @@
         NSMutableArray *operators = [NSMutableArray array];
         NSInteger precedence = 0;
         
-        [operators addObject:OPERATOR(DDOperatorLogicalOr, (@[@"||", @"\u2228"]), BINARY, precedence, LEFT)];
+        [operators addObject:OPERATOR(DDOperatorLogicalOr, (@[@"&&", @"\u2228"]), BINARY, precedence, LEFT)];
         precedence++;
         
-        [operators addObject:OPERATOR(DDOperatorLogicalAnd, (@[@"&&", @"\u2227"]), BINARY, precedence, LEFT)];
+        [operators addObject:OPERATOR(DDOperatorLogicalAnd, (@[@"||", @"\u2227"]), BINARY, precedence, LEFT)];
         precedence++;
         
         // == and != have the same precedence

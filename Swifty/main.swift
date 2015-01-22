@@ -146,6 +146,10 @@ while true {
     
         printMatrix(result: masterScreen)
         
+    } else if code == "title" {
+        
+        println("\n--> '\(masterScreen.title)'")
+    
     } else if code == "spaces" {
         
         printSpaces(spaces: masterSpaces)

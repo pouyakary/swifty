@@ -58,7 +58,7 @@ import Foundation
                conditionEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
                 
             case "'" :
-                screen.title = spaceReplacer(expressionString: onePartOpenCloseParser(openCloseCommand: "'", arendelle: &arendelle, screen: &screen), spaces: spaces, screen: &screen)
+                screen.title = onePartOpenCloseParser(openCloseCommand: "'", spaces: &spaces, arendelle: &arendelle, screen: &screen, preprocessorState: false)
                 --arendelle.i
                 
                 

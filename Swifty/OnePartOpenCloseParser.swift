@@ -8,7 +8,7 @@
 
 import Foundation
 
-func onePartOpenCloseParser (#openCloseCommand:Character, inout #arendelle: Arendelle, inout #screen: codeScreen) -> String {
+func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle, inout #screen: codeScreen, #preprocessorState: Bool) -> String {
 
     // going to the right char
     ++arendelle.i
@@ -50,6 +50,19 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #arendelle: Aren
                     
                 case "\\" :
                     result += "\\"
+                    
+                case "(" :
+                    var replacerParts = openCloseLexer(openCommand: "(", arendelle: &arendelle, screen: &screen)
+                    var replacerOnePart = ""
+                    for part in replacerParts { replacerOnePart += part }
+                    
+                    if preprocessorState == true {
+                        result += "\\("
+                        result += replacerOnePart
+                        result += ")"
+                    } else {
+                        result += mathEval(stringExpression: replacerOnePart, screen: &screen, spaces: &spaces).result.stringValue
+                    }
                     
                 default:
                     screen.errors.append("Bad escape sequence: '\\\(charToRead)'")

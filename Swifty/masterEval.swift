@@ -12,6 +12,8 @@ import Foundation
 /// the code for performance
 func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> String {
     
+    var spaces: [String: NSNumber] = ["@return":0]
+    
     // checking for || and &&
     if codeToBeSpaceFixed =~ "\\|\\||\\&\\&" {
         
@@ -29,11 +31,11 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
         switch currentChar {
             
         case "'" :
-            result += "'" + onePartOpenCloseParser(openCloseCommand: "'", arendelle: &theCode, screen: &screen) + "'"
+            result += "'" + onePartOpenCloseParser(openCloseCommand: "'", spaces: &spaces, arendelle: &theCode, screen: &screen, preprocessorState: true) + "'"
             --theCode.i
             
         case "\"" :
-            result += "\"" + onePartOpenCloseParser(openCloseCommand: "\"", arendelle: &theCode, screen: &screen) + "\""
+            result += "\"" + onePartOpenCloseParser(openCloseCommand: "\"", spaces: &spaces, arendelle: &theCode, screen: &screen, preprocessorState: true) + "\""
             --theCode.i
             
         case "/" :

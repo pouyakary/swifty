@@ -9,25 +9,6 @@
 
 import Foundation
 
-/// The mini replacer used for the strings
-func spaceReplacer (#expressionString: String, #spaces: [String:NSNumber], inout #screen: codeScreen) -> String {
-
-    var result = expressionString
-    
-    for match in result =~ "@[a-zA-Z0-9]+" {
-        
-        if spaces[match] != nil {
-            result = result.replace(match, withString: "\(spaces[match]!)")
-        } else {
-            screen.errors.append("Space '\(match)' not found")
-        }
-    }
-
-    return result
-}
-
-
-
 
 /// Arendelle Replacer that replaces Spaces / Stored Spaces / Sources / Functions
 func replacer (#expressionString: String, inout #spaces: [String:NSNumber], inout #screen: codeScreen) -> String {

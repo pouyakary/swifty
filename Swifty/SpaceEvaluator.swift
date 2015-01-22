@@ -54,6 +54,12 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
         }
     }
     
+    if grammarParts[0] == "return" {
+        if spaces["@\(grammarParts[0])"] == nil {
+            screen.errors.append("Using @return is forbidden in the main blueprint")
+        }
+    }
+    
     let regexMathes = grammarParts[0] =~ "([a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)"
     
     if grammarParts.count == 1 {
@@ -101,7 +107,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             if grammarParts[1].hasPrefix("\"") && grammarParts[1].hasSuffix("\"") {
                 
                 var spaceInputArendelleFortmat = Arendelle(code: grammarParts[1])
-                let spaceInputText = onePartOpenCloseParser(openCloseCommand: "\"", arendelle: &spaceInputArendelleFortmat, screen: &screen)
+                let spaceInputText = onePartOpenCloseParser(openCloseCommand: "\"",spaces: &spaces, arendelle: &spaceInputArendelleFortmat, screen: &screen, preprocessorState:false)
                 var spaceValue = spaceInput(text: spaceInputText)
                 
                 // if it's stored space
@@ -201,8 +207,14 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 
                     if spaces[grammarParts[0]] != nil {
                         
-                        spaces.removeValueForKey("@\(grammarParts[0])")
+                        if grammarParts[0] != "return" {
                         
+                            spaces.removeValueForKey("@\(grammarParts[0])")
+                        
+                        } else {
+                            screen.errors.append("The @return space can not be deleted")
+                        }
+        
                     } else {
                         screen.errors.append("No space as @\(grammarParts[0]) found to be deleted")
                     }

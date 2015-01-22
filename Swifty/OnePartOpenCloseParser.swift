@@ -64,6 +64,8 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
                         result += mathEval(stringExpression: replacerOnePart, screen: &screen, spaces: &spaces).result.stringValue
                     }
                     
+                    --arendelle.i
+                    
                 default:
                     screen.errors.append("Bad escape sequence: '\\\(charToRead)'")
                 }

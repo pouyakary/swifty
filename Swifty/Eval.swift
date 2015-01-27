@@ -10,7 +10,7 @@ import Foundation
 
 
     /// removes spaces defined eval
-    func evalSpaceRemover (inout #spaces: [String:NSNumber], #spacesToBeRemoved: [String]) {
+    func evalSpaceRemover (inout #spaces: [String:[NSNumber]], #spacesToBeRemoved: [String]) {
         for space in spacesToBeRemoved {
             if spaces[space] != nil && space != "@return" {
                 spaces.removeValueForKey(space)
@@ -19,7 +19,7 @@ import Foundation
     }
 
     /// Kernel of Arendelle which evaluates any given Arendelle Blueprint
-    func eval (inout arendelle: Arendelle, inout screen: codeScreen, inout spaces: [String:NSNumber]) -> [String] {
+    func eval (inout arendelle: Arendelle, inout screen: codeScreen, inout spaces: [String:[NSNumber]]) -> [String] {
                     
         var spacesToRemove:[String] = []
         
@@ -67,7 +67,7 @@ import Foundation
             //
                 
             case "!" :
-                let grammarParts = funcLexer(arendelle: &arendelle, screen: &screen)
+                let grammarParts = functionSpaceLexer(arendelle: &arendelle, screen: &screen, partTwoChar: "(")
                 funcEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces)
                 
                 

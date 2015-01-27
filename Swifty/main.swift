@@ -35,8 +35,9 @@ func replInput () -> String {
             specialCharactersNumbers[name] = number
         
         }
+
         
-        if specialCharactersNumbers["("] == specialCharactersNumbers[")"] && specialCharactersNumbers ["["] == specialCharactersNumbers ["]"] && specialCharactersNumbers["{"] == specialCharactersNumbers["}"] {
+        if specialCharactersNumbers["("] == specialCharactersNumbers[")"] && specialCharactersNumbers ["["] == specialCharactersNumbers ["]"] && specialCharactersNumbers["{"] == specialCharactersNumbers["}"]  {
             
             whileControlForREPLInput = false
             
@@ -82,8 +83,8 @@ func printMatrix (#result: codeScreen) {
 func printError (#result: codeScreen) {
 
     var i = 1;
-
-    println("\n  ⎪ ✖︎ Compilation Failed Because Of \(result.errors.count) Known Error\(PIEndS(number: result.errors.count))")
+    
+    println("\n  ⎪ ✖︎ Compilation Failed Because Of \(result.errors.count) Known Error\(PIEndS(number: result.errors.count)):")
     for error in result.errors {
         println("  ⎪ → \(error.lowercaseString)")
         i++
@@ -95,13 +96,13 @@ func printError (#result: codeScreen) {
 // PRINT SPACES:
 //
 
-func printSpaces (#spaces: [String:NSNumber]) {
+func printSpaces (#spaces: [String:[NSNumber]]) {
     if spaces.count > 0 {
         for space in spaces {
             println("• \(space.0) → \(space.1)")
         }
     } else {
-        println("=> no space found")
+        println("\n  ⎪ ✖︎ No space found")
     }
 }
 
@@ -113,11 +114,11 @@ func printSpaces (#spaces: [String:NSNumber]) {
 let x = 30, y = 10
 var masterScreen = codeScreen(xsize: x, ysize: y)
 var whileControl = true
-var masterSpaces: [String: NSNumber] = ["arendelle":0]
+var masterSpaces: [String:[NSNumber]] = ["arendelle":[0]]
 masterSpaces.removeAll(keepCapacity: false)
 
 println("\nSwifty : Arendelle's Apple Core REPL")
-println("Copyright 2014 Pouya Kary <k@arendelle.org>\n")
+println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>\n")
 
 while true {
     
@@ -132,7 +133,7 @@ while true {
         
     } else if code == "pwd" {
         
-        println("\(masterScreen.mainPath)")
+        println("\n--> \(masterScreen.mainPath)")
     
     } else if code == "cls" {
         
@@ -150,15 +151,27 @@ while true {
         
         println("\n--> '\(masterScreen.title)'")
     
-    } else if code == "spaces" {
+    } else if code == "dump" {
         
         printSpaces(spaces: masterSpaces)
         
+    } else if code == "help" {
+        
+        println()
+        println("  ⎪ Swifty - Arendelle Apple Core's REPL\n  ⎪")
+        println("  ⎪ λ [code]   : Evalautes the [code]")
+        println("  ⎪ λ = [expr] : Evaluates the [expr]")
+        println("  ⎪ λ dump     : Prints the spaces")
+        println("  ⎪ λ pwd      : codeScreen.mainPath")
+        println("  ⎪ λ cls      : Terminal clean")
+        println("  ⎪ λ print    : Prints the codeScreen")
+        println("  ⎪ λ title    : Shows the codeScreen.title")
+        println("  ⎪ λ help     : Shows this help")
+    
     } else if code.hasPrefix("= ") {
         
         var tempScreen = codeScreen(xsize: x, ysize: y)
         code = preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen)
-        var replacing = replacer(expressionString: code, spaces: &masterSpaces, screen: &tempScreen)
         
         var expr = code.stringByReplacingOccurrencesOfString("=", withString: "", options: NSStringCompareOptions.allZeros, range: nil)
         

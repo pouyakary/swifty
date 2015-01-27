@@ -46,12 +46,12 @@ class PIArray2D {
         }
     }
     
-    /// Returns the number the array columns
+    /// Returns the number of the array columns
     func colCount() -> Int {
         return self.cols
     }
     
-    /// Returns the number the array rows
+    /// Returns the number of the array rows
     func rowCount() -> Int {
         return self.rows
     }

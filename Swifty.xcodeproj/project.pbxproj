@@ -12,7 +12,7 @@
 		A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */; };
 		A6897EC81A263D850074966A /* console.m in Sources */ = {isa = PBXBuildFile; fileRef = A6897EC71A263D850074966A /* console.m */; };
 		A696E0B51A506B1D00E213D2 /* PiTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A696E0B41A506B1D00E213D2 /* PiTryCatch.m */; };
-		A696E0B71A508D8700E213D2 /* FunctionLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A696E0B61A508D8700E213D2 /* FunctionLexer.swift */; };
+		A696E0B71A508D8700E213D2 /* FunctionSpaceLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A696E0B61A508D8700E213D2 /* FunctionSpaceLexer.swift */; };
 		A69813241A517324000D67A4 /* FunctionEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69813231A517324000D67A4 /* FunctionEvaluator.swift */; };
 		A6A506DC1A285D3500962A9B /* MathEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A506DB1A285D3500962A9B /* MathEvaluator.swift */; };
 		A6C4AAB21A4D8C4E00516A8A /* ArendelleFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C4AAB11A4D8C4E00516A8A /* ArendelleFileSystem.swift */; };
@@ -72,7 +72,7 @@
 		A6897EC71A263D850074966A /* console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = console.m; sourceTree = "<group>"; };
 		A696E0B31A506B1D00E213D2 /* PiTryCatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiTryCatch.h; sourceTree = "<group>"; };
 		A696E0B41A506B1D00E213D2 /* PiTryCatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiTryCatch.m; sourceTree = "<group>"; };
-		A696E0B61A508D8700E213D2 /* FunctionLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionLexer.swift; sourceTree = "<group>"; };
+		A696E0B61A508D8700E213D2 /* FunctionSpaceLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionSpaceLexer.swift; sourceTree = "<group>"; };
 		A69813231A517324000D67A4 /* FunctionEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionEvaluator.swift; sourceTree = "<group>"; };
 		A6A506DB1A285D3500962A9B /* MathEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathEvaluator.swift; sourceTree = "<group>"; };
 		A6C4AAB11A4D8C4E00516A8A /* ArendelleFileSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArendelleFileSystem.swift; sourceTree = "<group>"; };
@@ -264,7 +264,7 @@
 			children = (
 				A6E7EA331A1A317100192409 /* OpenCloseLexer.swift */,
 				A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */,
-				A696E0B61A508D8700E213D2 /* FunctionLexer.swift */,
+				A696E0B61A508D8700E213D2 /* FunctionSpaceLexer.swift */,
 			);
 			name = Lexers;
 			sourceTree = "<group>";
@@ -421,7 +421,7 @@
 				A6FB5F041A27AA8700FE7161 /* DDMathStringTokenizer.m in Sources */,
 				A6E7EA341A1A317100192409 /* OpenCloseLexer.swift in Sources */,
 				A6FB5EFC1A27AA8700FE7161 /* _DDRewriteRule.m in Sources */,
-				A696E0B71A508D8700E213D2 /* FunctionLexer.swift in Sources */,
+				A696E0B71A508D8700E213D2 /* FunctionSpaceLexer.swift in Sources */,
 				A6C4AAB21A4D8C4E00516A8A /* ArendelleFileSystem.swift in Sources */,
 				A6FB5F061A27AA8700FE7161 /* DDParserTypes.m in Sources */,
 				A6ECE7631A2450C200B09103 /* masterEval.swift in Sources */,

@@ -8,6 +8,40 @@
 
 import Foundation
 
+struct spaceStruct {
+    var name : String
+    var index : Int
+    
+    init (spaceName: String, spaceIndex: Int) {
+        self.name = spaceName
+        self.index = spaceIndex
+    }
+}
+
+
+// Stores a value into the given space
+func saveToSpace (#spaceName: String, #indexAtSpace: Int, #valueToSave: NSNumber, inout #spaces: [String:[NSNumber]]) {
+    
+    if spaces["@\(spaceName)"] == nil {
+        spaces["@\(spaceName)"] = [0]
+    }
+    
+    if spaces["@\(spaceName)"]?.count < indexAtSpace + 1 {
+        
+        let toStupidityOfOptionalTypeOfSwift = spaces["@\(spaceName)"]?.count
+        let forNumber = indexAtSpace - toStupidityOfOptionalTypeOfSwift!
+        
+        for var addressOfLastIndex = 0; addressOfLastIndex < forNumber ; addressOfLastIndex++ {
+            spaces["@\(spaceName)"]?.append(0)
+        }
+        spaces["@\(spaceName)"]?.append(valueToSave)
+        
+    } else {
+        spaces["@\(spaceName)"]?[indexAtSpace] = (valueToSave)
+    }
+}
+
+
 /// Reads a NSNumber from an Arendelle Stored Space
 func storedSpaceLoader (#spaceName: String, inout #screen: codeScreen) -> NSNumber {
 
@@ -35,13 +69,15 @@ func checkIfStoredSpaceExists (#spaceName: String, inout #screen: codeScreen) ->
 
 
 /// Evaluates a space grammar
-func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) -> String {
+func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:[NSNumber]], inout #arendelle: Arendelle) -> String {
     
     var spaceResult = "";
     
     func spaceRegexNameError (#text: String) {
         screen.errors.append("Unaccepted space name : '\(grammarParts[0])'")
     }
+    
+    
     
     func saveNumberToStoredSpace (#number: NSNumber, toSpace space: String) {
         
@@ -54,13 +90,59 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
         }
     }
     
-    if grammarParts[0] == "return" {
+    
+    
+    
+    func spaceNameAndIndexReaderWithName (name: String) -> spaceStruct {
+    
+        var spaceName = ""; var spaceIndexFinal:Int = 0; var spaceReader = Arendelle(code: name);
+        
+        while spaceReader.i < spaceReader.code.utf16Count {
+            
+            var spaceCharToRead = Array(spaceReader.code)[spaceReader.i]
+            
+            switch spaceCharToRead {
+                
+            case "[":
+                let spaceIndexArgs = openCloseLexer(openCommand: "[", arendelle: &spaceReader, screen: &screen)
+                
+                if spaceIndexArgs.count == 1 {
+                
+                    var spaceIndex = mathEval(stringExpression: spaceIndexArgs[0], screen: &screen, spaces: &spaces)
+                    
+                    if spaceIndex.itsNotACondition && spaceIndex.doesItHaveErros == false {
+                    
+                        spaceIndexFinal = spaceIndex.result.integerValue
+                    
+                    } else if spaceIndex.itsNotACondition == false {
+                        screen.errors.append("Space index must not be condition")
+                    }
+                    
+                } else {
+                    screen.errors.append("Space index must be one part")
+                }
+                
+            default :
+                spaceName.append(spaceCharToRead)
+                spaceReader.i++
+            }
+        }
+    
+        return spaceStruct(spaceName: spaceName, spaceIndex: spaceIndexFinal)
+    }
+    
+    
+    
+    if grammarParts[0].hasPrefix("return") {
         if spaces["@\(grammarParts[0])"] == nil {
             screen.errors.append("Using @return is forbidden in the main blueprint")
         }
     }
     
-    let regexMathes = grammarParts[0] =~ "([a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)"
+    
+    
+    let regexMathes = grammarParts[0] =~ "(([a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)) *(\\[.*\\])?"
+    
     
     if grammarParts.count == 1 {
     
@@ -72,19 +154,18 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             
             // stored space
             
-            if grammarParts[0].hasPrefix("$") {
+            let space = spaceNameAndIndexReaderWithName(grammarParts[0])
             
-                let spaceValue = spaceInput(text: "Sign space '\(grammarParts[0])' with a number:")
- 
-                saveNumberToStoredSpace(number: spaceValue, toSpace: grammarParts[0].replace("$", withString: ""))
+            if space.name.hasPrefix("$") {
+            
+                let spaceValue = spaceInput(text: "Sign space '\(space.name)' with a number:")
+                saveNumberToStoredSpace(number: spaceValue, toSpace: space.name.replace("$", withString: ""))
             
             // simple space
                 
             } else {
-            
-                let spaceValue = spaceInput(text: "Sign space '@\(grammarParts[0])' with a number:")
-                spaces["@\(grammarParts[0])"] = spaceValue
-                
+                let spaceValue = spaceInput(text: "Sign space '@\(space.name)' at index '\(space.index)' with a number:")
+                saveToSpace(spaceName: space.name, indexAtSpace: space.index, valueToSave: spaceValue, spaces: &spaces)
             }
         
         } else {
@@ -99,6 +180,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
 
         if regexMathes.items.count == 1 && regexMathes.items[0] == grammarParts[0] {
             
+            let space = spaceNameAndIndexReaderWithName(grammarParts[0])
             
             //
             // INPUT
@@ -112,19 +194,15 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 
                 // if it's stored space
                 
-                if grammarParts[0].hasPrefix("$") {
+                if space.name.hasPrefix("$") {
                     
-                    saveNumberToStoredSpace(number: spaceValue, toSpace: grammarParts[0].replace("$", withString: ""))
+                    saveNumberToStoredSpace(number: spaceValue, toSpace: space.name.replace("$", withString: ""))
                 
                 // simple space
                     
                 } else {
                     
-                    if spaces["@\(grammarParts[0])"] == nil {
-                        spaceResult = "@\(grammarParts[0])"
-                    }
-                
-                    spaces["@\(grammarParts[0])"] = spaceValue
+                    saveToSpace(spaceName: space.name, indexAtSpace: space.index, valueToSave: spaceValue, spaces: &spaces)
                     
                 }
                 
@@ -145,8 +223,8 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     let result = mathEval(stringExpression: "@\(grammarParts[0]) \(grammarParts[1])", screen: &screen, spaces: &spaces)
 
                     if result.doesItHaveErros == false && result.itsNotACondition == true {
-                    
-                        spaces["@\(grammarParts[0])"] = result.result
+                        
+                        saveToSpace(spaceName: space.name, indexAtSpace: space.index, valueToSave: result.result, spaces: &spaces)
                     
                     } else {
                         if result.itsNotACondition == false {
@@ -163,7 +241,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     
                 } else if grammarParts[0].hasPrefix("$") {
                     
-                    if checkIfStoredSpaceExists(spaceName: grammarParts[0], screen: &screen) {
+                    if checkIfStoredSpaceExists(spaceName: space.name, screen: &screen) {
                     
                         let result = mathEval(stringExpression: "\(grammarParts[0]) \(grammarParts[1])", screen: &screen, spaces: &spaces)
            
@@ -193,30 +271,30 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 
                 if grammarParts[0].hasPrefix("$") {
                 
-                    if checkIfStoredSpaceExists(spaceName: grammarParts[0], screen: &screen) {
+                    if checkIfStoredSpaceExists(spaceName: space.name, screen: &screen) {
                     
-                        let spaceURL = arendellePathToNSURL(arendellePath: grammarParts[0].replace("$", withString: ""), kind: "space", screen: &screen)
+                        let spaceURL = arendellePathToNSURL(arendellePath: space.name.replace("$", withString: ""), kind: "space", screen: &screen)
                         
                         removeFileWithURL(spaceURL)
                         
                     } else {
-                        screen.errors.append("No stored space as \(grammarParts[0]) found to be deleted")
+                        screen.errors.append("No stored space as \(space.name) found to be deleted")
                     }
                 
                 } else {
                 
-                    if spaces[grammarParts[0]] != nil {
+                    if spaces["@\(space.name)"] != nil {
                         
-                        if grammarParts[0] != "return" {
+                        if space.name != "return" {
                         
-                            spaces.removeValueForKey("@\(grammarParts[0])")
+                            spaces.removeValueForKey("@\(space.name)")
                         
                         } else {
                             screen.errors.append("The @return space can not be deleted")
                         }
         
                     } else {
-                        screen.errors.append("No space as @\(grammarParts[0]) found to be deleted")
+                        screen.errors.append("No space as @\(space.name) found to be deleted")
                     }
                 }
             
@@ -240,7 +318,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                         
                             // if it's stored space
                         
-                            if grammarParts[0].hasPrefix("$") {
+                            if space.name.hasPrefix("$") {
                             
                                 saveNumberToStoredSpace(number: spaceValue.result, toSpace: grammarParts[0].replace("$", withString: ""))
                             
@@ -248,8 +326,8 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                                 
                             } else {
                                 
-                                spaces["@\(grammarParts[0])"] = spaceValue.result
-                                spaceResult = "@\(grammarParts[0])"
+                                saveToSpace(spaceName: space.name, indexAtSpace: space.index, valueToSave: spaceValue.result, spaces: &spaces)
+                                spaceResult = space.name
                                 
                             }
                         

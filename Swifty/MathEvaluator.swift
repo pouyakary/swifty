@@ -22,7 +22,7 @@ struct mathResult {
     
 }
 
-func mathEval (#stringExpression: String, inout #screen: codeScreen, inout #spaces: [String:NSNumber]) -> mathResult {
+func mathEval (#stringExpression: String, inout #screen: codeScreen, inout #spaces: [String:[NSNumber]]) -> mathResult {
     
     if stringExpression.toInt() != nil { return mathResult(number: Double(stringExpression.toInt()!), itIsNotCondition: true) }
     

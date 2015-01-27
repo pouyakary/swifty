@@ -10,97 +10,238 @@
 import Foundation
 
 
-/// Arendelle Replacer that replaces Spaces / Stored Spaces / Sources / Functions
-func replacer (#expressionString: String, inout #spaces: [String:NSNumber], inout #screen: codeScreen) -> String {
-
-    var result = expressionString
+func spaceReplacerWitheEvaluation (#name: String, #spaceParts: [String], #simpleSpaceOrNot: Bool, #numberOfErrors: Int, inout #screen: codeScreen, inout spaces: [String:[NSNumber]]) -> String {
     
-    for match in result =~ "((#|@)[a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)" {
+    var result = "0"
 
+    if spaceParts.count == 1 && numberOfErrors == screen.errors.count {
         
-        //
-        // SOURCE REPLACER
-        //
+        let calculatedIndexExpression = mathEval(stringExpression: spaceParts[0], screen: &screen, spaces: &spaces)
         
-        if match.hasPrefix("#") {
-        
-            switch match {
+        if calculatedIndexExpression.doesItHaveErros == false && calculatedIndexExpression.itsNotACondition {
+            
+            if simpleSpaceOrNot {
                 
-            case "#i" , "#width" :
-                result = result.replace(match, withString: "\(screen.screen.colCount())")
+                result = spaceLoaderWithName(name, atIndex: calculatedIndexExpression.result.integerValue, spaces: spaces, screen: &screen).stringValue
                 
-            case "#j" , "#height" :
-                result = result.replace(match, withString: "\(screen.screen.rowCount())")
-                
-            case "#x" :
-                result = result.replace("#x", withString: "\(screen.x)")
-                
-            case "#y" :
-                result = result.replace("#y", withString: "\(screen.y)")
-                
-            case "#n" :
-                result = result.replace("#n", withString: "\(screen.n)")
-                
-            case "#pi" :
-                result = result.replace("#pi", withString: "3.141592653589")
-                
-            case "#rnd" :
-                result = result.replace("#rnd", withString: arendelleRandom())
-                
-            default:
-                screen.errors.append("No source as '\(match)' exists")
             }
             
-        
-        //
-        // SPACE REPLACER
-        //
-            
-        } else if match.hasPrefix("@") {
-        
-            if spaces[match] != nil {
-                
-                result = result.replace(match, withString: "\(spaces[match]!)")
-                
-            } else {
-                screen.errors.append("Space '\(match)' not found")
-            }
-            
-            
-        //
-        // STORED SPACE REPLACER
-        //
-        
-        } else if match.hasPrefix("$") {
-            
-            result = result.replace(match, withString: "\(storedSpaceLoader(spaceName: match, screen: &screen))")
+        } else if calculatedIndexExpression.itsNotACondition == false {
+            screen.errors.append("Using conditions are not allowed in space index")
         }
+        
+    } else if spaceParts.count != 1 {
+        screen.errors.append("Space with array index with more or less than one part found.")
     }
     
+    return result
+}
+
+
+
+
+
+
+func spaceLoaderWithName (name: String, atIndex index: Int, #spaces: [String:[NSNumber]], inout #screen: codeScreen) -> NSNumber {
     
-    //
-    // FUNCTIONS
-    //
+    var result:NSNumber = 0;
+
+    if spaces[name] != nil {
         
-    for match in result =~ "\\![a-zA-Z0-9\\.]+ *\\(.*\\)" {
-            
-        if match.hasPrefix("!") {
-            
-            var funcArendelle = Arendelle(code: match)
-            let grammarParts = funcLexer(arendelle: &funcArendelle, screen: &screen)
-            result = result.replace(match, withString: "\(funcEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces))")
-    
+        if spaces[name]!.count > index {
+        
+            let temp = spaces[name]?[index]; result = temp!
+        
+        } else {
+            screen.errors.append("Array out of range for \(name) at [ \(index) ]")
         }
+        
+    } else {
+        screen.errors.append("Space \(name) not found")
     }
     
-    //
-    // AND / OR
-    //
+    return result
+}
+
+
+
+
+
+func spaceSize (#spaceName: String, #spaces:[String:[NSNumber]], #simpleSpaceOrNot: Bool, inout #screen: codeScreen) -> Int {
     
-    result = result.replace("floor", withString: "floo_r")
-    result = result.replace("or", withString: "||")
-    result = result.replace("floo_r", withString: "floor")
-    result = result.replace("and", withString: "&&")
+    var result = 0;
+    
+    if simpleSpaceOrNot {
+    
+        if spaces[spaceName] != nil {
+    
+            let a = spaces[spaceName]?.count; result = a!
+            
+        } else {
+            screen.errors.append("Space \(spaceName) not found")
+        }
+    
+    } else {
+    
+        //
+        // TO BE CONTINIUED
+        //
+
+    }
 
     return result
 }
+
+
+
+
+
+func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], inout #screen: codeScreen) -> String {
+    
+    
+    var collection : [String] = []
+    var part = ""
+    func cleanPart () {
+        part = part.replace("floor", withString: "floo_r")
+        part = part.replace("or", withString: "||")
+        part = part.replace("floo_r", withString: "floor")
+        part = part.replace("and", withString: "&&")
+        collection.append(part); part = ""
+    }
+    
+    var expression = Arendelle(code: expressionString)
+    var replaceString = "";
+    
+    
+    while expression.i < expression.code.utf16Count {
+        
+        var command = Array(expression.code)[expression.i]
+        
+        switch command {
+            
+        //
+        // SOURCE REPLACER
+        //
+            
+        case "#":
+            cleanPart()
+            expression.i++
+            
+            while expression.i < expression.code.utf16Count {
+                var command = Array(expression.code)[expression.i]
+                if String(command) =~ "[a-zA-Z]" {
+                    replaceString.append(command)
+                } else {
+                    break
+                }
+                expression.i++
+            }
+            
+            switch replaceString.lowercaseString {
+                
+            case "i" , "width" :
+                replaceString = "\(screen.screen.colCount())"
+                
+            case "j" , "height" :
+                replaceString = "\(screen.screen.rowCount())"
+                
+            case "x" :
+                replaceString = "\(screen.x)"
+                
+            case "y" :
+                replaceString = "\(screen.y)"
+                
+            case "n" :
+                replaceString = "\(screen.n)"
+                
+            case "pi" :
+                replaceString = "3.141592653589"
+                
+            case "rnd" :
+                replaceString = arendelleRandom()
+                
+            default:
+                screen.errors.append("No source as '\(replaceString)' exists")
+                replaceString = "0"
+            }
+            
+            collection.append(replaceString); replaceString = ""
+            
+    
+            
+            
+        //
+        // SPACE FAMILY REPLACER
+        //
+            
+        case "$", "@":
+            cleanPart()
+            
+            var simpleSpaceOrNot = true; if command == "$" { simpleSpaceOrNot = false }
+            
+            var rule = ""; if simpleSpaceOrNot { rule = "\\." }
+            replaceString.append(command); expression.i++
+            
+            while expression.i < expression.code.utf16Count {
+                var command = Array(expression.code)[expression.i]
+                
+                if String(command) =~ "[a-zA-Z\(rule)]" {
+                    replaceString.append(command)
+                    
+                } else if command == "[" {
+                    
+                    let numberOfErrors = screen.errors.count
+                    var spaceGrammarParts = openCloseLexer(openCommand: "[", arendelle: &expression, screen: &screen)
+                    replaceString = spaceReplacerWitheEvaluation(name: replaceString, spaceParts: spaceGrammarParts, simpleSpaceOrNot: simpleSpaceOrNot, numberOfErrors: numberOfErrors, screen: &screen, &spaces)
+                    break
+                    
+                } else if command == "?" {
+                    
+                    expression.i++
+                    replaceString = "\(spaceSize(spaceName: replaceString, spaces: spaces, simpleSpaceOrNot: simpleSpaceOrNot, screen: &screen))"
+                    break
+                    
+                } else {
+                    replaceString = spaceLoaderWithName(replaceString, atIndex: 0, spaces: spaces, screen: &screen).stringValue
+                    break
+                }
+
+                
+                if expression.i == expression.code.utf16Count - 1 {
+                    replaceString = spaceLoaderWithName(replaceString, atIndex: 0, spaces: spaces, screen: &screen).stringValue
+                }
+            
+                expression.i++
+            }
+            
+            collection.append(replaceString); replaceString = ""
+            
+            
+        //
+        // FUNCTION REPLACER
+        //
+            
+        case "!":
+            let grammarParts = functionSpaceLexer(arendelle: &expression, screen: &screen, partTwoChar: "(")
+            replaceString = funcEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces).stringValue
+            
+        //
+        // NO-NEED-FOR REPLACEMENT PARTS
+        //
+            
+        default:
+            part.append(command)
+            if expression.i < expression.code.utf16Count - 1 {
+                expression.i++
+            } else {
+                cleanPart()
+                expression.i++
+            }
+        }
+    }
+    
+    // for line in collection { println("--> '\(line)'") }
+    
+    var result = ""; for str in collection { result += str }; return result
+}
+

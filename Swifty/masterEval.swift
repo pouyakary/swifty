@@ -12,7 +12,7 @@ import Foundation
 /// the code for performance
 func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> String {
     
-    var spaces: [String: NSNumber] = ["@return":0]
+    var spaces: [String: [NSNumber]] = ["@return":[0]]
     
     // checking for || and &&
     if codeToBeSpaceFixed =~ "\\|\\||\\&\\&" {
@@ -119,23 +119,12 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
             
             theCode.i--
             
+
         case "÷":
             result += "÷"
             
         case "×":
             result += "*"
-            
-        case "→":
-            result += "r"
-            
-        case "←":
-            result += "l"
-            
-        case "↑":
-            result += "u"
-            
-        case "↓":
-            result += "d"
             
         case " ", "\n", "\t" :
             break
@@ -148,8 +137,6 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
         theCode.i++
     }
     
-    
-    
     return result
 }
 
@@ -161,7 +148,7 @@ func masterEvaluator (#code: String, #screenWidth: Int, #screenHeight: Int) -> c
     // Initing the first spaces
     //
     
-    var spaces: [String: NSNumber] = ["@return":0]
+    var spaces: [String: [NSNumber]] = ["@return":[0]]
     
 
     var screen = codeScreen(xsize: screenWidth, ysize: screenHeight)

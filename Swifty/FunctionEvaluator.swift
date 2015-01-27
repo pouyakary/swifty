@@ -8,7 +8,7 @@
 
 import Foundation
 
-func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:NSNumber]) -> NSNumber {
+func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:[NSNumber]]) -> NSNumber {
     
     let numberOfErrorsInStart = screen.errors.count
     
@@ -46,7 +46,7 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
 
             if funcCode.code != "" {
             
-                var funcSpaces: [String: NSNumber] = ["@return":0]
+                var funcSpaces: [String: [NSNumber]] = ["@return":[0]]
 
                 let headerParts = funcHeaderReader(code: &funcCode )
                 
@@ -70,7 +70,7 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
 
                         if spaceValue.itsNotACondition == true && spaceValue.doesItHaveErros == false {
                             
-                            funcSpaces[spaceName] = spaceValue.result
+                            funcSpaces[spaceName]?[0] = spaceValue.result
                             
                         } else {
                             if spaceValue.doesItHaveErros == true {
@@ -105,7 +105,7 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 
                     let toBeRemoved = eval (&funcCode, &screen, &funcSpaces)
                     evalSpaceRemover(spaces: &funcSpaces, spacesToBeRemoved: toBeRemoved)
-                    return funcSpaces["@return"]!
+                    return funcSpaces["@return"]![0]
                     
                 } else {
                 

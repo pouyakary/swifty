@@ -10,7 +10,7 @@ import Foundation
 import Darwin
 
 /// evaluates a loop grammar
-func loopEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle) {
+func loopEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:[NSNumber]], inout #arendelle: Arendelle) {
     
     if grammarParts.count == 2 {
         
@@ -21,24 +21,34 @@ func loopEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
         if ifCheckingReg.items.count == 1 && ifCheckingReg.items[0] == grammarParts [0] {
             loopExperssion.result = grammarParts[0].toInt()
             loopExperssion.itsNotACondition = true
-            
         } else {
             loopExperssion  =  mathEval(stringExpression: grammarParts[0], screen: &screen, spaces: &spaces)
         }
-            
+        
+        
         if loopExperssion.itsNotACondition == true && loopExperssion.doesItHaveErros == false {
         
             let LoopNum = floor(Double(loopExperssion.result))
             
-            // using this line we only get erros of a loop for one time!
-            let numberOfErrorsBeforeTheLoopGetsStarted = screen.errors.count
+            if grammarParts[1] != "w" {
+                
+                // using this line we only get erros of a loop for one time!
+                let numberOfErrorsBeforeTheLoopGetsStarted = screen.errors.count
+                
+                for var i:Double = 0; i < LoopNum && screen.errors.count == numberOfErrorsBeforeTheLoopGetsStarted ; i++ {
+                    
+                    var loopCode = Arendelle(code: grammarParts[1])
+                    
+                    let toBeRemoved = eval(&loopCode, &screen, &spaces)
+                    evalSpaceRemover(spaces: &spaces, spacesToBeRemoved: toBeRemoved)
+                }
+                
+                
+            // Special situation for [ ... , w ]
+            } else {
             
-            for var i:Double = 0; i < LoopNum && screen.errors.count == numberOfErrorsBeforeTheLoopGetsStarted ; i++ {
-                
-                var loopCode = Arendelle(code: grammarParts[1])
-                
-                let toBeRemoved = eval(&loopCode, &screen, &spaces)
-                evalSpaceRemover(spaces: &spaces, spacesToBeRemoved: toBeRemoved)
+                NSThread.sleepForTimeInterval(LoopNum * 0.001)
+            
             }
         
         } else {

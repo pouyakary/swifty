@@ -8,7 +8,7 @@
 
 import Foundation
 
-func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String:NSNumber], inout #arendelle: Arendelle, inout #screen: codeScreen, #preprocessorState: Bool) -> String {
+func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String:[NSNumber]], inout #arendelle: Arendelle, inout #screen: codeScreen, #preprocessorState: Bool) -> String {
 
     // going to the right char
     ++arendelle.i
@@ -60,6 +60,11 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
                         result += "\\("
                         result += replacerOnePart
                         result += ")"
+                        
+                        if arendelle.i >= arendelle.code.utf16Count {
+                            screen.errors.append("Unfinished replace scape \\( ... ) found")
+                        }
+                        
                     } else {
                         result += mathEval(stringExpression: replacerOnePart, screen: &screen, spaces: &spaces).result.stringValue
                     }

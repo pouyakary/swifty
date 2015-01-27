@@ -8,7 +8,7 @@
 
 import Foundation
 
-func funcLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> [String] {
+func functionSpaceLexer (inout #arendelle: Arendelle, inout #screen: codeScreen, #partTwoChar: Character) -> [String] {
 
     var result:[String] = []
     
@@ -22,7 +22,7 @@ func funcLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> [Stri
     
         charToRead = Array(arendelle.code)[arendelle.i]
         
-        if charToRead == "(" {
+        if charToRead == partTwoChar {
             
             if part =~ "[a-zA-Z0-9\\.]+" {
         
@@ -49,7 +49,7 @@ func funcLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> [Stri
     if arendelle.i < arendelle.code.utf16Count - 1 {
     
         let numberOfErrorBefore = screen.errors.count
-        let specialParts = openCloseLexer(openCommand: "(", arendelle: &arendelle, screen: &screen)
+        let specialParts = openCloseLexer(openCommand: partTwoChar, arendelle: &arendelle, screen: &screen)
         
         if screen.errors.count == numberOfErrorBefore {
         

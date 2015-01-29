@@ -11,6 +11,7 @@
 #include <editline/readline.h>
 
 NSString* readLine() {
+
     
     NSMutableData *data = [NSMutableData data];
 
@@ -20,8 +21,9 @@ NSString* readLine() {
         [data appendBytes:&c length:sizeof(char)];
         
     } while (true);
-    
+     
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
 }
 
 void clean () { system("clear"); }

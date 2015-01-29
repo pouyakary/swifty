@@ -46,6 +46,8 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
             // SLASH SLASH COMMENT REMOVER
             //
             
+            
+            
             if currentChar == "/" {
                 
                 theCode.i++
@@ -136,6 +138,7 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
         
         theCode.i++
     }
+    
     
     return result
 }

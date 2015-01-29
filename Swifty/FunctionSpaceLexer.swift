@@ -27,7 +27,7 @@ func functionSpaceLexer (inout #arendelle: Arendelle, inout #screen: codeScreen,
             if part =~ "[a-zA-Z0-9\\.]+" {
         
                 result.append(part)
-                whileControl = false
+                whileControl = false;
                 
             } else {
                 screen.errors.append("Bad function name found: \(part)")
@@ -62,6 +62,5 @@ func functionSpaceLexer (inout #arendelle: Arendelle, inout #screen: codeScreen,
         }
     } 
     
-
     return result
 }

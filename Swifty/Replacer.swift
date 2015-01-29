@@ -160,6 +160,10 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             case "rnd" :
                 replaceString = arendelleRandom()
                 
+            case "date" :
+                replaceString = timeDate()
+            
+                
             default:
                 screen.errors.append("No source as '\(replaceString)' exists")
                 replaceString = "0"
@@ -223,7 +227,7 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             
         case "!":
             let grammarParts = functionSpaceLexer(arendelle: &expression, screen: &screen, partTwoChar: "(")
-            replaceString = funcEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces).stringValue
+            replaceString = funcEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces)[0].stringValue
             
         //
         // NO-NEED-FOR REPLACEMENT PARTS

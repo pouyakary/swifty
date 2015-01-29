@@ -9,10 +9,8 @@
 import Foundation
 
 func spaceInput (#text: String) -> NSNumber {
-    clean()
-    print(text)
+    print("\n  \(text) ")
     let result =  readLine().toFloat()
-    clean()
     
     return result
 }

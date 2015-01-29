@@ -149,7 +149,7 @@ while true {
         
     } else if code == "title" {
         
-        println("\n--> '\(masterScreen.title)'")
+        println("\n  \(masterScreen.title)")
     
     } else if code == "dump" {
         

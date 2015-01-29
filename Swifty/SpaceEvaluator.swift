@@ -91,8 +91,6 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     }
     
     
-    
-    
     func spaceNameAndIndexReaderWithName (name: String) -> spaceStruct {
     
         var spaceName = ""; var spaceIndexFinal:Int = 0; var spaceReader = Arendelle(code: name);
@@ -266,6 +264,48 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     screen.errors.append("No space as '@\(grammarParts[0])' found")
                 }
             
+                
+            } else if Array(grammarParts[1] =~ ";").count > 0 {
+                
+                if grammarParts[1].hasSuffix(";") || Array(grammarParts[1] =~ ";+").count > 0{
+                
+                    // Empty entry counter
+                    var numberOfErrors = 0; if grammarParts[1].hasSuffix(";+") { numberOfErrors++ }
+                    if Array(grammarParts[1] =~ ";+").count > 0 { numberOfErrors += Array(grammarParts[1] =~ ";;").count }
+                    var ies = "y"; if numberOfErrors > 1 { ies = "ies" }
+                    screen.errors.append("Multi index space init with empty entr\(ies) found")
+                
+                } else {
+                    
+                    let array = grammarParts[1].componentsSeparatedByString(";"); var addArray:[NSNumber] = []
+                    
+                    for str in array {
+                        let rslt = mathEval(stringExpression: str, screen: &screen, spaces: &spaces)
+                        if rslt.doesItHaveErros == false {
+                            if rslt.itsNotACondition == true {
+                                addArray.append(rslt.result);
+                            } else {
+                                screen.errors.append("Conditional inputs are forbidden in space init ")
+                            }
+                        } else {
+                            screen.errors.append("Bad expression: '\(str)'")
+                        }
+                    }
+                    
+                    if grammarParts[0].hasPrefix("$") {
+                        
+                        //
+                        // TO BE ADDED FOR STORED SPACE
+                        //
+                        
+                    } else {
+                        
+                        spaces["@\(grammarParts[0])"] = addArray;
+                        
+                    }
+                }
+                
+                
                 
             } else if grammarParts[1] == "done" {
                 

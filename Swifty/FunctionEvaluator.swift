@@ -8,14 +8,13 @@
 
 import Foundation
 
-func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:[NSNumber]]) -> NSNumber {
+func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:[NSNumber]]) -> [NSNumber] {
     
     let numberOfErrorsInStart = screen.errors.count
     
     func funcHeaderReader (inout #code: Arendelle) -> [String] {
         
         var result:[String] = []
-        
         let header = code.code =~ "<(.|\n)*>"
         
         if header.items.count > 0 {
@@ -47,7 +46,6 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
             if funcCode.code != "" {
             
                 var funcSpaces: [String: [NSNumber]] = ["@return":[0]]
-
                 let headerParts = funcHeaderReader(code: &funcCode )
                 
                 //
@@ -65,7 +63,6 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                     for var counter = 1; counter < grammarParts.count; counter++  {
                         
                         let spaceName = "@\(headerParts[counter-1])"
-
                         var spaceValue = mathEval(stringExpression: grammarParts[counter], screen: &screen, spaces: &spaces)
 
                         if spaceValue.itsNotACondition == true && spaceValue.doesItHaveErros == false {
@@ -105,12 +102,10 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 
                     let toBeRemoved = eval (&funcCode, &screen, &funcSpaces)
                     evalSpaceRemover(spaces: &funcSpaces, spacesToBeRemoved: toBeRemoved)
-                    return funcSpaces["@return"]![0]
+                    return funcSpaces["@return"]!
                     
                 } else {
-                
-                    return 0
-                
+                    return [0]
                 }
                 
                 //
@@ -120,16 +115,16 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 
             } else {
                 screen.errors.append("Could not load function '\(grammarParts[0])'")
-                return 0
+                return [0]
             }
             
         } else {
             screen.errors.append("No function with name '\(grammarParts[0])' found")
-            return 0
+            return [0]
         }
     
     } else {
         screen.errors.append("Bad function name: '\(grammarParts[0])' found")
-        return 0
+        return [0]
     }
 }

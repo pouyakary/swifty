@@ -33,10 +33,11 @@ import Foundation
             }
         }
         
+        var arryToRead = Array(arendelle.code.lowercaseString)
         
         while arendelle.i < arendelle.code.utf16Count {
             
-            command = Array(arendelle.code.lowercaseString)[arendelle.i]
+            command = arryToRead[arendelle.i]
             
             switch command {
                 
@@ -116,22 +117,22 @@ import Foundation
                 screen.errors.append("Grammar closer: '\(command)' is used for an undifined grammar")
                 
             case ";":
-                screen.errors.append("Semicolons are not allowed in Arendelle")
+                screen.errors.append("Semicolons found in command-zone")
                 
             case "@":
-                screen.errors.append("Space sign found in command-only zone")
+                screen.errors.append("Space sign found in command-zone")
                 
             case "#":
-                screen.errors.append("Source sign found in command-only zone")
+                screen.errors.append("Source sign found in command-zone")
                 
             case "$":
-                screen.errors.append("Stored space sign found in command-only zone")
+                screen.errors.append("Stored space sign found in command-zone")
                 
             case "*", "/", "^", "-", "+", "%" :
-                screen.errors.append("Arithmetic operator '\(command)' found in command-only zone")
+                screen.errors.append("Arithmetic operator '\(command)' found in command-zone")
                 
             case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
-                screen.errors.append("Number '\(command)' found in command-only zone")
+                screen.errors.append("Number '\(command)' found in command-zone")
                 
             default:
                 screen.errors.append("Unknown command: \(command)")

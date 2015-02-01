@@ -22,10 +22,12 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
     // corrent char
     var charToRead:Character
     
+    var arrayToRead = Array(arendelle.code)
+    
     while arendelle.i < arendelle.code.utf16Count {
     
         // corrent char
-        charToRead = Array(arendelle.code)[arendelle.i]
+        charToRead = arrayToRead[arendelle.i]
         
         switch charToRead {
         

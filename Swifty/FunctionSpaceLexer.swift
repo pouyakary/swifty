@@ -18,9 +18,11 @@ func functionSpaceLexer (inout #arendelle: Arendelle, inout #screen: codeScreen,
     
     arendelle.i++
     
+    var arrayToRead = Array(arendelle.code)
+    
     while whileControl && arendelle.i < arendelle.code.utf16Count {
     
-        charToRead = Array(arendelle.code)[arendelle.i]
+        charToRead = arrayToRead[arendelle.i]
         
         if charToRead == partTwoChar {
             

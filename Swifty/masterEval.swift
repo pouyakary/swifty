@@ -13,14 +13,7 @@ import Foundation
 func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> String {
     
     var spaces: [String: [NSNumber]] = ["@return":[0]]
-    
-    // checking for || and &&
-    if codeToBeSpaceFixed =~ "\\|\\||\\&\\&" {
-        
-        screen.errors.append("&& and || are not accepted by Arendelle, Use 'and' and 'or' instead")
-        
-    }
-    
+
     var theCode = Arendelle (code: codeToBeSpaceFixed)
     var result : String = ""
     
@@ -121,6 +114,8 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
             
             theCode.i--
             
+        case "&", "|":
+            screen.errors.append("&&/& and ||/| are not accepted by Arendelle, Use 'and' and 'or' instead")
 
         case "÷":
             result += "÷"

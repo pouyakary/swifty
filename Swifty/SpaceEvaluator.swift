@@ -42,23 +42,24 @@ func saveToSpace (#spaceName: String, #indexAtSpace: Int, #valueToSave: NSNumber
 }
 
 
-/// Reads a NSNumber from an Arendelle Stored Space
-func storedSpaceLoader (#spaceName: String, inout #screen: codeScreen) -> NSNumber {
+/// Reads a [NSNumber] from an Arendelle Stored Space
+func storedSpaceLoader (#spaceName: String, inout #screen: codeScreen) -> [NSNumber] {
 
     let spaceURL = arendellePathToNSURL(arendellePath: spaceName.replace("$", withString: ""), kind: "space", screen: &screen)
 
     let spaceValue = String(contentsOfURL: spaceURL, encoding: NSUTF8StringEncoding, error: nil)?.replace("\n", withString: "")
+    let array = spaceValue?.componentsSeparatedByString(";"); var addArray:[NSNumber] = []
+    for spc in array! { addArray.append(NSNumber(double: spc.toDouble())) }
     
-    if spaceValue != nil {
-        
-        return Int(NSInteger(NSString(string: spaceValue!).integerValue))
+    if addArray != [] {
+    
+        return addArray
         
     } else {
         screen.errors.append("No stored space as '\(spaceName)' found")
-        return 0
+        return [0]
     }
 }
-
 
 /// Checks if a stored space exists
 func checkIfStoredSpaceExists (#spaceName: String, inout #screen: codeScreen) -> Bool {
@@ -78,15 +79,15 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     }
     
     
-    
-    func saveNumberToStoredSpace (#number: NSNumber, toSpace space: String) {
+    func saveNumberToStoredSpace (#number: [NSNumber], toSpace space: String) {
         
         let spaceURL = arendellePathToNSURL(arendellePath: space, kind: "space", screen: &screen)
+        var toBeStored = "\(number)".replace(" ", withString: "").replace(",", withString: ";")
         
-        let er = "\(number)".replace("\n", withString: "").writeToURL(spaceURL, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+        let er = toBeStored[1...toBeStored.utf16Count-2].writeToURL(spaceURL, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
         
         if !er {
-            screen.errors.append("Storing space '\(space)' failed")
+            screen.errors.append("Storing space '\(space).space' failed")
         }
     }
     
@@ -157,7 +158,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             if space.name.hasPrefix("$") {
             
                 let spaceValue = spaceInput(text: "Sign space '\(space.name)' with a number:")
-                saveNumberToStoredSpace(number: spaceValue, toSpace: space.name.replace("$", withString: ""))
+                saveNumberToStoredSpace(number: [spaceValue], toSpace: space.name.replace("$", withString: ""))
             
             // simple space
                 
@@ -194,7 +195,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 
                 if space.name.hasPrefix("$") {
                     
-                    saveNumberToStoredSpace(number: spaceValue, toSpace: space.name.replace("$", withString: ""))
+                    saveNumberToStoredSpace(number: [spaceValue], toSpace: space.name.replace("$", withString: ""))
                 
                 // simple space
                     
@@ -245,7 +246,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
            
                         if !result.doesItHaveErros && result.itsNotACondition {
  
-                            saveNumberToStoredSpace(number: result.result, toSpace: grammarParts[0].replace("$", withString: ""))
+                            saveNumberToStoredSpace(number: [result.result], toSpace: grammarParts[0].replace("$", withString: ""))
                         
                         } else {
                             
@@ -267,10 +268,10 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 
             } else if Array(grammarParts[1] =~ ";").count > 0 {
                 
-                if grammarParts[1].hasSuffix(";") || Array(grammarParts[1] =~ ";+").count > 0{
+                if grammarParts[1].hasSuffix(";") || grammarParts[1].hasPrefix(";") || Array(grammarParts[1] =~ ";;").count > 0{
                 
                     // Empty entry counter
-                    var numberOfErrors = 0; if grammarParts[1].hasSuffix(";+") { numberOfErrors++ }
+                    var numberOfErrors = 0; if grammarParts[1].hasSuffix(";;") { numberOfErrors++ }
                     if Array(grammarParts[1] =~ ";+").count > 0 { numberOfErrors += Array(grammarParts[1] =~ ";;").count }
                     var ies = "y"; if numberOfErrors > 1 { ies = "ies" }
                     screen.errors.append("Multi index space init with empty entr\(ies) found")
@@ -294,9 +295,9 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     
                     if grammarParts[0].hasPrefix("$") {
                         
-                        //
-                        // TO BE ADDED FOR STORED SPACE
-                        //
+                        
+                        saveNumberToStoredSpace(number: addArray, toSpace: grammarParts[0].replace("$", withString: ""))
+
                         
                     } else {
                         
@@ -360,7 +361,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                         
                             if space.name.hasPrefix("$") {
                             
-                                saveNumberToStoredSpace(number: spaceValue.result, toSpace: grammarParts[0].replace("$", withString: ""))
+                                saveNumberToStoredSpace(number: [spaceValue.result], toSpace: grammarParts[0].replace("$", withString: ""))
                             
                             // simple space
                                 

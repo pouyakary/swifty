@@ -172,7 +172,7 @@ extension String
         let end = advance(self.startIndex, range.endIndex)
         return self[start..<end]
     }
-    
+
     
     // MARK: - replace
     func replaceCharactersInRange(range: Range<Int>,  withString: String!) -> String {

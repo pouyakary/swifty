@@ -10,10 +10,10 @@
 import Foundation
 
 
-func spaceReplacerWitheEvaluation (#name: String, #spaceParts: [String], #simpleSpaceOrNot: Bool, #numberOfErrors: Int, inout #screen: codeScreen, inout spaces: [String:[NSNumber]]) -> String {
+func spaceReplacerWithEvaluation (#name: String, #spaceParts: [String], #simpleSpaceOrNot: Bool, #numberOfErrors: Int, inout #screen: codeScreen, inout spaces: [String:[NSNumber]]) -> String {
     
     var result = "0"
-
+    
     if spaceParts.count == 1 && numberOfErrors == screen.errors.count {
         
         let calculatedIndexExpression = mathEval(stringExpression: spaceParts[0], screen: &screen, spaces: &spaces)
@@ -21,9 +21,9 @@ func spaceReplacerWitheEvaluation (#name: String, #spaceParts: [String], #simple
         if calculatedIndexExpression.doesItHaveErros == false && calculatedIndexExpression.itsNotACondition {
             
             if simpleSpaceOrNot {
-                
                 result = spaceLoaderWithName(name, atIndex: calculatedIndexExpression.result.integerValue, spaces: spaces, screen: &screen).stringValue
-                
+            } else {
+                result = storedSpaceLoaderWithName(name, atIndex: calculatedIndexExpression.result.integerValue, spaces: spaces, screen: &screen).stringValue
             }
             
         } else if calculatedIndexExpression.itsNotACondition == false {
@@ -41,6 +41,23 @@ func spaceReplacerWitheEvaluation (#name: String, #spaceParts: [String], #simple
 
 
 
+func storedSpaceLoaderWithName (name: String, atIndex index: Int, #spaces: [String:[NSNumber]], inout #screen: codeScreen) -> NSNumber {
+
+    var spaceArray = storedSpaceLoader(spaceName: name, screen: &screen);
+    
+    if spaceArray.count > index && index >= 0 {
+    
+        return spaceArray[index]
+    
+    } else {
+
+        screen.errors.append("Array out of range for \(name) at [ \(index) ]")
+        return 0;
+    }
+    
+}
+
+
 
 func spaceLoaderWithName (name: String, atIndex index: Int, #spaces: [String:[NSNumber]], inout #screen: codeScreen) -> NSNumber {
     
@@ -48,7 +65,7 @@ func spaceLoaderWithName (name: String, atIndex index: Int, #spaces: [String:[NS
 
     if spaces[name] != nil {
         
-        if spaces[name]!.count > index {
+        if spaces[name]!.count > index && index >= 0 {
         
             let temp = spaces[name]?[index]; result = temp!
         
@@ -69,27 +86,31 @@ func spaceLoaderWithName (name: String, atIndex index: Int, #spaces: [String:[NS
 
 func spaceSize (#spaceName: String, #spaces:[String:[NSNumber]], #simpleSpaceOrNot: Bool, inout #screen: codeScreen) -> Int {
     
-    var result = 0;
-    
     if simpleSpaceOrNot {
     
         if spaces[spaceName] != nil {
     
-            let a = spaces[spaceName]?.count; result = a!
+            let a = spaces[spaceName]?.count
+            return a!
             
         } else {
             screen.errors.append("Space \(spaceName) not found")
+            return 0
         }
     
     } else {
     
-        //
-        // TO BE CONTINIUED
-        //
-
+        let numOfErrs = screen.errors.count;
+        var space = storedSpaceLoader(spaceName: spaceName, screen: &screen);
+        
+        if numOfErrs == screen.errors.count {
+        
+            return space.count;
+        
+        } else {
+            return 0;
+        }
     }
-
-    return result
 }
 
 
@@ -186,6 +207,10 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             var rule = ""; if simpleSpaceOrNot { rule = "\\." }
             replaceString.append(command); expression.i++
             
+            //
+            // ADD storedSpaceLoader FOR STORED SAPCES
+            //
+            
             while expression.i < expression.code.utf16Count {
                 var command = Array(expression.code)[expression.i]
                 
@@ -196,7 +221,9 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
                     
                     let numberOfErrors = screen.errors.count
                     var spaceGrammarParts = openCloseLexer(openCommand: "[", arendelle: &expression, screen: &screen)
-                    replaceString = spaceReplacerWitheEvaluation(name: replaceString, spaceParts: spaceGrammarParts, simpleSpaceOrNot: simpleSpaceOrNot, numberOfErrors: numberOfErrors, screen: &screen, &spaces)
+                    
+                    replaceString = spaceReplacerWithEvaluation(name: replaceString, spaceParts: spaceGrammarParts, simpleSpaceOrNot: simpleSpaceOrNot, numberOfErrors: numberOfErrors, screen: &screen, &spaces)
+                    
                     break
                     
                 } else if command == "?" {
@@ -205,14 +232,16 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
                     replaceString = "\(spaceSize(spaceName: replaceString, spaces: spaces, simpleSpaceOrNot: simpleSpaceOrNot, screen: &screen))"
                     break
                     
-                } else {
-                    replaceString = spaceLoaderWithName(replaceString, atIndex: 0, spaces: spaces, screen: &screen).stringValue
-                    break
                 }
-
+                
                 
                 if expression.i == expression.code.utf16Count - 1 {
-                    replaceString = spaceLoaderWithName(replaceString, atIndex: 0, spaces: spaces, screen: &screen).stringValue
+                    
+                    if simpleSpaceOrNot {
+                        replaceString = spaceLoaderWithName(replaceString, atIndex: 0, spaces: spaces, screen: &screen).stringValue
+                    } else {
+                        replaceString = storedSpaceLoader(spaceName: replaceString, screen: &screen)[0].stringValue
+                    }
                 }
             
                 expression.i++

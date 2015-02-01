@@ -18,7 +18,7 @@ func replInput () -> String {
 
     var whileControlForREPLInput = true
     var result = ""
-    var specialCharactersNumbers = [ "(":0 , "[":0, "{":0 , ")":0 , "]":0, "}":0 ]
+    var specialCharactersNumbers = [ "/\\*":0, "(":0 , "[":0, "{":0 , "*\\/":0, ")":0 , "]":0, "}":0 ]
     
     
     print("\nλ ")
@@ -37,7 +37,7 @@ func replInput () -> String {
         }
 
         
-        if specialCharactersNumbers["("] == specialCharactersNumbers[")"] && specialCharactersNumbers ["["] == specialCharactersNumbers ["]"] && specialCharactersNumbers["{"] == specialCharactersNumbers["}"]  {
+        if specialCharactersNumbers["("] == specialCharactersNumbers[")"] && specialCharactersNumbers ["["] == specialCharactersNumbers ["]"] && specialCharactersNumbers["{"] == specialCharactersNumbers["}"] && specialCharactersNumbers["/\\*"] == specialCharactersNumbers["*\\/"]   {
             
             whileControlForREPLInput = false
             
@@ -99,7 +99,7 @@ func printError (#result: codeScreen) {
 func printSpaces (#spaces: [String:[NSNumber]]) {
     if spaces.count > 0 {
         for space in spaces {
-            println("• \(space.0) → \(space.1)")
+            println("\n• \(space.0) → \(space.1)")
         }
     } else {
         println("\n  ⎪ ✖︎ No space found")

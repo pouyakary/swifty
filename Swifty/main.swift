@@ -141,7 +141,7 @@ while true {
     
     } else if code == "exit" {
      
-        clean(); break
+        break
     
     } else if code == "print" {
     

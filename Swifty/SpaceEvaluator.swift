@@ -141,6 +141,8 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     
     
     let regexMathes = grammarParts[0] =~ "(([a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)) *(\\[.*\\])?"
+    let regexMatchForPartTwo = grammarParts[1] =~ "(\\$|\\@)[0-9a-zA-Z\\.]+"
+
     
     
     if grammarParts.count == 1 {
@@ -181,6 +183,9 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             
             let space = spaceNameAndIndexReaderWithName(grammarParts[0])
             
+            
+            
+            
             //
             // INPUT
             //
@@ -204,6 +209,8 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     saveToSpace(spaceName: space.name, indexAtSpace: space.index, valueToSave: spaceValue, spaces: &spaces)
                     
                 }
+                
+                
                 
                 
             //
@@ -264,7 +271,57 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 } else {
                     screen.errors.append("No space as '@\(grammarParts[0])' found")
                 }
+                
+                
+                
+                
+            //
+            // ( space , @copyAFullSpaceToSpace )
+            //
             
+            } else if regexMatchForPartTwo.items.count == 1 && regexMatchForPartTwo.items[0] == grammarParts[1] {
+                
+                var toBeCopiedArray:[NSNumber] = [0]
+                
+                // OPENING THE SPACE
+                
+                if grammarParts[1].hasPrefix("$") {
+                
+                    if checkIfStoredSpaceExists(spaceName: grammarParts[1], screen: &screen) {
+                    
+                        toBeCopiedArray = storedSpaceLoader(spaceName: grammarParts[1], screen: &screen)
+                    
+                    } else {
+                        screen.errors.append("No stored space as '\(grammarParts[1])' found")
+                    }
+                } else {
+                
+                    if spaces[grammarParts[1]] != nil {
+                    
+                        toBeCopiedArray = spaces[grammarParts[1]]!
+                    
+                    } else {
+                        screen.errors.append("Space \(grammarParts[1]) not found")
+                    }
+                }
+            
+                
+                // OVERWRITING THE SPACE
+                
+                if grammarParts[0].hasPrefix("$") {
+                
+                    saveNumberToStoredSpace(number: toBeCopiedArray, toSpace: grammarParts[0].replace("$", withString: ""))
+                
+                } else {
+                
+                    spaces["@\(grammarParts[0])"] = toBeCopiedArray
+                
+                }
+
+                
+            //
+            // ( space , 1; 1; 2; 3; 5; 8; 13; 21 )
+            //
                 
             } else if Array(grammarParts[1] =~ ";").count > 0 {
                 
@@ -293,11 +350,10 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                         }
                     }
                     
+                    
                     if grammarParts[0].hasPrefix("$") {
                         
-                        
                         saveNumberToStoredSpace(number: addArray, toSpace: grammarParts[0].replace("$", withString: ""))
-
                         
                     } else {
                         
@@ -306,7 +362,13 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     }
                 }
                 
+            
+            
                 
+                
+            //
+            // ( space , done )
+            //
                 
             } else if grammarParts[1] == "done" {
                 
@@ -339,6 +401,8 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     }
                 }
             
+                
+                
             
             //
             // STANDARD INIT OF SPACE

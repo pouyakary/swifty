@@ -255,8 +255,39 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
         //
             
         case "!":
-            let grammarParts = functionSpaceLexer(arendelle: &expression, screen: &screen, partTwoChar: "(")
-            replaceString = funcEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces)[0].stringValue
+            cleanPart()
+            
+            let funcParts = functionLexer(arendelle: &expression, screen: &screen)
+            let result = funcEval(funcParts: funcParts, screen: &screen, spaces: &spaces)
+            
+            if funcParts.index != "0" {
+            
+                let index = mathEval(stringExpression: funcParts.index, screen: &screen, spaces: &spaces)
+                
+                if index.itsNotACondition == true &&  index.doesItHaveErros == false && index.result.integerValue >= 0 && index.result.integerValue < result.count {
+                
+                    collection.append("\(result[index.result.integerValue])")
+                
+                } else {
+                    if index.result.integerValue < 0 || index.result.integerValue >= result.count {
+                        screen.errors.append("Index of function !\(funcParts.name)() out of range")
+                    } else if index.itsNotACondition == false {
+                        screen.errors.append("Condition found in index of function !\(funcParts.name)()")
+                    } else {
+                        screen.errors.append("Bad expression for index of function !\(funcParts.name)()")
+                    }
+                    
+                    collection.append("0");
+                }
+                
+            } else {
+            
+                collection.append("\(result[0])")
+            
+            }
+            
+            
+            
             
         //
         // NO-NEED-FOR REPLACEMENT PARTS

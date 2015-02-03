@@ -133,7 +133,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     
     
     if grammarParts[0].hasPrefix("return") {
-        if spaces["@\(grammarParts[0])"] == nil {
+        if spaces["@return"] == nil {
             screen.errors.append("Using @return is forbidden in the main blueprint")
         }
     }

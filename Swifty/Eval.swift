@@ -68,8 +68,9 @@ import Foundation
             //
                 
             case "!" :
-                let grammarParts = functionSpaceLexer(arendelle: &arendelle, screen: &screen, partTwoChar: "(")
-                funcEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces)
+                let functionParts = functionLexer(arendelle: &arendelle, screen: &screen)
+                funcEval(funcParts: functionParts, screen: &screen, spaces: &spaces)
+                
                 
                 
             //

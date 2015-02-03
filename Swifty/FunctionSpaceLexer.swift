@@ -8,9 +8,27 @@
 
 import Foundation
 
-func functionSpaceLexer (inout #arendelle: Arendelle, inout #screen: codeScreen, #partTwoChar: Character) -> [String] {
+struct FuncParts {
+    
+    var name:String
+    var inputs:[String]
+    var index:String
+    
+    init () {
+        self.name = "BadGrammar"
+        self.inputs = []
+        self.index = "0"
+    }
+}
 
-    var result:[String] = []
+
+func functionLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> FuncParts {
+
+    var name:String
+    var inputs:[String]
+    var input:String
+    
+    var result = FuncParts()
     
     var whileControl = true
     var charToRead:Character
@@ -19,21 +37,27 @@ func functionSpaceLexer (inout #arendelle: Arendelle, inout #screen: codeScreen,
     arendelle.i++
     
     var arrayToRead = Array(arendelle.code)
+
+    
+    
+    //
+    // ! FUNC (120, 23, 34) [12]
+    // --^^^^-------------------
     
     while whileControl && arendelle.i < arendelle.code.utf16Count {
     
         charToRead = arrayToRead[arendelle.i]
         
-        if charToRead == partTwoChar {
+        if charToRead == "(" {
             
             if part =~ "[a-zA-Z0-9\\.]+" {
         
-                result.append(part)
+                result.name = part
                 whileControl = false;
                 
             } else {
                 screen.errors.append("Bad function name found: \(part)")
-                return ["BadGrammar"]
+                return result
             }
             
         } else {
@@ -43,26 +67,63 @@ func functionSpaceLexer (inout #arendelle: Arendelle, inout #screen: codeScreen,
             
             if arendelle.i == arendelle.code.utf16Count {
                 screen.errors.append("Function name without parenthesis found")
-                return ["BadGrammar"]
+                return result
             }
         }
     }
     
+
+    
+    //
+    // ! FUNC (120, 23, 34) [12]
+    // --------^^^^^^^^^^^------
+    
     if arendelle.i < arendelle.code.utf16Count - 1 {
     
         let numberOfErrorBefore = screen.errors.count
-        let specialParts = openCloseLexer(openCommand: partTwoChar, arendelle: &arendelle, screen: &screen)
+        let inputParts = openCloseLexer(openCommand: "(", arendelle: &arendelle, screen: &screen)
         
         if screen.errors.count == numberOfErrorBefore {
         
-            result += specialParts
-            return result
+            result.inputs = inputParts
             
         } else {
             screen.errors.append("Broken function parenthesis found")
-            return ["BadGrammar"]
+            return result
         }
-    } 
+    }
+    
+    
+    
+    //
+    // ! FUNC (120, 23, 34) [12]
+    // ----------------------^^-
+    
+    if arendelle.i < arendelle.code.utf16Count {
+    
+        charToRead = arrayToRead[arendelle.i]
+        
+        if charToRead == "[" {
+            
+            let numberOfErrorBefore = screen.errors.count
+            let indexParts = openCloseLexer(openCommand: "[", arendelle: &arendelle, screen: &screen)
+            
+            if screen.errors.count == numberOfErrorBefore && indexParts.count == 1 {
+                
+                result.index = indexParts[0]
+                return result
+                
+            } else {
+                if indexParts.count != 1 {
+                    screen.errors.append("Function index with more or less than one part found.")
+                    return result
+                } else {
+                    screen.errors.append("Broken function parenthesis found")
+                    return result
+                }
+            }
+        }
+    }
     
     return result
 }

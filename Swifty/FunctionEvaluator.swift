@@ -8,13 +8,14 @@
 
 import Foundation
 
-func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces: [String:[NSNumber]]) -> [NSNumber] {
+
+
+func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: [String:[NSNumber]]) -> [NSNumber] {
     
     let numberOfErrorsInStart = screen.errors.count
     
     func funcHeaderReader (inout #code: Arendelle) -> [String] {
         
-        var result:[String] = []
         let header = code.code =~ "<(.|\n)*>"
         
         if header.items.count > 0 {
@@ -29,15 +30,14 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
             }
             
         } else {
-            screen.errors.append("No function header fount")
-            return ["BadGrammar"]
+            return [""]
         }
         
     }
 
-    if grammarParts[0] =~ "[a-zA-Z0-9\\.]+" {
+    if funcParts.name =~ "[a-zA-Z0-9\\.]+" {
         
-        let funcURL = arendellePathToNSURL(arendellePath: grammarParts[0], kind: "arendelle" , screen: &screen)
+        let funcURL = arendellePathToNSURL(arendellePath: funcParts.name, kind: "arendelle" , screen: &screen)
         
         if checkIfURLExists (funcURL) {
    
@@ -52,28 +52,27 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 // FUNCTION SPACE'S EVAL
                 //
                 
-                let matchInGerammarParts = grammarParts[1] =~ "( |\n|\t|)*"
-                var numberOfGrammarParts = grammarParts.count; if matchInGerammarParts[0] == grammarParts[1] { numberOfGrammarParts-- }
-                let matchInHeaderParts = headerParts[0] =~ "( |\n|\t|)*"
-                var numberOfHeaderParts = headerParts.count; if matchInHeaderParts[0] == headerParts[0] { numberOfHeaderParts-- }
                 
+                var numberOfHeaderParts = headerParts.count; if headerParts[0] == "" { numberOfHeaderParts--}
+                var numberOfFunctionParts = funcParts.inputs.count; if funcParts.inputs[0] == "" { numberOfFunctionParts--}
                 
-                if numberOfHeaderParts == numberOfGrammarParts - 1 && numberOfHeaderParts > 0 {
-
-                    for var counter = 1; counter < grammarParts.count; counter++  {
+                if numberOfHeaderParts == numberOfFunctionParts {
+                    
+                    for var counter = 0; counter < numberOfFunctionParts; counter++  {
                         
-                        let spaceName = "@\(headerParts[counter-1])"
-                        var spaceValue = mathEval(stringExpression: grammarParts[counter], screen: &screen, spaces: &spaces)
+                        let spaceName = "@\(headerParts[counter])"
+                        var spaceValue = mathEval(stringExpression: funcParts.inputs[counter], screen: &screen, spaces: &spaces)
 
                         if spaceValue.itsNotACondition == true && spaceValue.doesItHaveErros == false {
                             
                             funcSpaces[spaceName]?[0] = spaceValue.result
                             
                         } else {
+                            
                             if spaceValue.doesItHaveErros == true {
-                                screen.errors.append("Header value for '\(spaceName)' of function: !\(grammarParts[0])() is broken")
+                                screen.errors.append("Header value for '\(spaceName)' of function: !\(funcParts.name)() is broken")
                             } else {
-                                screen.errors.append("Conditional value fount for '\(spaceName)' of function: !\(grammarParts[0])()")
+                                screen.errors.append("Conditional value fount for '\(spaceName)' of function: !\(funcParts.name)()")
                             }
                         }
                     }
@@ -82,16 +81,18 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 // ERROR FOR FUNCTION SPACE NUMBERS
                 //
                 
+                    
                 } else {
                     switch (numberOfHeaderParts) {
                     case 0:
-                        screen.errors.append("Function: !\(grammarParts[0])() takes no space")
+                        screen.errors.append("Function: !\(funcParts.name)() takes no space")
                     case 1:
-                        screen.errors.append("Function: !\(grammarParts[0])() takes one space")
+                        screen.errors.append("Function: !\(funcParts.name)() takes one space")
                     default:
-                        screen.errors.append("Function: !\(grammarParts[0])() takes \(headerParts.count) spaces")
+                        screen.errors.append("Function: !\(funcParts.name)() takes \(headerParts.count) spaces")
                     }
                 }
+                
                 
                 
                 //
@@ -114,17 +115,17 @@ func funcEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 
                 
             } else {
-                screen.errors.append("Could not load function '\(grammarParts[0])'")
+                screen.errors.append("Could not load function '\(funcParts.name)'")
                 return [0]
             }
             
         } else {
-            screen.errors.append("No function with name '\(grammarParts[0])' found")
+            screen.errors.append("No function with name '\(funcParts.name)' found")
             return [0]
         }
     
     } else {
-        screen.errors.append("Bad function name: '\(grammarParts[0])' found")
+        screen.errors.append("Bad function name: '\(funcParts.name)' found")
         return [0]
     }
 }

@@ -12,6 +12,9 @@ import Foundation
 
 func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: [String:[NSNumber]]) -> [NSNumber] {
     
+    
+    if funcParts.name == "BadGrammar" { return [0] }
+    
     let numberOfErrorsInStart = screen.errors.count
     
     func funcHeaderReader (inout #code: Arendelle) -> [String] {

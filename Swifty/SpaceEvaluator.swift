@@ -141,9 +141,6 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     
     
     let regexMathes = grammarParts[0] =~ "(([a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)) *(\\[.*\\])?"
-    let regexMatchForPartTwo = grammarParts[1] =~ "(\\$|\\@)[0-9a-zA-Z\\.]+"
-
-    
     
     if grammarParts.count == 1 {
     
@@ -159,13 +156,13 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             
             if space.name.hasPrefix("$") {
             
-                let spaceValue = spaceInput(text: "Sign space '\(space.name)' with a number:")
+                let spaceValue = spaceInput(text: "Sign space '\(space.name)' with a number:", screen: &screen)
                 saveNumberToStoredSpace(number: [spaceValue], toSpace: space.name.replace("$", withString: ""))
             
             // simple space
                 
             } else {
-                let spaceValue = spaceInput(text: "Sign space '@\(space.name)' at index '\(space.index)' with a number:")
+                let spaceValue = spaceInput(text: "Sign space '@\(space.name)' at index '\(space.index)' with a number:", screen: &screen)
                 saveToSpace(spaceName: space.name, indexAtSpace: space.index, valueToSave: spaceValue, spaces: &spaces)
             }
         
@@ -178,12 +175,12 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
         //
         
     } else if grammarParts.count == 2 {
+        
+        let regexMatchForPartTwo = grammarParts[1] =~ "(\\$|\\@)[0-9a-zA-Z\\.]+"
 
         if regexMathes.items.count == 1 && regexMathes.items[0] == grammarParts[0] {
             
             let space = spaceNameAndIndexReaderWithName(grammarParts[0])
-            
-            
             
             
             //
@@ -194,7 +191,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 
                 var spaceInputArendelleFortmat = Arendelle(code: grammarParts[1])
                 let spaceInputText = onePartOpenCloseParser(openCloseCommand: "\"",spaces: &spaces, arendelle: &spaceInputArendelleFortmat, screen: &screen, preprocessorState:false)
-                var spaceValue = spaceInput(text: spaceInputText)
+                var spaceValue = spaceInput(text: spaceInputText, screen: &screen)
                 
                 // if it's stored space
                 

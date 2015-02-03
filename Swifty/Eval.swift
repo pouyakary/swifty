@@ -48,7 +48,7 @@ import Foundation
             case "(" :
                 let grammarParts = openCloseLexer(openCommand: "(", arendelle: &arendelle, screen: &screen)
                 let spaceToBeRemoved = spaceEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
-                if spaceToBeRemoved != "" { spacesToRemove.append(spaceToBeRemoved) }
+                if spaceToBeRemoved != "" { spacesToRemove.append(spaceToBeRemoved) } 
                 
             case "[" :
                 let grammarParts = openCloseLexer(openCommand: "[", arendelle: &arendelle, screen: &screen)

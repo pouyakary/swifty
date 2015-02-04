@@ -82,7 +82,7 @@ func printMatrix (#result: codeScreen) {
 
 func printError (#result: codeScreen) {
 
-    var i = 1;
+    var i = 1; fails++
     
     println("\n  ⎪ ✖︎ Compilation Failed Because Of \(result.errors.count) Known Error\(PIEndS(number: result.errors.count)):")
     for error in result.errors {
@@ -111,7 +111,7 @@ func printSpaces (#spaces: [String:[NSNumber]]) {
 // REPL
 //
 
-let x = 30, y = 10
+let x = 30, y = 10; var prompts = 0, fails = 0
 var masterScreen = codeScreen(xsize: x, ysize: y)
 var whileControl = true
 var masterSpaces: [String:[NSNumber]] = ["arendelle":[0]]
@@ -122,7 +122,8 @@ println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>\n")
 
 while true {
     
-    var code = replInput()
+    var code = replInput();
+    prompts++
     
     if code == "clean" {
     
@@ -140,7 +141,9 @@ while true {
         clean()
     
     } else if code == "exit" {
-     
+    
+        
+        println("\n  ⎪ Log: Prompts: \(prompts - fails) successful of \(prompts)\n  ⎪ Log: Shutdown: Safe\n\n  Goodbye!\n\n")
         break
     
     } else if code == "print" {

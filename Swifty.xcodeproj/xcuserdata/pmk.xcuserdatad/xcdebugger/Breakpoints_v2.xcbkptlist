@@ -279,7 +279,7 @@
                   symbolName = "Swifty.spaceInput (text : Swift.String, screen : inout Swifty.codeScreen) -&gt; ObjectiveC.NSNumber"
                   moduleName = "Swifty"
                   urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/CoreInterface.swift"
-                  timestampString = "444770352.633594"
+                  timestampString = "444773323.647706"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -293,7 +293,7 @@
                   symbolName = "Swifty.spaceInput (text : Swift.String, screen : inout Swifty.codeScreen) -&gt; ObjectiveC.NSNumber"
                   moduleName = "Swifty"
                   urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/CoreInterface.swift"
-                  timestampString = "444770352.633796"
+                  timestampString = "444773323.647828"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -317,6 +317,20 @@
             endingLineNumber = "76"
             landmarkName = "openCloseLexer(openCommand:arendelle:screen:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty/main.swift"
+            timestampString = "444771679.004913"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

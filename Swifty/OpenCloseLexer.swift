@@ -72,7 +72,7 @@ func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inou
     }
                         
     if whileControl == true { screen.errors.append ("Unfinished gramamr found") }
-                        
-return args
+    
+    return args
 
 }

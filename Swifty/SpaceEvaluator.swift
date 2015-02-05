@@ -221,7 +221,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 // SIMPLE SPACE
                 //
                 
-                if spaces["@\(grammarParts[0])"] != nil && !grammarParts[0].hasPrefix("$") {
+                if !grammarParts[0].hasPrefix("$") {
                     
                     let result = mathEval(stringExpression: "@\(grammarParts[0]) \(grammarParts[1])", screen: &screen, spaces: &spaces)
 
@@ -265,10 +265,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                         screen.errors.append("No stored space as '@\(grammarParts[0])' found")
                     }
                 
-                } else {
-                    screen.errors.append("No space as '@\(grammarParts[0])' found")
                 }
-                
                 
                 
                 

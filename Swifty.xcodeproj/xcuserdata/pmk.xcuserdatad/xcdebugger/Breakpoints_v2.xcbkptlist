@@ -174,7 +174,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12"
-            endingLineNumber = "12">
+            endingLineNumber = "12"
+            landmarkName = "timeDate()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -184,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/Replacer.swift"
-            timestampString = "444691254.465843"
+            timestampString = "444812037.519237"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "replacer(expressionString:spaces:screen:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -200,28 +202,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/SpaceEvaluator.swift"
-            timestampString = "444694961.113949"
+            timestampString = "444812168.271021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "spaceEval(grammarParts:screen:spaces:arendelle:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifty/Replacer.swift"
-            timestampString = "444661435.908957"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "replacer(expressionString:spaces:screen:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -248,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/Replacer.swift"
-            timestampString = "444691254.465843"
+            timestampString = "444812037.519237"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "replacer(expressionString:spaces:screen:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -279,7 +265,7 @@
                   symbolName = "Swifty.spaceInput (text : Swift.String, screen : inout Swifty.codeScreen) -&gt; ObjectiveC.NSNumber"
                   moduleName = "Swifty"
                   urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/CoreInterface.swift"
-                  timestampString = "444773323.647706"
+                  timestampString = "444812168.521859"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -293,7 +279,7 @@
                   symbolName = "Swifty.spaceInput (text : Swift.String, screen : inout Swifty.codeScreen) -&gt; ObjectiveC.NSNumber"
                   moduleName = "Swifty"
                   urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/CoreInterface.swift"
-                  timestampString = "444773323.647828"
+                  timestampString = "444812168.52201"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"

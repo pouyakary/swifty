@@ -133,7 +133,6 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
     var expression = Arendelle(code: expressionString)
     var replaceString = "";
     
-    
     while expression.i < expression.code.utf16Count {
         
         var command = Array(expression.code)[expression.i]
@@ -145,6 +144,7 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
         //
             
         case "#":
+            
             cleanPart()
             expression.i++
             
@@ -191,6 +191,51 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             }
             
             collection.append(replaceString); replaceString = ""
+         
+            
+            
+            
+            
+            
+        //
+        // FUNCTION REPLACER
+        //
+            
+        case "!":
+            
+            cleanPart()
+            
+            let funcParts = functionLexer(arendelle: &expression, screen: &screen)
+            let result = funcEval(funcParts: funcParts, screen: &screen, spaces: &spaces)
+            
+            if funcParts.index != "0" {
+                
+                let index = mathEval(stringExpression: funcParts.index, screen: &screen, spaces: &spaces)
+                
+                if index.itsNotACondition == true &&  index.doesItHaveErros == false && index.result.integerValue >= 0 && index.result.integerValue < result.count {
+                    
+                    collection.append("\(result[index.result.integerValue])")
+                    
+                } else {
+                    if index.result.integerValue < 0 || index.result.integerValue >= result.count {
+                        screen.errors.append("Index of function !\(funcParts.name)() out of range")
+                    } else if index.itsNotACondition == false {
+                        screen.errors.append("Condition found in index of function !\(funcParts.name)()")
+                    } else {
+                        screen.errors.append("Bad expression for index of function !\(funcParts.name)()")
+                    }
+                    
+                    collection.append("0");
+                }
+                
+            } else {
+                
+                collection.append("\(result[0])")
+                
+            }
+            
+            
+            
             
     
             
@@ -200,6 +245,7 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
         //
             
         case "$", "@":
+            
             cleanPart()
             
             var simpleSpaceOrNot = true; if command == "$" { simpleSpaceOrNot = false }
@@ -207,6 +253,7 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             var rule = ""; if simpleSpaceOrNot { rule = "\\." }
             replaceString.append(command); expression.i++
             
+
             //
             // ADD storedSpaceLoader FOR STORED SAPCES
             //
@@ -232,8 +279,17 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
                     replaceString = "\(spaceSize(spaceName: replaceString, spaces: spaces, simpleSpaceOrNot: simpleSpaceOrNot, screen: &screen))"
                     break
                     
-                }
+                } else {
                 
+                    if simpleSpaceOrNot {
+                        replaceString = spaceLoaderWithName(replaceString, atIndex: 0, spaces: spaces, screen: &screen).stringValue
+                    } else {
+                        replaceString = storedSpaceLoader(spaceName: replaceString, screen: &screen)[0].stringValue
+                    }
+                    
+                    break
+                
+                }
                 
                 if expression.i == expression.code.utf16Count - 1 {
                     
@@ -243,48 +299,14 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
                         replaceString = storedSpaceLoader(spaceName: replaceString, screen: &screen)[0].stringValue
                     }
                 }
-            
+                
                 expression.i++
+
             }
             
             collection.append(replaceString); replaceString = ""
+
             
-            
-        //
-        // FUNCTION REPLACER
-        //
-            
-        case "!":
-            cleanPart()
-            
-            let funcParts = functionLexer(arendelle: &expression, screen: &screen)
-            let result = funcEval(funcParts: funcParts, screen: &screen, spaces: &spaces)
-            
-            if funcParts.index != "0" {
-            
-                let index = mathEval(stringExpression: funcParts.index, screen: &screen, spaces: &spaces)
-                
-                if index.itsNotACondition == true &&  index.doesItHaveErros == false && index.result.integerValue >= 0 && index.result.integerValue < result.count {
-                
-                    collection.append("\(result[index.result.integerValue])")
-                
-                } else {
-                    if index.result.integerValue < 0 || index.result.integerValue >= result.count {
-                        screen.errors.append("Index of function !\(funcParts.name)() out of range")
-                    } else if index.itsNotACondition == false {
-                        screen.errors.append("Condition found in index of function !\(funcParts.name)()")
-                    } else {
-                        screen.errors.append("Bad expression for index of function !\(funcParts.name)()")
-                    }
-                    
-                    collection.append("0");
-                }
-                
-            } else {
-            
-                collection.append("\(result[0])")
-            
-            }
             
             
             
@@ -304,7 +326,8 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
         }
     }
     
-    // for line in collection { println("--> '\(line)'") }
+    
+    //for line in collection { println("--> '\(line)'") }
     
     var result = ""; for str in collection { result += str }; return result
 }

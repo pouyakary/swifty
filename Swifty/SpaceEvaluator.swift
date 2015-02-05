@@ -137,8 +137,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             screen.errors.append("Using @return is forbidden in the main blueprint")
         }
     }
-    
-    
+
     
     let regexMathes = grammarParts[0] =~ "(([a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)) *(\\[.*\\])?"
     
@@ -154,17 +153,24 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             
             let space = spaceNameAndIndexReaderWithName(grammarParts[0])
             
-            if space.name.hasPrefix("$") {
+            if space.name != "BadGrammar" {
             
-                let spaceValue = spaceInput(text: "Sign space '\(space.name)' with a number:", screen: &screen)
-                saveNumberToStoredSpace(number: [spaceValue], toSpace: space.name.replace("$", withString: ""))
+                if space.name.hasPrefix("$") {
+                    
+                    let spaceValue = spaceInput(text: "Sign stored space '\(space.name)' at index '\(space.index)' with a number:", screen: &screen)
+                    saveNumberToStoredSpace(number: [spaceValue], toSpace: space.name.replace("$", withString: ""))
+                    
+                    // simple space
+                    
+                } else {
+                    let spaceValue = spaceInput(text: "Sign space '@\(space.name)' at index '\(space.index)' with a number:", screen: &screen)
+                    saveToSpace(spaceName: space.name, indexAtSpace: space.index, valueToSave: spaceValue, spaces: &spaces)
+                }
             
-            // simple space
-                
             } else {
-                let spaceValue = spaceInput(text: "Sign space '@\(space.name)' at index '\(space.index)' with a number:", screen: &screen)
-                saveToSpace(spaceName: space.name, indexAtSpace: space.index, valueToSave: spaceValue, spaces: &spaces)
+                screen.errors.append("Problem with space name found.")
             }
+            
         
         } else {
             spaceRegexNameError(text: grammarParts[0])
@@ -176,7 +182,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
         
     } else if grammarParts.count == 2 {
         
-        let regexMatchForPartTwo = grammarParts[1] =~ "(\\$|\\@)[0-9a-zA-Z\\.]+"
+        let regexMatchForPartTwo = grammarParts[1] =~ "((\\$|\\@)[0-9a-zA-Z\\.]+)|(![a-zA-Z0-9\\.]+(\\((?:\\(.*\\)|[^\\(\\)])*\\)))"
 
         if regexMathes.items.count == 1 && regexMathes.items[0] == grammarParts[0] {
             
@@ -288,6 +294,13 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     } else {
                         screen.errors.append("No stored space as '\(grammarParts[1])' found")
                     }
+                    
+                } else if grammarParts[1].hasPrefix("!") {
+                    
+                    var funcCode = Arendelle(code: grammarParts[1])
+                    let functionParts = functionLexer(arendelle: &funcCode, screen: &screen)
+                    toBeCopiedArray = funcEval(funcParts: functionParts, screen: &screen, spaces: &spaces)
+                
                 } else {
                 
                     if spaces[grammarParts[1]] != nil {

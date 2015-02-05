@@ -71,7 +71,7 @@ import Foundation
                 let functionParts = functionLexer(arendelle: &arendelle, screen: &screen)
                 funcEval(funcParts: functionParts, screen: &screen, spaces: &spaces)
                 
-                
+            
                 
             //
             // COMMANDS

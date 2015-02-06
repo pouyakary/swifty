@@ -1,7 +1,7 @@
-<center><img width="400" src="http://web.arendelle.org/developer/graphics/swiftyTitle.png"></center>
+<img width="400" src="http://web.arendelle.org/developer/graphics/swiftyTitle.png"><br>
 Core Arendelle: Apple-Tech (Swift / Objective-C / C) based compiler for Arendelle with Swifty REPL: Swifty is a REPL for Arendelle’s Apple compiler Core Arendelle. For those of us who needs higher levels of debugging, those of us who want’s to discover who Arendelle works from inside and for those of us who want’s to work with Core Arendelle to create great things. Swifty is surly the best REPL in the world<br><br>
 
-With so much [Pouya Kary](http://kary.us)<br><br>
+With so much [Pouya Kary](http://kary.us)<br><br><br>
 
 
 ## License

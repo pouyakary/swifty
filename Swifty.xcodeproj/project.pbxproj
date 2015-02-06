@@ -10,6 +10,7 @@
 		A60A75091A29B85C00576F13 /* ConditonEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A75081A29B85C00576F13 /* ConditonEvaluator.swift */; };
 		A62792B71A3E4F9E0086C664 /* SpaceEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62792B61A3E4F9E0086C664 /* SpaceEvaluator.swift */; };
 		A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */; };
+		A6822B061A83E32700A23FC3 /* spaceOverwriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6822B051A83E32700A23FC3 /* spaceOverwriter.swift */; };
 		A6897EC81A263D850074966A /* console.m in Sources */ = {isa = PBXBuildFile; fileRef = A6897EC71A263D850074966A /* console.m */; };
 		A696E0B51A506B1D00E213D2 /* PiTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A696E0B41A506B1D00E213D2 /* PiTryCatch.m */; };
 		A696E0B71A508D8700E213D2 /* FunctionSpaceLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A696E0B61A508D8700E213D2 /* FunctionSpaceLexer.swift */; };
@@ -69,6 +70,7 @@
 		A60A75081A29B85C00576F13 /* ConditonEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditonEvaluator.swift; sourceTree = "<group>"; };
 		A62792B61A3E4F9E0086C664 /* SpaceEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceEvaluator.swift; sourceTree = "<group>"; };
 		A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePartOpenCloseParser.swift; sourceTree = "<group>"; };
+		A6822B051A83E32700A23FC3 /* spaceOverwriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spaceOverwriter.swift; sourceTree = "<group>"; };
 		A6897EC61A263D840074966A /* Swifty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swifty-Bridging-Header.h"; sourceTree = "<group>"; };
 		A6897EC71A263D850074966A /* console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = console.m; sourceTree = "<group>"; };
 		A696E0B31A506B1D00E213D2 /* PiTryCatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiTryCatch.h; sourceTree = "<group>"; };
@@ -161,6 +163,17 @@
 			name = "File System";
 			sourceTree = "<group>";
 		};
+		A6822B041A83E1A100A23FC3 /* Facilities */ = {
+			isa = PBXGroup;
+			children = (
+				A698A16B1A78063200594411 /* TimeSystem.swift */,
+				A6E59D641A289DC90088729A /* RND.swift */,
+				A6D303F01A2B16560045D9A9 /* Replacer.swift */,
+				A6822B051A83E32700A23FC3 /* spaceOverwriter.swift */,
+			);
+			name = Facilities;
+			sourceTree = "<group>";
+		};
 		A696E0B11A5055A100E213D2 /* Pi */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,9 +197,6 @@
 			children = (
 				A6FB5EAD1A27AA8700FE7161 /* DDMathParser */,
 				A6A506DB1A285D3500962A9B /* MathEvaluator.swift */,
-				A698A16B1A78063200594411 /* TimeSystem.swift */,
-				A6E59D641A289DC90088729A /* RND.swift */,
-				A6D303F01A2B16560045D9A9 /* Replacer.swift */,
 			);
 			name = "Math Evaluator";
 			sourceTree = "<group>";
@@ -244,6 +254,7 @@
 		A6E2B06E1A15EB450025C2E9 /* Kernel */ = {
 			isa = PBXGroup;
 			children = (
+				A6822B041A83E1A100A23FC3 /* Facilities */,
 				A69813221A517307000D67A4 /* Functions */,
 				A662D7E41A49E5A900BEC447 /* File System */,
 				A6A506DA1A285CFB00962A9B /* Math Evaluator */,
@@ -421,6 +432,7 @@
 				A6E2B0731A162D200025C2E9 /* codeScreen.swift in Sources */,
 				A6FB5F011A27AA8700FE7161 /* DDMathEvaluator.m in Sources */,
 				A6E2B0701A15EB7C0025C2E9 /* Eval.swift in Sources */,
+				A6822B061A83E32700A23FC3 /* spaceOverwriter.swift in Sources */,
 				A6FB5F031A27AA8700FE7161 /* DDMathStringToken.m in Sources */,
 				A6FB5F041A27AA8700FE7161 /* DDMathStringTokenizer.m in Sources */,
 				A6E7EA341A1A317100192409 /* OpenCloseLexer.swift in Sources */,
@@ -525,6 +537,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"GCC_OPTIMIZATION_LEVEL[arch=*]" = fast;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Swifty-Bridging-Header.h";

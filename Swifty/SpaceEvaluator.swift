@@ -281,58 +281,23 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             
             } else if regexMatchForPartTwo.items.count == 1 && regexMatchForPartTwo.items[0] == grammarParts[1] {
                 
-                var toBeCopiedArray:[NSNumber] = [0]
-                
-                // OPENING THE SPACE
-                
-                if grammarParts[1].hasPrefix("$") {
-                
-                    if checkIfStoredSpaceExists(spaceName: grammarParts[1], screen: &screen) {
-                    
-                        toBeCopiedArray = storedSpaceLoader(spaceName: grammarParts[1], screen: &screen)
-                    
-                    } else {
-                        screen.errors.append("No stored space as '\(grammarParts[1])' found")
-                    }
-                    
-                } else if grammarParts[1].hasPrefix("!") {
-                    
-                    var funcCode = Arendelle(code: grammarParts[1])
-                    let functionParts = functionLexer(arendelle: &funcCode, screen: &screen)
-                    toBeCopiedArray = funcEval(funcParts: functionParts, screen: &screen, spaces: &spaces)
-                
-                } else {
-                
-                    if spaces[grammarParts[1]] != nil {
-                    
-                        toBeCopiedArray = spaces[grammarParts[1]]!
-                    
-                    } else {
-                        screen.errors.append("Space \(grammarParts[1]) not found")
-                    }
-                }
-            
-                
-                // OVERWRITING THE SPACE
+                let toBeCopiedArray = spaceOverwriterWithID(grammarParts[1], &spaces, &screen)
                 
                 if grammarParts[0].hasPrefix("$") {
-                
                     saveNumberToStoredSpace(number: toBeCopiedArray, toSpace: grammarParts[0].replace("$", withString: ""))
-                
                 } else {
-                
                     spaces["@\(grammarParts[0])"] = toBeCopiedArray
-                
                 }
 
                 
+                
             //
-            // ( space , 1; 1; 2; 3; 5; 8; 13; 21 )
+            // ( space , 1; 1; 2; 3; 5; 8; 13; 21; 34; 55 )
             //
                 
             } else if Array(grammarParts[1] =~ ";").count > 0 {
                 
-                if grammarParts[1].hasSuffix(";") || grammarParts[1].hasPrefix(";") || Array(grammarParts[1] =~ ";;").count > 0{
+                if grammarParts[1].hasSuffix(";") || grammarParts[1].hasPrefix(";") || Array(grammarParts[1] =~ ";;").count > 0 {
                 
                     // Empty entry counter
                     var numberOfErrors = 0; if grammarParts[1].hasSuffix(";;") { numberOfErrors++ }
@@ -443,10 +408,10 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                                 
                             }
                         
+                        
                         //
                         // END OF SPACE WITH 2 PARTS
                         //
-                        
                         
                     } else {
                         screen.errors.append("Unaccepted using of conditions in space value: '\(grammarParts[1])'")

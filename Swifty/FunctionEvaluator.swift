@@ -63,21 +63,37 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                     
                     for var counter = 0; counter < numberOfFunctionParts; counter++  {
                         
+                        let regexMatchForPartTwo = funcParts.inputs[counter] =~ "((\\$|\\@)[0-9a-zA-Z\\.]+)|(![a-zA-Z0-9\\.]+(\\((?:\\(.*\\)|[^\\(\\)])*\\)))"
+                        
                         let spaceName = "@\(headerParts[counter])"
-                        var spaceValue = mathEval(stringExpression: funcParts.inputs[counter], screen: &screen, spaces: &spaces)
-
-                        if spaceValue.itsNotACondition == true && spaceValue.doesItHaveErros == false {
+                        
+                        
+                        //----- Space overwrite -----------------------------------------------------------------------------------------
+                        
+                        if regexMatchForPartTwo.items.count == 1 && regexMatchForPartTwo.items[0] == funcParts.inputs[counter] {
+                         
+                            funcSpaces[spaceName] = spaceOverwriterWithID(funcParts.inputs[counter], &spaces, &screen)
                             
-                            funcSpaces[spaceName]?[0] = spaceValue.result
+                        //----- Only first space ----------------------------------------------------------------------------------------
                             
                         } else {
                             
-                            if spaceValue.doesItHaveErros == true {
-                                screen.errors.append("Header value for '\(spaceName)' of function: !\(funcParts.name)() is broken")
+                            var spaceValue = mathEval(stringExpression: funcParts.inputs[counter], screen: &screen, spaces: &spaces)
+                            
+                            if spaceValue.itsNotACondition == true && spaceValue.doesItHaveErros == false {
+                                
+                                funcSpaces[spaceName] = [spaceValue.result]
+                                
                             } else {
-                                screen.errors.append("Conditional value fount for '\(spaceName)' of function: !\(funcParts.name)()")
+                                if spaceValue.doesItHaveErros == true {
+                                    screen.errors.append("Header value for '\(spaceName)' of function: !\(funcParts.name)() is broken")
+                                } else {
+                                    screen.errors.append("Conditional value fount for '\(spaceName)' of function: !\(funcParts.name)()")
+                                }
                             }
                         }
+                        
+                        //---------------------------------------------------------------------------------------------------------------
                     }
                     
                 //

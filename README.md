@@ -6,7 +6,7 @@ With so much [Pouya Kary](http://kary.us)<br><br><br>
 
 ## License
 
-###Swifty
+### Swifty
 
 ```
 Swifty - Apple based port of Arendelle
@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
 
 <br>
-### DDMathParser ([GitHub](https://github.com/davedelong/DDMathParser)):
+#### DDMathParser ([GitHub](https://github.com/davedelong/DDMathParser)):
 
 ```
 Copyright (c) 2010-2011 Dave DeLong

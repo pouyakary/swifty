@@ -1,7 +1,7 @@
-<img width="120" src="http://kary.us/GitHubWideImages/Arendelle/Swifty/swiftyIcon500.png">
-# Swifty
-Core Arendelle: Apple-Tech (Swift / Objective-C / C) based compiler for Arendelle with Swifty REPL: Swifty is a REPL for Arendelle’s Apple compiler Core Arendelle. For those of us who needs higher levels of debugging, those of us who want’s to discover who Arendelle works from inside and for those of us who want’s to work with Core Arendelle to create great things. Swifty is surly the best REPL in the world <br>
-By [Pouya Kary](http://kary.us)<br><br>
+<center><img width="400" src="http://web.arendelle.org/developer/graphics/swiftyTitle.png"></center>
+Core Arendelle: Apple-Tech (Swift / Objective-C / C) based compiler for Arendelle with Swifty REPL: Swifty is a REPL for Arendelle’s Apple compiler Core Arendelle. For those of us who needs higher levels of debugging, those of us who want’s to discover who Arendelle works from inside and for those of us who want’s to work with Core Arendelle to create great things. Swifty is surly the best REPL in the world<br><br>
+
+With so much [Pouya Kary](http://kary.us)<br><br>
 
 
 ## License
@@ -27,14 +27,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
 
 <br>
-### DDMathParser:
+### DDMathParser ([GitHub](https://github.com/davedelong/DDMathParser)):
 
 ```
 Copyright (c) 2010-2011 Dave DeLong
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a 
+copy of this software and associated documentation files (the "Software"), 
+to deal in the Software without restriction, including without limitation 
+the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or sell copies of the Software, and to permit persons to whom the 
+Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included 
+in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS IN THE SOFTWARE.
 ```

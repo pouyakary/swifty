@@ -119,6 +119,9 @@ import Foundation
             case ";":
                 screen.errors.append("Semicolons found in command-zone")
                 
+            case ":":
+                screen.errors.append("In-Founction comment sign found in command-zone")
+                
             case "@":
                 screen.errors.append("Space sign found in command-zone")
                 

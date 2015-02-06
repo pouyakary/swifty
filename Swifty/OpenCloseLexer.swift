@@ -10,18 +10,18 @@ import Foundation
 
 func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inout #screen: codeScreen) -> [String] {
     
+    ++arendelle.i
                         
     var command:Character
-    ++arendelle.i
                         
     var arg:String = ""
     var args:[String] = []
     var whileControl = true
-    var openCloseDictionary:[Character:Character] = [ "{":"}", "(":")", "[":"]" , "<":">" ]
+    var openCloseDictionary:[Character:Character] = [ "{":"}", "(":")", "[":"]" , "<":">", "~":":" ]
     let closeCommand = openCloseDictionary[openCommand]!
     
     while arendelle.whileCondtion() && whileControl {
-                            
+        
         command = arendelle.readAtI()
                             
         switch command {
@@ -67,8 +67,10 @@ func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inou
                                 
         }
         
-        arendelle.i++
+        ++arendelle.i
     }
+    
+    if args.count == 0 { args.append("BadGrammar") }
                         
     if whileControl == true { screen.errors.append ("Unfinished gramamr found") }
     

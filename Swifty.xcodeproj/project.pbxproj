@@ -12,7 +12,6 @@
 		A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */; };
 		A6822B061A83E32700A23FC3 /* spaceOverwriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6822B051A83E32700A23FC3 /* spaceOverwriter.swift */; };
 		A6897EC81A263D850074966A /* console.m in Sources */ = {isa = PBXBuildFile; fileRef = A6897EC71A263D850074966A /* console.m */; };
-		A696E0B51A506B1D00E213D2 /* PiTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A696E0B41A506B1D00E213D2 /* PiTryCatch.m */; };
 		A696E0B71A508D8700E213D2 /* FunctionSpaceLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A696E0B61A508D8700E213D2 /* FunctionSpaceLexer.swift */; };
 		A69813241A517324000D67A4 /* FunctionEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69813231A517324000D67A4 /* FunctionEvaluator.swift */; };
 		A698A16C1A78063200594411 /* TimeSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A16B1A78063200594411 /* TimeSystem.swift */; };
@@ -29,6 +28,7 @@
 		A6E7EA311A19D07600192409 /* PI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7EA301A19D07600192409 /* PI.swift */; };
 		A6E7EA341A1A317100192409 /* OpenCloseLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7EA331A1A317100192409 /* OpenCloseLexer.swift */; };
 		A6ECE7631A2450C200B09103 /* masterEval.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6ECE7621A2450C200B09103 /* masterEval.swift */; };
+		A6F879761A8563BA005ADC0D /* PiTryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F879751A8563BA005ADC0D /* PiTryCatch.m */; };
 		A6FB5EF21A27AA8700FE7161 /* _DDDecimalFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FB5EAF1A27AA8700FE7161 /* _DDDecimalFunctions.m */; };
 		A6FB5EF31A27AA8700FE7161 /* _DDFunctionEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FB5EB11A27AA8700FE7161 /* _DDFunctionEvaluator.m */; };
 		A6FB5EF41A27AA8700FE7161 /* _DDFunctionExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FB5EB31A27AA8700FE7161 /* _DDFunctionExpression.m */; };
@@ -73,8 +73,6 @@
 		A6822B051A83E32700A23FC3 /* spaceOverwriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spaceOverwriter.swift; sourceTree = "<group>"; };
 		A6897EC61A263D840074966A /* Swifty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swifty-Bridging-Header.h"; sourceTree = "<group>"; };
 		A6897EC71A263D850074966A /* console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = console.m; sourceTree = "<group>"; };
-		A696E0B31A506B1D00E213D2 /* PiTryCatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiTryCatch.h; sourceTree = "<group>"; };
-		A696E0B41A506B1D00E213D2 /* PiTryCatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiTryCatch.m; sourceTree = "<group>"; };
 		A696E0B61A508D8700E213D2 /* FunctionSpaceLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionSpaceLexer.swift; sourceTree = "<group>"; };
 		A69813231A517324000D67A4 /* FunctionEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionEvaluator.swift; sourceTree = "<group>"; };
 		A698A16B1A78063200594411 /* TimeSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeSystem.swift; path = DDMathParser/TimeSystem.swift; sourceTree = "<group>"; };
@@ -92,6 +90,8 @@
 		A6E7EA301A19D07600192409 /* PI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PI.swift; sourceTree = "<group>"; };
 		A6E7EA331A1A317100192409 /* OpenCloseLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenCloseLexer.swift; sourceTree = "<group>"; };
 		A6ECE7621A2450C200B09103 /* masterEval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = masterEval.swift; sourceTree = "<group>"; };
+		A6F879751A8563BA005ADC0D /* PiTryCatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiTryCatch.m; sourceTree = "<group>"; };
+		A6F879771A8563D7005ADC0D /* PiTryCatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PiTryCatch.h; sourceTree = "<group>"; };
 		A6FB5EAE1A27AA8700FE7161 /* _DDDecimalFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DDDecimalFunctions.h; sourceTree = "<group>"; };
 		A6FB5EAF1A27AA8700FE7161 /* _DDDecimalFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DDDecimalFunctions.m; sourceTree = "<group>"; };
 		A6FB5EB01A27AA8700FE7161 /* _DDFunctionEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DDFunctionEvaluator.h; sourceTree = "<group>"; };
@@ -178,8 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				A6E7EA301A19D07600192409 /* PI.swift */,
-				A696E0B31A506B1D00E213D2 /* PiTryCatch.h */,
-				A696E0B41A506B1D00E213D2 /* PiTryCatch.m */,
+				A6F879751A8563BA005ADC0D /* PiTryCatch.m */,
+				A6F879771A8563D7005ADC0D /* PiTryCatch.h */,
 			);
 			name = Pi;
 			sourceTree = "<group>";
@@ -401,8 +401,8 @@
 				A6FB5F071A27AA8700FE7161 /* DDTypes.m in Sources */,
 				A6FB5EFF1A27AA8700FE7161 /* DDExpression.m in Sources */,
 				A6FB5F081A27AA8700FE7161 /* NSString+DDMathParsing.m in Sources */,
-				A696E0B51A506B1D00E213D2 /* PiTryCatch.m in Sources */,
 				A6FB5EF91A27AA8700FE7161 /* _DDOperatorTerm.m in Sources */,
+				A6F879761A8563BA005ADC0D /* PiTryCatch.m in Sources */,
 				A6E23C9B1A154E350057DB7B /* main.swift in Sources */,
 				A6FB5EFD1A27AA8700FE7161 /* _DDVariableExpression.m in Sources */,
 				A6FB5F001A27AA8700FE7161 /* DDExpressionRewriter.m in Sources */,

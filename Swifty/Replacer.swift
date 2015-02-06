@@ -119,7 +119,6 @@ func spaceSize (#spaceName: String, #spaces:[String:[NSNumber]], #simpleSpaceOrN
 
 func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], inout #screen: codeScreen) -> String {
     
-    
     var collection : [String] = []
     var part = ""
     func cleanPart () {
@@ -130,7 +129,11 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
         collection.append(part); part = ""
     }
     
+    
+    
     var expression = Arendelle(code: expressionString)
+    
+    
     var replaceString = "";
     
     while expression.whileCondtion() {

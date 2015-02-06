@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/Replacer.swift"
-            timestampString = "444935691.288918"
+            timestampString = "444952972.845274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "replacer(expressionString:spaces:screen:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/Replacer.swift"
-            timestampString = "444935691.288918"
+            timestampString = "444952972.845274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "replacer(expressionString:spaces:screen:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -265,7 +265,7 @@
                   symbolName = "Swifty.spaceInput (text : Swift.String, screen : inout Swifty.codeScreen) -&gt; ObjectiveC.NSNumber"
                   moduleName = "Swifty"
                   urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/CoreInterface.swift"
-                  timestampString = "444938085.558212"
+                  timestampString = "444953804.948533"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -279,7 +279,7 @@
                   symbolName = "Swifty.spaceInput (text : Swift.String, screen : inout Swifty.codeScreen) -&gt; ObjectiveC.NSNumber"
                   moduleName = "Swifty"
                   urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/CoreInterface.swift"
-                  timestampString = "444938085.558408"
+                  timestampString = "444953804.948759"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -296,11 +296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/OpenCloseLexer.swift"
-            timestampString = "444936767.306875"
+            timestampString = "444951761.67115"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "openCloseLexer(openCommand:arendelle:screen:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/main.swift"
-            timestampString = "444771679.004913"
+            timestampString = "444950465.275078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125">
+            startingLineNumber = "133"
+            endingLineNumber = "133">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -333,6 +333,22 @@
             endingLineNumber = "15"
             landmarkName = "Arendelle"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty/FunctionEvaluator.swift"
+            timestampString = "444953213.645391"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "funcEval(funcParts:screen:spaces:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

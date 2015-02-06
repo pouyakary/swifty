@@ -63,7 +63,17 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                     
                     for var counter = 0; counter < numberOfFunctionParts; counter++  {
                         
-                        let regexMatchForPartTwo = funcParts.inputs[counter] =~ "((\\$|\\@)[0-9a-zA-Z\\.]+)|(![a-zA-Z0-9\\.]+(\\((?:\\(.*\\)|[^\\(\\)])*\\)))"
+                        var spaceExpr = funcParts.inputs[counter]
+                        
+                        let match = funcParts.inputs[counter] =~ "[a-zA-Z]+:"
+                        if match.items.count == 1{
+                            if funcParts.inputs[counter].hasPrefix(match.items[0]) {
+                                spaceExpr = funcParts.inputs[counter].substringFromIndex(match.items[0].utf16Count)
+        
+                            }
+                        }
+                        
+                        let regexMatchForPartTwo = spaceExpr =~ "((\\$|\\@)[0-9a-zA-Z\\.]+)|(![a-zA-Z0-9\\.]+(\\((?:\\(.*\\)|[^\\(\\)])*\\)))"
                         
                         let spaceName = "@\(headerParts[counter])"
                         
@@ -72,13 +82,13 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                         
                         if regexMatchForPartTwo.items.count == 1 && regexMatchForPartTwo.items[0] == funcParts.inputs[counter] {
                          
-                            funcSpaces[spaceName] = spaceOverwriterWithID(funcParts.inputs[counter], &spaces, &screen)
+                            funcSpaces[spaceName] = spaceOverwriterWithID(spaceExpr, &spaces, &screen)
                             
                         //----- Only first space ----------------------------------------------------------------------------------------
                             
                         } else {
                             
-                            var spaceValue = mathEval(stringExpression: funcParts.inputs[counter], screen: &screen, spaces: &spaces)
+                            var spaceValue = mathEval(stringExpression: spaceExpr, screen: &screen, spaces: &spaces)
                             
                             if spaceValue.itsNotACondition == true && spaceValue.doesItHaveErros == false {
                                 

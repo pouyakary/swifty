@@ -107,6 +107,14 @@ func printSpaces (#spaces: [String:[NSNumber]]) {
 }
 
 
+
+func compilerBroken () {
+    
+    println("\n  Execution of compiler failed due to an unknown runtime problem...")
+
+}
+
+
 //
 // REPL
 //
@@ -178,35 +186,48 @@ while true {
         
         var expr = code.stringByReplacingOccurrencesOfString("=", withString: "", options: NSStringCompareOptions.allZeros, range: nil)
         
-        var tempResult = mathEval(stringExpression: expr, screen: &tempScreen, spaces: &masterSpaces).result
-        
-        if ( tempScreen.errors.count > 0 ) {
-        
-            printError(result: tempScreen)
-        
-        } else {
+        PiTryCatch.try({ () -> Void in
             
-            println("\n--> \(tempResult)")
+            var tempResult = mathEval(stringExpression: expr, screen: &tempScreen, spaces: &masterSpaces).result
+            
+            if ( tempScreen.errors.count > 0 ) {
+                
+                printError(result: tempScreen)
+                
+            } else {
+                
+                println("\n--> \(tempResult)")
+                
+            }
         
-        }
+        }, catch: { (var ex:NSException!) -> Void in
+            compilerBroken()
+        }, finally: { () -> Void in })
     
     } else {
-    
-        var tempScreen = masterScreen
-        var tempArendelle = Arendelle(code: preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen))
-        var tempSpaces = masterSpaces
-        eval(&tempArendelle, &tempScreen, &tempSpaces)
         
-        if tempScreen.errors.count > 0 {
-        
-            printError(result: tempScreen)
-        
-        } else {
-        
-            masterSpaces = tempSpaces
-            masterScreen = tempScreen
-        
-        }
+        PiTryCatch.try({ () -> Void in
+            
+            var tempScreen = masterScreen
+            var tempArendelle = Arendelle(code: preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen))
+            var tempSpaces = masterSpaces
+            
+            eval(&tempArendelle, &tempScreen, &tempSpaces);
+            
+            if tempScreen.errors.count > 0 {
+                
+                printError(result: tempScreen)
+                
+            } else {
+                
+                masterSpaces = tempSpaces
+                masterScreen = tempScreen
+                
+            }
+            
+        }, catch: { (var ex:NSException!) -> Void in
+            compilerBroken()
+        }, finally: { () -> Void in })
     }
 }
 

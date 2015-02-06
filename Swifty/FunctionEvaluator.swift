@@ -65,7 +65,7 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                         
                         var spaceExpr = funcParts.inputs[counter]
                         
-                        let match = funcParts.inputs[counter] =~ "[a-zA-Z]+:"
+                        let match = funcParts.inputs[counter] =~ "[a-zA-Z0-9]+:"
                         if match.items.count == 1{
                             if funcParts.inputs[counter].hasPrefix(match.items[0]) {
                                 spaceExpr = funcParts.inputs[counter].substringFromIndex(match.items[0].utf16Count)
@@ -80,7 +80,7 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                         
                         //----- Space overwrite -----------------------------------------------------------------------------------------
                         
-                        if regexMatchForPartTwo.items.count == 1 && regexMatchForPartTwo.items[0] == funcParts.inputs[counter] {
+                        if regexMatchForPartTwo.items.count == 1 && regexMatchForPartTwo.items[0] == spaceExpr {
                          
                             funcSpaces[spaceName] = spaceOverwriterWithID(spaceExpr, &spaces, &screen)
                             

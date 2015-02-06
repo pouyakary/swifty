@@ -99,7 +99,7 @@ func printError (#result: codeScreen) {
 func printSpaces (#spaces: [String:[NSNumber]]) {
     if spaces.count > 0 {
         for space in spaces {
-            println("\n• \(space.0) → \(space.1)")
+            println("\n  • \(space.0) → \(space.1)")
         }
     } else {
         println("\n  ⎪ ✖︎ No space found")

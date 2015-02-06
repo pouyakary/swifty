@@ -21,7 +21,7 @@ func spaceOverwriterWithID (name: String, inout spaces: [String:[NSNumber]], ino
             toBeCopiedArray = storedSpaceLoader(spaceName: name, screen: &screen)
             
         } else {
-            screen.errors.append("No stored space as '\(name)' found")
+            report("No stored space as '\(name)' found", &screen)
         }
         
     } else if name.hasPrefix("!") {
@@ -38,7 +38,7 @@ func spaceOverwriterWithID (name: String, inout spaces: [String:[NSNumber]], ino
             
         } else {
             
-            screen.errors.append("Space \(name) not found")
+            report("Space \(name) not found", &screen)
         }
     }
     

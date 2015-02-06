@@ -27,11 +27,11 @@ func spaceReplacerWithEvaluation (#name: String, #spaceParts: [String], #simpleS
             }
             
         } else if calculatedIndexExpression.itsNotACondition == false {
-            screen.errors.append("Using conditions are not allowed in space index")
+            report("Using conditions are not allowed in space index", &screen)
         }
         
     } else if spaceParts.count != 1 {
-        screen.errors.append("Space with array index with more or less than one part found.")
+        report("Space with array index with more or less than one part found.", &screen)
     }
     
     return result
@@ -51,7 +51,7 @@ func storedSpaceLoaderWithName (name: String, atIndex index: Int, #spaces: [Stri
     
     } else {
 
-        screen.errors.append("Array out of range for \(name) at [ \(index) ]")
+        report("Array out of range for \(name) at [ \(index) ]", &screen)
         return 0;
     }
     
@@ -70,11 +70,11 @@ func spaceLoaderWithName (name: String, atIndex index: Int, #spaces: [String:[NS
             let temp = spaces[name]?[index]; result = temp!
         
         } else {
-            screen.errors.append("Array out of range for \(name) at [ \(index) ]")
+            report("Array out of range for \(name) at [ \(index) ]", &screen)
         }
         
     } else {
-        screen.errors.append("Space \(name) not found")
+        report("Space \(name) not found", &screen)
     }
     
     return result
@@ -94,7 +94,7 @@ func spaceSize (#spaceName: String, #spaces:[String:[NSNumber]], #simpleSpaceOrN
             return a!
             
         } else {
-            screen.errors.append("Space \(spaceName) not found")
+            report("Space \(spaceName) not found", &screen)
             return 0
         }
     
@@ -189,7 +189,7 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             
                 
             default:
-                screen.errors.append("No source as '\(replaceString)' exists")
+                report("No source as '\(replaceString)' exists", &screen)
                 replaceString = "0"
             }
             
@@ -221,11 +221,11 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
                     
                 } else {
                     if index.result.integerValue < 0 || index.result.integerValue >= result.count {
-                        screen.errors.append("Index of function !\(funcParts.name)() out of range")
+                        report("Index of function !\(funcParts.name)() out of range", &screen)
                     } else if index.itsNotACondition == false {
-                        screen.errors.append("Condition found in index of function !\(funcParts.name)()")
+                        report("Condition found in index of function !\(funcParts.name)()", &screen)
                     } else {
-                        screen.errors.append("Bad expression for index of function !\(funcParts.name)()")
+                        report("Bad expression for index of function !\(funcParts.name)()", &screen)
                     }
                     
                     collection.append("0");

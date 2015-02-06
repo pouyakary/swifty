@@ -21,12 +21,12 @@ func spaceInput (#text: String, inout #screen: codeScreen) -> NSNumber {
             return result.toFloat()
         
         } else {
-            screen.errors.append("Unacceptable user input")
+            report("Unacceptable user input", &screen)
             return 0;
         }
         
     } else {
-        screen.errors.append("Unacceptable user input")
+        report("Unacceptable user input", &screen)
         return 0
     }
 }

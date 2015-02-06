@@ -66,14 +66,14 @@ func mathEval (#stringExpression: String, inout #screen: codeScreen, inout #spac
                 totalResult.result = result
                 
             } else {
-                screen.errors.append("Bad expression: '\(stringExpression)'")
+                report("Bad expression: '\(stringExpression)'", &screen)
             }
 
         }, catch: { (var ex:NSException!) -> Void in
             
             totalResult.result = 0
             totalResult.doesItHaveErros = true
-            screen.errors.append("Bad expression: '\(stringExpression)'")
+            report("Bad expression: '\(stringExpression)'", &screen)
             
         }, finally: { () -> Void in })
         

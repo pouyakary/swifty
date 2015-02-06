@@ -28,7 +28,7 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                 return openCloseLexer(openCommand: "<", arendelle: &code, screen: &screen)
                 
             } else {
-                screen.errors.append("Function started with something other than function header")
+                report("Function started with something other than function header", &screen)
                 return ["BadGrammar"]
             }
             
@@ -96,9 +96,9 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                                 
                             } else {
                                 if spaceValue.doesItHaveErros == true {
-                                    screen.errors.append("Header value for '\(spaceName)' of function: !\(funcParts.name)() is broken")
+                                    report("Header value for '\(spaceName)' of function: !\(funcParts.name)() is broken", &screen)
                                 } else {
-                                    screen.errors.append("Conditional value fount for '\(spaceName)' of function: !\(funcParts.name)()")
+                                    report("Conditional value fount for '\(spaceName)' of function: !\(funcParts.name)()", &screen)
                                 }
                             }
                         }
@@ -114,11 +114,11 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                 } else {
                     switch (numberOfHeaderParts) {
                     case 0:
-                        screen.errors.append("Function: !\(funcParts.name)() takes no space")
+                        report("Function: !\(funcParts.name)() takes no space", &screen)
                     case 1:
-                        screen.errors.append("Function: !\(funcParts.name)() takes one space")
+                        report("Function: !\(funcParts.name)() takes one space", &screen)
                     default:
-                        screen.errors.append("Function: !\(funcParts.name)() takes \(headerParts.count) spaces")
+                        report("Function: !\(funcParts.name)() takes \(headerParts.count) spaces", &screen)
                     }
                 }
                 
@@ -130,8 +130,14 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                 
                 if numberOfErrorsInStart == screen.errors.count {
                 
+                    let nowName = screen.funcName
+                    screen.funcName = funcParts.name
+                    
                     let toBeRemoved = eval (&funcCode, &screen, &funcSpaces)
                     evalSpaceRemover(spaces: &funcSpaces, spacesToBeRemoved: toBeRemoved)
+                    
+                    screen.funcName = nowName
+                    
                     return funcSpaces["@return"]!
                     
                 } else {
@@ -144,17 +150,17 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                 
                 
             } else {
-                screen.errors.append("Could not load function '\(funcParts.name)'")
+                report("Could not load function '\(funcParts.name)'", &screen)
                 return [0]
             }
             
         } else {
-            screen.errors.append("No function with name '\(funcParts.name)' found")
+            report("No function with name '\(funcParts.name)' found", &screen)
             return [0]
         }
     
     } else {
-        screen.errors.append("Bad function name: '\(funcParts.name)' found")
+        report("Bad function name: '\(funcParts.name)' found", &screen)
         return [0]
     }
 }

@@ -50,7 +50,7 @@ func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inou
                 result = newCode[0] + "," + newCode[1] + "," + newCode[2]
                                     
             default:
-                screen.errors.append("Grammar with more than 3 parts")
+                report("Grammar with more than 3 parts", &screen)
                 return["BadGrammar"]
                                     
             }
@@ -72,7 +72,7 @@ func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inou
     
     if args.count == 0 { args.append("BadGrammar") }
                         
-    if whileControl == true { screen.errors.append ("Unfinished gramamr found") }
+    if whileControl == true { report ("Unfinished gramamr found", &screen) }
     
     return args
 

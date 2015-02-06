@@ -8,6 +8,13 @@
 
 import Foundation
 
+func report(text: String, inout screen: codeScreen) {
+
+    screen.errors.append("\(screen.funcName): \(text)")
+
+}
+
+
 struct codeScreen {
     
     //--- Init ---------------------------------------------
@@ -16,7 +23,6 @@ struct codeScreen {
         self.screen = PIArray2D (cols: xsize, rows: ysize)
         
     }
-    
     
     //--- Screen -------------------------------------------
     var screen = PIArray2D (cols: 10, rows: 10)
@@ -30,9 +36,11 @@ struct codeScreen {
     var title:String = "Arendelle"
     
     
+    //--- Func Name ----------------------------------------
+    var funcName = "main"
+    
     //--- Errors -------------------------------------------
     var errors:[String] = []
-    
     
     //--- Ordinations --------------------------------------
     var x = 0

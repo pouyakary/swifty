@@ -100,7 +100,7 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
                     theCode.i++
                 }
                 
-                if whileControl == true { screen.errors.append("Unfinished /* ... */ comment") }
+                if whileControl == true { report("Unfinished /* ... */ comment", &screen) }
                 
                 //
                 // ARE WE WRONG
@@ -115,7 +115,7 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
             theCode.i--
             
         case "&", "|":
-            screen.errors.append("&&/& and ||/| are not accepted by Arendelle, Use 'and' and 'or' instead")
+            report("&&/& and ||/| are not accepted by Arendelle, Use 'and' and 'or' instead", &screen)
 
         case "÷":
             result += "÷"

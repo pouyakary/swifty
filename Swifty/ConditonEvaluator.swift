@@ -43,12 +43,12 @@ func conditionEval (#grammarParts: [String], inout #screen: codeScreen, inout #s
                 evalSpaceRemover(spaces: &spaces, spacesToBeRemoved: toBeRemoved)
                 
             } else {
-                screen.errors.append("Bad condition expression: '\(grammarParts[0])'")
+                report("Bad condition expression: '\(grammarParts[0])'", &screen)
             }
         }
         
     } else {
-        screen.errors.append("Condition with \(grammarParts.count) part\(PIEndS(number: grammarParts.count)) found")
+        report("Condition with \(grammarParts.count) part\(PIEndS(number: grammarParts.count)) found", &screen)
     }
     
     arendelle.i--

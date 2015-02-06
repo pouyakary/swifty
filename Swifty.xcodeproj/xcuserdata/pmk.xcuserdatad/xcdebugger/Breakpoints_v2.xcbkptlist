@@ -265,7 +265,7 @@
                   symbolName = "Swifty.spaceInput (text : Swift.String, screen : inout Swifty.codeScreen) -&gt; ObjectiveC.NSNumber"
                   moduleName = "Swifty"
                   urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/CoreInterface.swift"
-                  timestampString = "444954774.412979"
+                  timestampString = "444957255.286412"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -279,12 +279,12 @@
                   symbolName = "Swifty.spaceInput (text : Swift.String, screen : inout Swifty.codeScreen) -&gt; ObjectiveC.NSNumber"
                   moduleName = "Swifty"
                   urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/CoreInterface.swift"
-                  timestampString = "444954774.413174"
+                  timestampString = "444957255.286525"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
                   endingLineNumber = "32"
-                  offsetFromSymbolStart = "4178">
+                  offsetFromSymbolStart = "4088">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -349,6 +349,38 @@
             endingLineNumber = "71"
             landmarkName = "funcEval(funcParts:screen:spaces:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty/FunctionEvaluator.swift"
+            timestampString = "444955645.149376"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "funcHeaderReader(code:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty/codeScreen.swift"
+            timestampString = "444957249.93403"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "codeScreen"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

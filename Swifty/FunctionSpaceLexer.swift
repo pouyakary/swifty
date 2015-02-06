@@ -54,7 +54,7 @@ func functionLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> F
                 whileControl = false;
                 
             } else {
-                screen.errors.append("Bad function name found: \(part)")
+                report("Bad function name found: \(part)", &screen)
                 return result
             }
             
@@ -64,7 +64,7 @@ func functionLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> F
             arendelle.i++
             
             if arendelle.i == arendelle.code.utf16Count {
-                screen.errors.append("Function name without parenthesis found")
+                report("Function name without parenthesis found", &screen)
                 return result
             }
         }
@@ -86,7 +86,7 @@ func functionLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> F
             result.inputs = inputParts
             
         } else {
-            screen.errors.append("Broken function parenthesis found")
+            report("Broken function parenthesis found", &screen)
             return result
         }
     }
@@ -113,10 +113,10 @@ func functionLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> F
                 
             } else {
                 if indexParts.count != 1 {
-                    screen.errors.append("Function index with more or less than one part found.")
+                    report("Function index with more or less than one part found.", &screen)
                     return result
                 } else {
-                    screen.errors.append("Broken function parenthesis found")
+                    report("Broken function parenthesis found", &screen)
                     return result
                 }
             }

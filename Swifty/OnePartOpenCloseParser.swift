@@ -62,7 +62,7 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
                         result += ")"
                         
                         if arendelle.i >= arendelle.codeSize() {
-                            screen.errors.append("Unfinished replace scape \\( ... ) found")
+                            report("Unfinished replace scape \\( ... ) found", &screen)
                         }
                         
                     } else {
@@ -72,12 +72,12 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
                     --arendelle.i
                     
                 default:
-                    screen.errors.append("Bad escape sequence: '\\\(charToRead)'")
+                    report("Bad escape sequence: '\\\(charToRead)'", &screen)
                 }
             
             } else {
             
-                screen.errors.append("Unfinished \(openCloseCommand)...\(openCloseCommand) grammar found")
+                report("Unfinished \(openCloseCommand)...\(openCloseCommand) grammar found", &screen)
                 return "BadGrammar"
             
             }
@@ -91,6 +91,6 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
     
     }
     
-    screen.errors.append("Unfinished \(openCloseCommand)...\(openCloseCommand) grammar found")
+    report("Unfinished \(openCloseCommand)...\(openCloseCommand) grammar found", &screen)
     return "BadGrammar"
 }

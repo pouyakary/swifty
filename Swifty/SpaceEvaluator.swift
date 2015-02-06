@@ -56,7 +56,7 @@ func storedSpaceLoader (#spaceName: String, inout #screen: codeScreen) -> [NSNum
         return addArray
         
     } else {
-        screen.errors.append("No stored space as '\(spaceName)' found")
+        report("No stored space as '\(spaceName)' found", &screen)
         return [0]
     }
 }
@@ -75,7 +75,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     var spaceResult = "";
     
     func spaceRegexNameError (#text: String) {
-        screen.errors.append("Unaccepted space name : '\(grammarParts[0])'")
+        report("Unaccepted space name : '\(grammarParts[0])'", &screen)
     }
     
     
@@ -87,7 +87,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
         let er = toBeStored[1...toBeStored.utf16Count-2].writeToURL(spaceURL, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
         
         if !er {
-            screen.errors.append("Storing space '\(space).space' failed")
+            report("Storing space '\(space).space' failed", &screen)
         }
     }
     
@@ -114,11 +114,11 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                         spaceIndexFinal = spaceIndex.result.integerValue
                     
                     } else if spaceIndex.itsNotACondition == false {
-                        screen.errors.append("Space index must not be condition")
+                        report("Space index must not be condition", &screen)
                     }
                     
                 } else {
-                    screen.errors.append("Space index must be one part")
+                    report("Space index must be one part", &screen)
                 }
                 
             default :
@@ -134,7 +134,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     
     if grammarParts[0].hasPrefix("return") {
         if spaces["@return"] == nil {
-            screen.errors.append("Using @return is forbidden in the main blueprint")
+            report("Using @return is forbidden in the main blueprint", &screen)
         }
     }
 
@@ -168,7 +168,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 }
             
             } else {
-                screen.errors.append("Problem with space name found.")
+                report("Problem with space name found.", &screen)
             }
             
         
@@ -237,9 +237,9 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     
                     } else {
                         if result.itsNotACondition == false {
-                            screen.errors.append("Unaccepted using of conditions in space value: '\(grammarParts[1])'")
+                            report("Unaccepted using of conditions in space value: '\(grammarParts[1])'", &screen)
                         } else {
-                            screen.errors.append("Bad expression: '\(grammarParts[1])'")
+                            report("Bad expression: '\(grammarParts[1])'", &screen)
                         }
                     }
                    
@@ -261,14 +261,14 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                         } else {
                             
                             if result.itsNotACondition == false {
-                                screen.errors.append("Unaccepted using of conditions in space value: '\(grammarParts[1])'")
+                                report("Unaccepted using of conditions in space value: '\(grammarParts[1])'", &screen)
                             } else {
-                                screen.errors.append("Bad expression: '\(grammarParts[1])'")
+                                report("Bad expression: '\(grammarParts[1])'", &screen)
                             }
                         }
                     
                     } else {
-                        screen.errors.append("No stored space as '@\(grammarParts[0])' found")
+                        report("No stored space as '@\(grammarParts[0])' found", &screen)
                     }
                 
                 }
@@ -303,7 +303,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     var numberOfErrors = 0; if grammarParts[1].hasSuffix(";;") { numberOfErrors++ }
                     if Array(grammarParts[1] =~ ";+").count > 0 { numberOfErrors += Array(grammarParts[1] =~ ";;").count }
                     var ies = "y"; if numberOfErrors > 1 { ies = "ies" }
-                    screen.errors.append("Multi index space init with empty entr\(ies) found")
+                    report("Multi index space init with empty entr\(ies) found", &screen)
                 
                 } else {
                     
@@ -315,10 +315,10 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                             if rslt.itsNotACondition == true {
                                 addArray.append(rslt.result);
                             } else {
-                                screen.errors.append("Conditional inputs are forbidden in space init ")
+                                report("Conditional inputs are forbidden in space init ", &screen)
                             }
                         } else {
-                            screen.errors.append("Bad expression: '\(str)'")
+                            report("Bad expression: '\(str)'", &screen)
                         }
                     }
                     
@@ -353,7 +353,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                         removeFileWithURL(spaceURL)
                         
                     } else {
-                        screen.errors.append("No stored space as \(space.name) found to be deleted")
+                        report("No stored space as \(space.name) found to be deleted", &screen)
                     }
                 
                 } else {
@@ -365,11 +365,11 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                             spaces.removeValueForKey("@\(space.name)")
                         
                         } else {
-                            screen.errors.append("The @return space can not be deleted")
+                            report("The @return space can not be deleted", &screen)
                         }
         
                     } else {
-                        screen.errors.append("No space as @\(space.name) found to be deleted")
+                        report("No space as @\(space.name) found to be deleted", &screen)
                     }
                 }
             
@@ -414,11 +414,11 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                         //
                         
                     } else {
-                        screen.errors.append("Unaccepted using of conditions in space value: '\(grammarParts[1])'")
+                        report("Unaccepted using of conditions in space value: '\(grammarParts[1])'", &screen)
                     }
                     
                 } else {
-                    screen.errors.append("Bad expression: '\(grammarParts[1])'")
+                    report("Bad expression: '\(grammarParts[1])'", &screen)
                 }
             }
         
@@ -427,7 +427,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
         }
     
     } else {
-        screen.errors.append("Space grammar found with more than 2 parts")
+        report("Space grammar found with more than 2 parts", &screen)
     }
     
     --arendelle.i

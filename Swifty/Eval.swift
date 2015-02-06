@@ -105,40 +105,40 @@ import Foundation
                 NSThread.sleepForTimeInterval(0.1)
                 
             case "s":
-                screen.errors.append("Stop-Clean command is no longer supported by Arendelle compilers")
+                report("Stop-Clean command is no longer supported by Arendelle compilers", &screen)
                 
             case ",":
-                screen.errors.append("Using gramamr divider ',' out of grammars")
+                report("Using gramamr divider ',' out of grammars", &screen)
                 
             case "<", ">":
-                screen.errors.append("Using function header in middle of blueprint")
+                report("Using function header in middle of blueprint", &screen)
                 
             case "]", "}", ")" :
-                screen.errors.append("Grammar closer: '\(command)' is used for an undifined grammar")
+                report("Grammar closer: '\(command)' is used for an undifined grammar", &screen)
                 
             case ";":
-                screen.errors.append("Semicolons found in command-zone")
+                report("Semicolons found in command-zone", &screen)
                 
             case ":":
-                screen.errors.append("In-Founction comment sign found in command-zone")
+                report("In-Founction comment sign found in command-zone", &screen)
                 
             case "@":
-                screen.errors.append("Space sign found in command-zone")
+                report("Space sign found in command-zone", &screen)
                 
             case "#":
-                screen.errors.append("Source sign found in command-zone")
+                report("Source sign found in command-zone", &screen)
                 
             case "$":
-                screen.errors.append("Stored space sign found in command-zone")
+                report("Stored space sign found in command-zone", &screen)
                 
             case "*", "/", "^", "-", "+", "%" :
-                screen.errors.append("Arithmetic operator '\(command)' found in command-zone")
+                report("Arithmetic operator '\(command)' found in command-zone", &screen)
                 
             case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
-                screen.errors.append("Number '\(command)' found in command-zone")
+                report("Number '\(command)' found in command-zone", &screen)
                 
             default:
-                screen.errors.append("Unknown command: \(command)")
+                report("Unknown command: \(command)", &screen)
             }
             
             arendelle.i++

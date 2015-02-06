@@ -67,7 +67,7 @@ func loopEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
                 
             } else {
             
-                screen.errors.append("Bad expression: '\(grammarParts[0])'")
+                report("Bad expression: '\(grammarParts[0])'", &screen)
             
             }
         }
@@ -79,11 +79,13 @@ func loopEval (#grammarParts: [String], inout #screen: codeScreen, inout #spaces
     
         if grammarParts.count == 1 {
         
-            screen.errors.append("single part loop found")
+            report("single part loop found", &screen)
+
         
         } else {
         
-            screen.errors.append("Loop with \(grammarParts.count) parts found")
+            report("Loop with \(grammarParts.count) parts found", &screen)
+
         
         }
     

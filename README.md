@@ -1,10 +1,8 @@
 
-<<<<<<< HEAD
-![](https://kary.us/GitHubWideImages/Arendelle/Swifty/SwiftyREPL.png)
-=======
 ![](http://kary.us/GitHubWideImages/Arendelle/Swifty/SwiftyREPL.png)
->>>>>>> FETCH_HEAD
 
+
+<img width="150" src="http://kary.us/GitHubWideImages/Arendelle/Swifty/swiftyIcon500.png">
 # Swifty
 Apple based port of Arendelle written in Swift / Objective-C and C/C++<br>
 By [Pouya Kary](http://kary.us)<br><br>

@@ -1,5 +1,5 @@
 
-![](https://raw.githubusercontent.com/pmkary/pmkary.github.io/master/GitHubWideImages/Arendelle/Swifty/SwiftyREPL.png)
+![](http://kary.us/GitHubWideImages/Arendelle/Swifty/SwiftyREPL.png)
 
 # Swifty
 Apple based port of Arendelle written in Swift / Objective-C and C/C++<br>

@@ -22,12 +22,10 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
     // corrent char
     var charToRead:Character
     
-    var arrayToRead = Array(arendelle.code)
-    
-    while arendelle.i < arendelle.code.utf16Count {
+    while arendelle.whileCondtion() {
     
         // corrent char
-        charToRead = arrayToRead[arendelle.i]
+        charToRead = arendelle.readAtI()
         
         switch charToRead {
         
@@ -37,10 +35,10 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
             
         case "\\" :
             
-            if arendelle.i < arendelle.code.utf16Count {
+            if arendelle.whileCondtion() {
             
                 arendelle.i++
-                charToRead = Array(arendelle.code)[arendelle.i]
+                charToRead = arendelle.readAtI()
                 
                 switch charToRead {
                     
@@ -63,7 +61,7 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
                         result += replacerOnePart
                         result += ")"
                         
-                        if arendelle.i >= arendelle.code.utf16Count {
+                        if arendelle.i >= arendelle.codeSize() {
                             screen.errors.append("Unfinished replace scape \\( ... ) found")
                         }
                         

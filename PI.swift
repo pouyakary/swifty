@@ -120,6 +120,11 @@ extension Character
 
 extension String
 {
+    func PiIndex (theEndIndex: Int) -> Character {
+            let index = advance(startIndex, theEndIndex)
+            return self[index]
+    }
+    
     /// Converts string to Int
     func toInt () -> Int {
         return Int(NSInteger(NSString(string: self).integerValue))
@@ -163,9 +168,9 @@ extension String
         return self.substringWithRange(start..<end)
     }
     
-    subscript(index:Int) -> Character{
+    /* subscript(index:Int) -> Character{
         return self[advance(self.startIndex, index)]
-    }
+    } */
     
     subscript(range:Range<Int>) -> String {
         let start = advance(self.startIndex, range.startIndex)

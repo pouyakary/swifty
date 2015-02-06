@@ -133,9 +133,9 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
     var expression = Arendelle(code: expressionString)
     var replaceString = "";
     
-    while expression.i < expression.code.utf16Count {
+    while expression.whileCondtion() {
         
-        var command = Array(expression.code)[expression.i]
+        var command = expression.readAtI()
         
         switch command {
             
@@ -148,10 +148,10 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             cleanPart()
             expression.i++
             
-            while expression.i < expression.code.utf16Count {
+            while expression.whileCondtion() {
                 var command = Array(expression.code)[expression.i]
-                if String(command) =~ "[a-zA-Z]" {
-                    replaceString.append(command)
+                if "\(command)" =~ "[a-zA-Z]" {
+                    replaceString += "\(command)"
                 } else {
                     break
                 }
@@ -258,8 +258,9 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             // ADD storedSpaceLoader FOR STORED SAPCES
             //
             
-            while expression.i < expression.code.utf16Count {
-                var command = Array(expression.code)[expression.i]
+            while expression.whileCondtion() {
+                
+                var command = expression.readAtI()
                 
                 if String(command) =~ "[a-zA-Z\(rule)]" {
                     replaceString.append(command)
@@ -291,7 +292,7 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
                 
                 }
                 
-                if expression.i == expression.code.utf16Count - 1 {
+                if expression.i == expression.codeSize() - 1 {
                     
                     if simpleSpaceOrNot {
                         replaceString = spaceLoaderWithName(replaceString, atIndex: 0, spaces: spaces, screen: &screen).stringValue
@@ -317,7 +318,7 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             
         default:
             part.append(command)
-            if expression.i < expression.code.utf16Count - 1 {
+            if expression.i < expression.codeSize() - 1 {
                 expression.i++
             } else {
                 cleanPart()

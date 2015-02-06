@@ -19,11 +19,10 @@ func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inou
     var whileControl = true
     var openCloseDictionary:[Character:Character] = [ "{":"}", "(":")", "[":"]" , "<":">" ]
     let closeCommand = openCloseDictionary[openCommand]!
-    let arrayToRead = Array(arendelle.code)
     
-    while arendelle.i < arendelle.code.utf16Count && whileControl {
+    while arendelle.whileCondtion() && whileControl {
                             
-        command = arrayToRead[arendelle.i]
+        command = arendelle.readAtI()
                             
         switch command {
                                 

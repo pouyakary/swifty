@@ -10,35 +10,37 @@ import Foundation
 
 struct codeScreen {
     
-    
-    // Screen
-    var screen = PIArray2D (cols: 10, rows: 10)
-    
+    //--- Init ---------------------------------------------
     init (xsize:Int, ysize: Int) {
         
         self.screen = PIArray2D (cols: xsize, rows: ysize)
         
     }
     
+    
+    //--- Screen -------------------------------------------
+    var screen = PIArray2D (cols: 10, rows: 10)
+    
+    
+    //--- MainPath -----------------------------------------
     var mainPath = "."
     
-    // title
+    
+    //--- Title --------------------------------------------
     var title:String = "Arendelle"
     
-    // errors
+    
+    //--- Errors -------------------------------------------
     var errors:[String] = []
     
-    // Ordinations
+    
+    //--- Ordinations --------------------------------------
     var x = 0
     var y = 0
     var z = 0
     
-    // ...
+    //--- Rest ---------------------------------------------
     var n = 1
     var whileSign = true
-    
-    // code controling
-    var line = 1
-    var line2 = 0
     
 }

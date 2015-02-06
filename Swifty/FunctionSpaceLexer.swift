@@ -36,17 +36,15 @@ func functionLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> F
     
     arendelle.i++
     
-    var arrayToRead = Array(arendelle.code)
 
-    
     
     //
     // ! FUNC (120, 23, 34) [12]
     // --^^^^-------------------
     
-    while whileControl && arendelle.i < arendelle.code.utf16Count {
+    while whileControl && arendelle.whileCondtion() {
     
-        charToRead = arrayToRead[arendelle.i]
+        charToRead = arendelle.readAtI()
         
         if charToRead == "(" {
             
@@ -78,7 +76,7 @@ func functionLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> F
     // ! FUNC (120, 23, 34) [12]
     // --------^^^^^^^^^^^------
     
-    if arendelle.i < arendelle.code.utf16Count - 1 {
+    if arendelle.i < arendelle.codeSize() - 1 {
     
         let numberOfErrorBefore = screen.errors.count
         let inputParts = openCloseLexer(openCommand: "(", arendelle: &arendelle, screen: &screen)
@@ -99,9 +97,9 @@ func functionLexer (inout #arendelle: Arendelle, inout #screen: codeScreen) -> F
     // ! FUNC (120, 23, 34) [12]
     // ----------------------^^-
     
-    if arendelle.i < arendelle.code.utf16Count {
+    if arendelle.whileCondtion() {
     
-        charToRead = arrayToRead[arendelle.i]
+        charToRead = arendelle.readAtI()
         
         if charToRead == "[" {
             

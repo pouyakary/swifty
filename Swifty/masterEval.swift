@@ -17,9 +17,9 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
     var theCode = Arendelle (code: codeToBeSpaceFixed)
     var result : String = ""
     
-    while theCode.i < theCode.code.utf16Count {
+    while theCode.whileCondtion() {
         
-        var currentChar:Character = Array(theCode.code)[theCode.i]
+        var currentChar = theCode.readAtI()
         
         switch currentChar {
             

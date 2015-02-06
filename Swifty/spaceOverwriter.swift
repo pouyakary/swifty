@@ -9,8 +9,6 @@
 import Foundation
 
 func spaceOverwriterWithID (name: String, inout spaces: [String:[NSNumber]], inout screen: codeScreen) -> [NSNumber] {
-
-    println("--> '\(name)'")
     
     var toBeCopiedArray:[NSNumber] = [0]
     

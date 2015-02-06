@@ -33,11 +33,10 @@ import Foundation
             }
         }
         
-        var arryToRead = Array(arendelle.code.lowercaseString)
         
-        while arendelle.i < arendelle.code.utf16Count {
+        while arendelle.i < arendelle.codeSize() {
             
-            command = arryToRead[arendelle.i]
+            command = arendelle.readAtI()
             
             switch command {
                 

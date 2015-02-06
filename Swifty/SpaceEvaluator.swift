@@ -96,9 +96,9 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     
         var spaceName = ""; var spaceIndexFinal:Int = 0; var spaceReader = Arendelle(code: name);
         
-        while spaceReader.i < spaceReader.code.utf16Count {
+        while spaceReader.whileCondtion() {
             
-            var spaceCharToRead = Array(spaceReader.code)[spaceReader.i]
+            var spaceCharToRead = spaceReader.readAtI()
             
             switch spaceCharToRead {
                 

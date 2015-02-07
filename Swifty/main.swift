@@ -119,7 +119,7 @@ func compilerBroken () {
 // REPL
 //
 
-let x = 30, y = 10; var prompts = 0, fails = 0
+let x = 30, y = 10; var prompts = 0, fails = 0, blueprints = 1, directs = 0, directFails = 0, prints = 0, dumps = 0
 var masterScreen = codeScreen(xsize: x, ysize: y)
 var whileControl = true
 var masterSpaces: [String:[NSNumber]] = ["arendelle":[0]]
@@ -135,6 +135,8 @@ while true {
     
     if code == "clean" {
     
+        ++blueprints
+        
         clean()
         
         masterSpaces.removeAll(keepCapacity: false)
@@ -151,19 +153,22 @@ while true {
     } else if code == "exit" {
     
         
-        println("\n  ⎪ Log: Prompts: \(prompts - fails) successful of \(prompts)\n  ⎪ Log: Shutdown: Safe\n\n  Goodbye!\n\n")
+        println("\n  ⎪ ♨︎ Season Information\n  ⎪ → prompts: \(prompts - fails) successful of \(prompts)\n  ⎪ → blueprints: total of \(blueprints)\n  ⎪ → direct mathEval access: \(directs - directFails) successful of \(directs)\n  ⎪ → matrix prints: \(prints)\n  ⎪ → dumps: \(dumps)\n\n  Goodbye!\n\n")
         break
     
     } else if code == "print" {
     
+        prints++
         printMatrix(result: masterScreen)
         
     } else if code == "title" {
         
+        prints++
         println("\n  \(masterScreen.title)")
     
     } else if code == "dump" {
         
+        dumps++
         printSpaces(spaces: masterSpaces)
         
     } else if code == "help" {
@@ -181,6 +186,8 @@ while true {
     
     } else if code.hasPrefix("= ") {
         
+        directs++
+        
         var tempScreen = codeScreen(xsize: x, ysize: y)
         code = preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen)
         
@@ -191,6 +198,8 @@ while true {
             var tempResult = mathEval(stringExpression: expr, screen: &tempScreen, spaces: &masterSpaces).result
             
             if ( tempScreen.errors.count > 0 ) {
+                
+                directFails++
                 
                 printError(result: tempScreen)
                 

@@ -189,13 +189,12 @@ while true {
         directs++
         
         var tempScreen = codeScreen(xsize: x, ysize: y)
-        code = preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen)
-        
-        var expr = code.stringByReplacingOccurrencesOfString("=", withString: "", options: NSStringCompareOptions.allZeros, range: nil)
-        
+
+        var expr =  preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen).removeFromStart("=");
+    
         PiTryCatch.try({ () -> Void in
             
-            var tempResult = mathEval(stringExpression: expr, screen: &tempScreen, spaces: &masterSpaces).result
+            var tempResult = mathEval(stringExpression: expr, screen: &tempScreen, spaces: &masterSpaces)
             
             if ( tempScreen.errors.count > 0 ) {
                 
@@ -205,8 +204,22 @@ while true {
                 
             } else {
                 
-                println("\n--> \(tempResult)")
+                if tempResult.itsNotACondition {
                 
+                    println("\n--> \(tempResult.result)")
+                    
+                } else {
+                    
+                    if tempResult.result == 1 {
+                    
+                        println("\n--> Yes")
+                    
+                    } else {
+                    
+                        println("\n--> No")
+                        
+                    }
+                }
             }
         
         }, catch: { (var ex:NSException!) -> Void in

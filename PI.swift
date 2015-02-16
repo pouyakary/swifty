@@ -125,6 +125,20 @@ extension String
             return self[index]
     }
     
+    /// removes a part of the string from
+    /// start of a string unless there is
+    /// no text in the start of the string
+    func removeFromStart(text: String) -> String {
+    
+        if self.hasPrefix(text) {
+        
+            return self[text.utf16Count...self.utf16Count - 1]
+        
+        } else {
+            return self
+        }
+    }
+    
     /// Converts string to Int
     func toInt () -> Int {
         return Int(NSInteger(NSString(string: self).integerValue))

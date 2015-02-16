@@ -245,8 +245,8 @@
 			children = (
 				A6E2B06E1A15EB450025C2E9 /* Kernel */,
 				A6E7EA321A1A2E3400192409 /* Lexers */,
-				A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */,
 				A6ECE7621A2450C200B09103 /* masterEval.swift */,
+				A6E2B06F1A15EB7C0025C2E9 /* Eval.swift */,
 			);
 			name = Engine;
 			sourceTree = "<group>";

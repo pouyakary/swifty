@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/SpaceEvaluator.swift"
-            timestampString = "444851886.905312"
+            timestampString = "445760437.403973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
             landmarkName = "spaceEval(grammarParts:screen:spaces:arendelle:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/CoreInterface.swift"
-            timestampString = "444695336.42077"
+            timestampString = "445760502.11782"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "spaceInput(text:screen:)"
             landmarkType = "7">
             <Locations>
@@ -265,12 +265,12 @@
                   symbolName = "Swifty.spaceInput (text : Swift.String, screen : inout Swifty.codeScreen) -&gt; ObjectiveC.NSNumber"
                   moduleName = "Swifty"
                   urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/CoreInterface.swift"
-                  timestampString = "444964117.724256"
+                  timestampString = "445760975.615447"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "3782">
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "3799">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -279,12 +279,12 @@
                   symbolName = "Swifty.spaceInput (text : Swift.String, screen : inout Swifty.codeScreen) -&gt; ObjectiveC.NSNumber"
                   moduleName = "Swifty"
                   urlString = "file:///Users/pmk/Dropbox/Document/Source%20Codes/swifty/Swifty/CoreInterface.swift"
-                  timestampString = "444964117.72442"
+                  timestampString = "445760975.615649"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32"
-                  offsetFromSymbolStart = "4088">
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "4105">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty/main.swift"
-            timestampString = "444950465.275078"
+            timestampString = "445760044.485268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133">
+            startingLineNumber = "132"
+            endingLineNumber = "132">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

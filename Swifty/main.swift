@@ -21,7 +21,7 @@ func replInput () -> String {
     var specialCharactersNumbers = [ "/\\*":0, "(":0 , "[":0, "{":0 , "*\\/":0, ")":0 , "]":0, "}":0 ]
     
     
-    print("\nλ ")
+    print("\nλ")
     
     while whileControlForREPLInput {
     
@@ -35,14 +35,13 @@ func replInput () -> String {
             specialCharactersNumbers[name] = number
         
         }
-
         
         if specialCharactersNumbers["("] == specialCharactersNumbers[")"] && specialCharactersNumbers ["["] == specialCharactersNumbers ["]"] && specialCharactersNumbers["{"] == specialCharactersNumbers["}"] && specialCharactersNumbers["/\\*"] == specialCharactersNumbers["*\\/"]   {
             
             whileControlForREPLInput = false
             
         } else {
-            print("→ ")
+            print("→")
         }
     }
     return result
@@ -86,7 +85,7 @@ func printError (#result: codeScreen) {
     
     println("\n  ⎪ ✖︎ Compilation Failed Because Of \(result.errors.count) Known Error\(PIEndS(number: result.errors.count)):")
     for error in result.errors {
-        println("  ⎪ → \(error.lowercaseString)")
+        println("  ⎪ →\(error.lowercaseString)")
         i++
     }
 }
@@ -99,7 +98,7 @@ func printError (#result: codeScreen) {
 func printSpaces (#spaces: [String:[NSNumber]]) {
     if spaces.count > 0 {
         for space in spaces {
-            println("\n  • \(space.0) → \(space.1)")
+            println("\n  •\(space.0) →\(space.1)")
         }
     } else {
         println("\n  ⎪ ✖︎ No space found")
@@ -152,8 +151,9 @@ while true {
     
     } else if code == "exit" {
     
+        prompts--
         
-        println("\n  ⎪ ♨︎ Season Information\n  ⎪ → prompts: \(prompts - fails) successful of \(prompts)\n  ⎪ → blueprints: total of \(blueprints)\n  ⎪ → direct mathEval access: \(directs - directFails) successful of \(directs)\n  ⎪ → matrix prints: \(prints)\n  ⎪ → dumps: \(dumps)\n\n  Goodbye!\n\n")
+        println("\n  ⎪ ♨︎Season Information\n  ⎪ →prompts: \(prompts - fails) successful of \(prompts)\n  ⎪ →blueprints: total of \(blueprints)\n  ⎪ →direct mathEval access: \(directs - directFails) successful of \(directs)\n  ⎪ →matrix prints: \(prints)\n  ⎪ →dumps: \(dumps)\n\n  Goodbye!\n\n")
         break
     
     } else if code == "print" {

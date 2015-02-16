@@ -57,8 +57,8 @@ import Foundation
                 let grammarParts = openCloseLexer(openCommand: "{", arendelle: &arendelle, screen: &screen)
                conditionEval(grammarParts: grammarParts, screen: &screen, spaces: &spaces, arendelle: &arendelle)
                 
-            case "'" :
-                screen.title = onePartOpenCloseParser(openCloseCommand: "'", spaces: &spaces, arendelle: &arendelle, screen: &screen, preprocessorState: false)
+            case "'", "\"" :
+                screen.title = onePartOpenCloseParser(openCloseCommand: command, spaces: &spaces, arendelle: &arendelle, screen: &screen, preprocessorState: false)
                 --arendelle.i
                 
                 

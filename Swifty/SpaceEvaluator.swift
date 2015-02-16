@@ -158,6 +158,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 if space.name.hasPrefix("$") {
                     
                     let spaceValue = spaceInput(text: "Sign stored space '\(space.name)' at index '\(space.index)' with a number:", screen: &screen)
+                    
                     saveNumberToStoredSpace(number: [spaceValue], toSpace: space.name.replace("$", withString: ""))
                     
                     // simple space
@@ -193,10 +194,13 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             // INPUT
             //
             
-            if grammarParts[1].hasPrefix("\"") && grammarParts[1].hasSuffix("\"") {
+            if ( grammarParts[1].hasPrefix("\"") && grammarParts[1].hasSuffix("\"") ) ||
+               ( grammarParts[1].hasPrefix("'") && grammarParts[1].hasSuffix("'") ){
                 
                 var spaceInputArendelleFortmat = Arendelle(code: grammarParts[1])
-                let spaceInputText = onePartOpenCloseParser(openCloseCommand: "\"",spaces: &spaces, arendelle: &spaceInputArendelleFortmat, screen: &screen, preprocessorState:false)
+                var stringSing = "\"" as Character ; if grammarParts[1].hasPrefix("'") { stringSing = "'"; }
+            
+                let spaceInputText = onePartOpenCloseParser(openCloseCommand: stringSing, spaces: &spaces, arendelle: &spaceInputArendelleFortmat, screen: &screen, preprocessorState:false)
                 var spaceValue = spaceInput(text: spaceInputText, screen: &screen)
                 
                 // if it's stored space

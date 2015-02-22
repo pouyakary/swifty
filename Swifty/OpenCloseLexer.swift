@@ -72,7 +72,7 @@ func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inou
     
     if args.count == 0 { args.append("BadGrammar") }
                         
-    if whileControl == true { report ("Unfinished gramamr found", &screen) }
+    if whileControl == true { report ("Unfinished grammar found", &screen) }
     
     return args
 

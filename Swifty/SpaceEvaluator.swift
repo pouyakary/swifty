@@ -46,15 +46,23 @@ func saveToSpace (#spaceName: String, #indexAtSpace: Int, #valueToSave: NSNumber
 func storedSpaceLoader (#spaceName: String, inout #screen: codeScreen) -> [NSNumber] {
 
     let spaceURL = arendellePathToNSURL(arendellePath: spaceName.replace("$", withString: ""), kind: "space", screen: &screen)
-
-    let spaceValue = String(contentsOfURL: spaceURL, encoding: NSUTF8StringEncoding, error: nil)?.replace("\n", withString: "")
-    let array = spaceValue?.componentsSeparatedByString(";"); var addArray:[NSNumber] = []
-    for spc in array! { addArray.append(NSNumber(double: spc.toDouble())) }
+    var checkValidation = NSFileManager.defaultManager()
     
-    if addArray != [] {
+    if checkValidation.fileExistsAtPath(spaceURL.path!) {
     
-        return addArray
+        let spaceValue = String(contentsOfURL: spaceURL, encoding: NSUTF8StringEncoding, error: nil)?.replace("\n", withString: "")
+        let array = spaceValue?.componentsSeparatedByString(";"); var addArray:[NSNumber] = []
+        for spc in array! { addArray.append(NSNumber(double: spc.toDouble())) }
         
+        if addArray != [] {
+            
+            return addArray
+            
+        } else {
+            report("Broken stored space: '\(spaceName)' found", &screen)
+            return [0]
+        }
+    
     } else {
         report("No stored space as '\(spaceName)' found", &screen)
         return [0]
@@ -132,11 +140,11 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     
     
     
-    if grammarParts[0].hasPrefix("return") {
+    /*if grammarParts[0].hasPrefix("return") {
         if spaces["@return"] == nil {
             report("Using @return is forbidden in the main blueprint", &screen)
         }
-    }
+    }*/
 
     
     let regexMathes = grammarParts[0] =~ "(([a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)) *(\\[.*\\])?"

@@ -108,7 +108,7 @@ import Foundation
                 report("Stop-Clean command is no longer supported by Arendelle compilers", &screen)
                 
             case ",":
-                report("Using gramamr divider ',' out of grammars", &screen)
+                report("Using grammar divider ',' out of grammars", &screen)
                 
             case "<", ">":
                 report("Using function header in middle of blueprint", &screen)

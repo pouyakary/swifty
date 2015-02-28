@@ -147,7 +147,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     }*/
 
     
-    let regexMathes = grammarParts[0] =~ "(([a-zA-Z0-9]+)|(\\$[a-zA-Z0-9\\.]+)) *(\\[.*\\])?"
+    let regexMathes = grammarParts[0] =~ "(([a-zA-Z0-9_]+)|(\\$[a-zA-Z0-9_\\.]+)) *(\\[.*\\])?"
     
     if grammarParts.count == 1 {
     
@@ -191,7 +191,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
         
     } else if grammarParts.count == 2 {
         
-        let regexMatchForPartTwo = grammarParts[1] =~ "((\\$|\\@)[0-9a-zA-Z\\.]+)|(![a-zA-Z0-9\\.]+(\\((?:\\(.*\\)|[^\\(\\)])*\\)))"
+        let regexMatchForPartTwo = grammarParts[1] =~ "((\\$|\\@)[0-9a-zA-Z\\._]+)|(![a-zA-Z0-9\\._]+(\\((?:\\(.*\\)|[^\\(\\)])*\\)))"
 
         if regexMathes.items.count == 1 && regexMathes.items[0] == grammarParts[0] {
             
@@ -241,7 +241,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 
                 if !grammarParts[0].hasPrefix("$") {
                     
-                    let result = mathEval(stringExpression: "@\(grammarParts[0]) \(grammarParts[1])", screen: &screen, spaces: &spaces)
+                    let result = mathEval(stringExpression: "@\(grammarParts[0])\(grammarParts[1])", screen: &screen, spaces: &spaces)
 
                     if result.doesItHaveErros == false && result.itsNotACondition == true {
                         

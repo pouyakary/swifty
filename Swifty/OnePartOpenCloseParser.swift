@@ -42,6 +42,12 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
                 
                 switch charToRead {
                     
+                case "n" :
+                    result += "\n"
+                    
+                case "t" :
+                    result += "   " // 1 tab in Arendelle == 3 white spaces;
+                    
                 case "\"" :
                     result += "\""
                     

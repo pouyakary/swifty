@@ -34,7 +34,7 @@ import Foundation
         }
         
         
-        while arendelle.i < arendelle.codeSize() {
+        while arendelle.i < arendelle.codeSize() && screen.whileSign {
             
             command = arendelle.readAtI()
             
@@ -60,6 +60,8 @@ import Foundation
             case "'", "\"" :
                 screen.title = onePartOpenCloseParser(openCloseCommand: command, spaces: &spaces, arendelle: &arendelle, screen: &screen, preprocessorState: false)
                 --arendelle.i
+                
+                println("--> \(screen.title)")
                 
                 
             //
@@ -101,6 +103,9 @@ import Foundation
             case "d":
                 screen.y++
                 
+            case "e":
+                screen.whileSign = false
+                
             case "w":
                 NSThread.sleepForTimeInterval(0.1)
                 
@@ -114,13 +119,13 @@ import Foundation
                 report("Using function header in middle of blueprint", &screen)
                 
             case "]", "}", ")" :
-                report("Grammar closer: '\(command)' is used for an undifined grammar", &screen)
+                report("Grammar closer: '\(command)' is used for an undefined grammar", &screen)
                 
             case ";":
                 report("Semicolons found in command-zone", &screen)
                 
             case ":":
-                report("In-Founction comment sign found in command-zone", &screen)
+                report("In-Function comment sign found in command-zone", &screen)
                 
             case "@":
                 report("Space sign found in command-zone", &screen)

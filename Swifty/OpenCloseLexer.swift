@@ -29,7 +29,13 @@ func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inou
         case "," :
             args.append(arg)
             arg=""
-
+            
+        
+        case "'", "\"" :
+            var spaces : [String:[NSNumber]] = ["return":[0]]
+            arg += "\(command)\(onePartOpenCloseParser(openCloseCommand: command, spaces: &spaces, arendelle: &arendelle, screen: &screen, preprocessorState: true))\(command)"
+            --arendelle.i
+            
             
         case "[", "(", "{" :
                                 

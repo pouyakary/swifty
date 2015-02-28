@@ -83,7 +83,7 @@ func printError (#result: codeScreen) {
 
     var i = 1; fails++
     
-    println("\n  ⎪ ✖︎ Compilation Failed Because Of \(result.errors.count) Known Error\(PIEndS(number: result.errors.count)):")
+    println("  ⎪ ✖︎ Compilation Failed Because Of \(result.errors.count) Known Error\(PIEndS(number: result.errors.count)):")
     for error in result.errors {
         println("  ⎪ →\(error.lowercaseString)")
         i++
@@ -228,28 +228,25 @@ while true {
     
     } else {
         
-        PiTryCatch.try({ () -> Void in
+        println()
+        
+        var tempScreen = masterScreen
+        var tempArendelle = Arendelle(code: preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen))
+        var tempSpaces = masterSpaces
             
-            var tempScreen = masterScreen
-            var tempArendelle = Arendelle(code: preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen))
-            var tempSpaces = masterSpaces
+        eval(&tempArendelle, &tempScreen, &tempSpaces);
             
-            eval(&tempArendelle, &tempScreen, &tempSpaces);
-            
-            if tempScreen.errors.count > 0 {
+        if tempScreen.errors.count > 0 {
                 
-                printError(result: tempScreen)
+            printError(result: tempScreen)
                 
-            } else {
+        } else {
                 
-                masterSpaces = tempSpaces
-                masterScreen = tempScreen
+            masterSpaces = tempSpaces
+            masterScreen = tempScreen
                 
-            }
-            
-        }, catch: { (var ex:NSException!) -> Void in
-            compilerBroken()
-        }, finally: { () -> Void in })
+        }
+
     }
 }
 

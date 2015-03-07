@@ -57,7 +57,7 @@ func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inou
                                     
             default:
                 report("Grammar with more than 3 parts", &screen)
-                return["BadGrammar"]
+                return["BadGrammar"] 
                                     
             }
                                 

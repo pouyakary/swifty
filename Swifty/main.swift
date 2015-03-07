@@ -6,13 +6,22 @@
 //  Copyright (c) 2014 Arendelle Language. All rights reserved.
 //
 
+
+//
+//  THIS VERSION OF SWIFTY SUPPORTS ARENDELLE 
+//  UP TO ARENDELLE SPECIFICATION 2XII
+//
+
+
 // the very starting point
 
 import Foundation
 
-//
-// REPL INPUT
-//
+
+
+/* ------------------------------- *
+ * ::::: R E P L   I N P U T ::::: *
+ * ------------------------------- */
 
 func replInput () -> String {
 
@@ -21,7 +30,7 @@ func replInput () -> String {
     var specialCharactersNumbers = [ "/\\*":0, "(":0 , "[":0, "{":0 , "*\\/":0, ")":0 , "]":0, "}":0 ]
     
     
-    print("\nλ")
+    print("\nλ ")
     
     while whileControlForREPLInput {
     
@@ -36,12 +45,15 @@ func replInput () -> String {
         
         }
         
-        if specialCharactersNumbers["("] == specialCharactersNumbers[")"] && specialCharactersNumbers ["["] == specialCharactersNumbers ["]"] && specialCharactersNumbers["{"] == specialCharactersNumbers["}"] && specialCharactersNumbers["/\\*"] == specialCharactersNumbers["*\\/"]   {
+        if specialCharactersNumbers["("] == specialCharactersNumbers[")"] &&
+           specialCharactersNumbers ["["] == specialCharactersNumbers ["]"] &&
+           specialCharactersNumbers["{"] == specialCharactersNumbers["}"] &&
+           specialCharactersNumbers["/\\*"] == specialCharactersNumbers["*\\/"] {
             
             whileControlForREPLInput = false
             
         } else {
-            print("→")
+            print("→ ")
         }
     }
     return result
@@ -83,9 +95,9 @@ func printError (#result: codeScreen) {
 
     var i = 1; fails++
     
-    println("  ⎪ ✖︎ Compilation Failed Because Of \(result.errors.count) Known Error\(PIEndS(number: result.errors.count)):")
+    println("\n  ⎪ ✖︎ Compilation Failed Because Of \(result.errors.count) Known Error\(PIEndS(number: result.errors.count)):")
     for error in result.errors {
-        println("  ⎪ →\(error.lowercaseString)")
+        println("  ⎪ → \(error.lowercaseString)")
         i++
     }
 }
@@ -98,10 +110,10 @@ func printError (#result: codeScreen) {
 func printSpaces (#spaces: [String:[NSNumber]]) {
     if spaces.count > 0 {
         for space in spaces {
-            println("\n  •\(space.0) →\(space.1)")
+            println("\n  • \(space.0) → \(space.1)")
         }
     } else {
-        println("\n  ⎪ ✖︎ No space found")
+        println("\n   ⎪ ✖︎ No space found")
     }
 }
 
@@ -114,9 +126,9 @@ func compilerBroken () {
 }
 
 
-//
-// REPL
-//
+/* ------------------- *
+ * ::::: R E P L ::::: *
+ * ------------------- */
 
 let x = 30, y = 10; var prompts = 0, fails = 0, blueprints = 1, directs = 0, directFails = 0, prints = 0, dumps = 0
 var masterScreen = codeScreen(xsize: x, ysize: y)
@@ -124,8 +136,9 @@ var whileControl = true
 var masterSpaces: [String:[NSNumber]] = ["arendelle":[0]]
 masterSpaces.removeAll(keepCapacity: false)
 
-println("\nSwifty : Arendelle's Apple Core REPL")
-println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>\n")
+println("\nSwifty : Apple Core REPL for Arendelle")
+println("Edition 1, Build 61 - Supporting up to Specification 2XII")
+println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>")
 
 while true {
     
@@ -153,7 +166,7 @@ while true {
     
         prompts--
         
-        println("\n  ⎪ ♨︎Season Information\n  ⎪ →prompts: \(prompts - fails) successful of \(prompts)\n  ⎪ →blueprints: total of \(blueprints)\n  ⎪ →direct mathEval access: \(directs - directFails) successful of \(directs)\n  ⎪ →matrix prints: \(prints)\n  ⎪ →dumps: \(dumps)\n\n  Goodbye!\n\n")
+        println("\n  ⎪ ♨︎ Season Information\n  ⎪ → prompts: \(prompts - fails) successful of \(prompts)\n  ⎪ → blueprints: total of \(blueprints)\n  ⎪ → direct mathEval access: \(directs - directFails) successful of \(directs)\n  ⎪ → matrix prints: \(prints)\n  ⎪ → dumps: \(dumps)\n\n  Goodbye!\n\n")
         break
     
     } else if code == "print" {
@@ -173,7 +186,7 @@ while true {
         
     } else if code == "help" {
         
-        println()
+        println("")
         println("  ⎪ Swifty - Arendelle Apple Core's REPL\n  ⎪")
         println("  ⎪ λ [code]   : Evalautes the [code]")
         println("  ⎪ λ = [expr] : Evaluates the [expr]")
@@ -191,45 +204,37 @@ while true {
         var tempScreen = codeScreen(xsize: x, ysize: y)
 
         var expr =  preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen).removeFromStart("=");
-    
-        PiTryCatch.try({ () -> Void in
             
-            var tempResult = mathEval(stringExpression: expr, screen: &tempScreen, spaces: &masterSpaces)
+        var tempResult = mathEval(stringExpression: expr, screen: &tempScreen, spaces: &masterSpaces)
             
-            if ( tempScreen.errors.count > 0 ) {
+        if ( tempScreen.errors.count > 0 ) {
                 
-                directFails++
+            directFails++
                 
-                printError(result: tempScreen)
+            printError(result: tempScreen)
                 
+        } else {
+                
+            if tempResult.itsNotACondition {
+                
+                println("\n--> \(tempResult.result)")
+                    
             } else {
-                
-                if tempResult.itsNotACondition {
-                
-                    println("\n--> \(tempResult.result)")
+                    
+                if tempResult.result == 1 {
+                    
+                    println("\n--> Right")
                     
                 } else {
                     
-                    if tempResult.result == 1 {
-                    
-                        println("\n--> Yes")
-                    
-                    } else {
-                    
-                        println("\n--> No")
+                    println("\n--> Wrong")
                         
-                    }
                 }
             }
-        
-        }, catch: { (var ex:NSException!) -> Void in
-            compilerBroken()
-        }, finally: { () -> Void in })
+        }
     
     } else {
-        
-        println()
-        
+
         var tempScreen = masterScreen
         var tempArendelle = Arendelle(code: preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen))
         var tempSpaces = masterSpaces

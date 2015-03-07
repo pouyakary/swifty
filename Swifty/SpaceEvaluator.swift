@@ -90,6 +90,9 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
     func saveNumberToStoredSpace (#number: [NSNumber], toSpace space: String) {
         
         let spaceURL = arendellePathToNSURL(arendellePath: space, kind: "space", screen: &screen)
+        
+        storedSpaceFolderChecker(spaceURL, screen.mainPath)
+        
         var toBeStored = "\(number)".replace(" ", withString: "").replace(",", withString: ";")
         
         let er = toBeStored[1...toBeStored.utf16Count-2].writeToURL(spaceURL, atomically: true, encoding: NSUTF8StringEncoding, error: nil)

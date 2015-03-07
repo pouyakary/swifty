@@ -9,7 +9,7 @@
 import Foundation
 
 func spaceInput (#text: String, inout #screen: codeScreen) -> NSNumber {
-    print("\n  \(text) ")
+    print("--> \(text)")
 
     let result = readLine()
     

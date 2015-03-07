@@ -23,8 +23,6 @@ import Foundation
                     
         var spacesToRemove:[String] = []
         
-        var command:Character
-        
         /// Paints a dot in the matrix
         func paintInDot (color: Int) {
             if screen.x < screen.screen.colCount() && screen.y < screen.screen.rowCount()
@@ -36,7 +34,7 @@ import Foundation
         
         while arendelle.i < arendelle.codeSize() && screen.whileSign {
             
-            command = arendelle.readAtI()
+            var command = Character(arendelle.readAtI().toString().lowercaseString)
             
             switch command {
                 
@@ -61,8 +59,11 @@ import Foundation
                 screen.title = onePartOpenCloseParser(openCloseCommand: command, spaces: &spaces, arendelle: &arendelle, screen: &screen, preprocessorState: false)
                 --arendelle.i
                 
-                println("--> \(screen.title)")
-                
+                if screen.errors.count == 0 {
+                     println("\n--> \(screen.title)")
+                }
+               
+    
                 
             //
             // FUNCTION

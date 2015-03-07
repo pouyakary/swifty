@@ -72,7 +72,25 @@ func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String
                         }
                         
                     } else {
-                        result += mathEval(stringExpression: replacerOnePart, screen: &screen, spaces: &spaces).result.stringValue
+                        if replacerOnePart != "" {
+                            
+                            result += mathEval(stringExpression: replacerOnePart, screen: &screen, spaces: &spaces).result.stringValue
+                            
+                        } else {
+                            var errtext = ""
+                            
+                            if result.utf16Count > 10 {
+                            
+                                
+                            
+                            } else {
+                            
+                                errtext = result
+                            
+                            }
+                            
+                            screen.errors.append("Empty string interpolation found: \"\(result)\\()...\"")
+                        }
                     }
                     
                     --arendelle.i

@@ -21,9 +21,13 @@ func PIEndS (#number: Int) -> String {
     }
 }
 
-//////////////////
-/// PI OBJECTS ///
-//////////////////
+
+
+
+/* --------------------------------------------------------------------------- *
+ * :::::::::::::::::::::::::: R E G E X   T O O L S :::::::::::::::::::::::::: *
+ * --------------------------------------------------------------------------- */
+
 
 /// PI 2D Array
 class PIArray2D {
@@ -103,9 +107,12 @@ struct RegexMatchResult : SequenceType, BooleanType {
 }
 
 
-/////////////////////
-/// PI EXTENSIONS ///
-/////////////////////
+
+
+/* --------------------------------------------------------------------------- *
+ * ::::::::::::::::::::::::::: E X T E N S I O N S ::::::::::::::::::::::::::: *
+ * --------------------------------------------------------------------------- */
+
 
 extension Character
 {
@@ -134,6 +141,17 @@ extension String
         
             return self[text.utf16Count...self.utf16Count - 1]
         
+        } else {
+            return self
+        }
+    }
+    
+    func removeFromEnd(text: String) -> String {
+        
+        if self.hasSuffix(text) {
+            
+            return self[0...self.utf16Count - text.utf16Count - 1 ]
+            
         } else {
             return self
         }

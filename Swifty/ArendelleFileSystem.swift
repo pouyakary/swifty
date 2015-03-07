@@ -13,8 +13,6 @@ func storedSpaceFolderChecker (url: NSURL, mainPath: String) {
     let spaceName  = url.path! =~ "/[a-zA-Z0-9_]+\\.space"
     let stringPath = url.path!.removeFromEnd(spaceName.items[0])
     
-    println("--> string path: \(stringPath)")
-    
     // File manager
     var fileManager = NSFileManager.defaultManager()
     
@@ -29,11 +27,7 @@ func storedSpaceFolderChecker (url: NSURL, mainPath: String) {
         // We check each level of folders
         for part in urlParts {
             
-            println("--> part: \(part)")
-            
             if !fileManager.fileExistsAtPath("\(currentFolder)/\(part)") {
-                
-                println("    okay saved")
                 
                 fileManager.createDirectoryAtPath("\(currentFolder)/\(part)", withIntermediateDirectories: false, attributes: nil, error: nil)
                 

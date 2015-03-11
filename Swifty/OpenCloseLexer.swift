@@ -17,7 +17,7 @@ func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inou
     var arg:String = ""
     var args:[String] = []
     var whileControl = true
-    var openCloseDictionary:[Character:Character] = [ "{":"}", "(":")", "[":"]" , "<":">", "~":":" ]
+    var openCloseDictionary:[Character:Character] = [ "{":"}", "(":")", "[":"]" , "<":">", "|":"|" ]
     let closeCommand = openCloseDictionary[openCommand]!
     
     while arendelle.whileCondtion() && whileControl {

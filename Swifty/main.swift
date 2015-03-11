@@ -137,7 +137,7 @@ var masterSpaces: [String:[NSNumber]] = ["arendelle":[0]]
 masterSpaces.removeAll(keepCapacity: false)
 
 println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 62 - Supporting up to Specification 2XII")
+println("Edition 1, Build 63 - Supporting up to Specification 2XII")
 println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>")
 
 while true {

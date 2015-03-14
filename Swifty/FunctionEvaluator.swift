@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: [String:[NSNumber]]) -> [NSNumber] {
     
     
@@ -54,7 +52,6 @@ func funcEval (#funcParts: FuncParts, inout #screen: codeScreen, inout #spaces: 
                 //
                 // FUNCTION SPACE'S EVAL
                 //
-                
                 
                 var numberOfHeaderParts = headerParts.count; if headerParts[0] == "" { numberOfHeaderParts--}
                 var numberOfFunctionParts = funcParts.inputs.count; if funcParts.inputs[0] == "" { numberOfFunctionParts--}

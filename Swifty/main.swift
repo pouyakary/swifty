@@ -29,12 +29,14 @@ func replInput () -> String {
     var result = ""
     var specialCharactersNumbers = [ "/\\*":0, "(":0 , "[":0, "{":0 , "*\\/":0, ")":0 , "]":0, "}":0 ]
     
-    
-    print("\nλ ")
+    PiConsoleBlue(); PiConsoleBold(); print("\nλ "); PiConsoleReset(); PiConsoleBold()
     
     while whileControlForREPLInput {
-    
-        let tempInput = readLine()
+        
+        let tempInput = readLine();
+        
+        PiConsoleReset()
+        
         result += tempInput
         
         for specialChar in specialCharactersNumbers {
@@ -53,7 +55,7 @@ func replInput () -> String {
             whileControlForREPLInput = false
             
         } else {
-            print("→ ")
+            PiConsoleBlue(); PiConsoleBold(); print("→ "); PiConsoleReset(); PiConsoleBold()
         }
     }
     return result
@@ -66,7 +68,6 @@ func replInput () -> String {
 
 func printMatrix (#result: codeScreen) {
 
-    clean()
     println("\nFinal Matrix in size of #i=\(x) and #j=\(y) (finished at #x:\(result.x) #y:\(result.y)) :")
     
     //println("Matrix for the code \'" + arendelle.code + "\':")
@@ -75,15 +76,32 @@ func printMatrix (#result: codeScreen) {
         for var j = 0; j < x; j++ {
             var color = result.screen[j,i]
             
-            if color != 0 {
-                print("\(color) ")
-            } else {
-                print("  ")
+            switch ( color ) {
+            
+            case 1:
+                PiConsoleBlue()
+                
+            case 2:
+                PiConsoleCayan()
+                
+            case 3:
+                PiConsoleMagenta()
+                
+            case 4:
+                PiConsoleRed()
+                
+            default:
+                PiConsoleYellow()
+            
             }
+            
+            print("\(color); ")
+            
+            PiConsoleReset()
         }
     }
     
-    println("\n\nFinal title: '\(result.title)'\n\n")
+    println("\n\nFinal title: '\(result.title)'")
 }
 
 
@@ -100,6 +118,8 @@ func printError (#result: codeScreen) {
         println("  ⎪ → \(error.lowercaseString)")
         i++
     }
+    
+    PiConsoleReset()
 }
 
 
@@ -136,9 +156,12 @@ var whileControl = true
 var masterSpaces: [String:[NSNumber]] = ["arendelle":[0]]
 masterSpaces.removeAll(keepCapacity: false)
 
+PiConsoleBold();
+
 println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 63 - Supporting up to Specification 2XII")
+println("Edition 1, Build 64 - Supporting up to Specification 2XII")
 println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>")
+
 
 while true {
     
@@ -149,7 +172,7 @@ while true {
     
         ++blueprints
         
-        clean()
+        PiConsoleClean()
         
         masterSpaces.removeAll(keepCapacity: false)
         masterScreen = codeScreen(xsize: x, ysize: y)
@@ -160,15 +183,17 @@ while true {
     
     } else if code == "cls" {
         
-        clean()
+        PiConsoleClean()
     
     } else if code == "exit" {
     
         prompts--
         
         println("\n  ⎪ ♨︎ Season Information\n  ⎪ → prompts: \(prompts - fails) successful of \(prompts)\n  ⎪ → blueprints: total of \(blueprints)\n  ⎪ → direct mathEval access: \(directs - directFails) successful of \(directs)\n  ⎪ → matrix prints: \(prints)\n  ⎪ → dumps: \(dumps)\n\n  Goodbye!\n\n")
+        
+        PiConsoleReset()
         break
-    
+        
     } else if code == "print" {
     
         prints++

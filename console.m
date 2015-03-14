@@ -26,4 +26,21 @@ NSString* readLine() {
     
 }
 
-void clean () { system("clear"); }
+/* ----------------------------------------- *
+ * :::::::::: P I   C O N S O L E :::::::::: *
+ * ----------------------------------------- */
+
+void PiConsoleClean () { system("clear"); }
+void PiConsoleReset () { printf("\033[0m"); }
+void PiConsoleBold () { printf("\033[1m"); }
+void PiConsoleRed () { printf("\x1B[31m"); }
+void PiConsoleGreen () { printf("\x1B[32m"); }
+void PiConsoleYellow () { printf("\x1B[33m"); }
+void PiConsoleBlue () { printf("\x1B[34m"); }
+void PiConsoleMagenta () { printf("\x1B[35m"); }
+void PiConsoleCayan () { printf("\x1B[36m"); }
+void PiConsoleWhite () { printf("\x1B[37m"); }
+
+
+
+

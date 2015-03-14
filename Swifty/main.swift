@@ -95,7 +95,7 @@ func printMatrix (#result: codeScreen) {
             
             }
             
-            print("\(color); ")
+            print("\(color) ")
             
             PiConsoleReset()
         }
@@ -159,7 +159,7 @@ masterSpaces.removeAll(keepCapacity: false)
 PiConsoleBold();
 
 println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 64 - Supporting up to Specification 2XII")
+println("Edition 1, Build 66 - Supporting up to Specification 2XII")
 println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>")
 
 

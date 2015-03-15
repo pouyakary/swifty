@@ -159,7 +159,7 @@ masterSpaces.removeAll(keepCapacity: false)
 PiConsoleBold();
 
 println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 68 - Supporting up to Specification 2XII")
+println("Edition 1, Build 69 - Supporting up to Specification 2XII")
 println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>")
 
 func screenResize () {

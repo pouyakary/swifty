@@ -150,7 +150,7 @@ func compilerBroken () {
  * ::::: R E P L ::::: *
  * ------------------- */
 
-let x = 30, y = 10; var prompts = 0, fails = 0, blueprints = 1, directs = 0, directFails = 0, prints = 0, dumps = 0
+var x = 40, y = 30; var prompts = 0, fails = 0, blueprints = 1, directs = 0, directFails = 0, prints = 0, dumps = 0
 var masterScreen = codeScreen(xsize: x, ysize: y)
 var whileControl = true
 var masterSpaces: [String:[NSNumber]] = ["arendelle":[0]]
@@ -159,9 +159,17 @@ masterSpaces.removeAll(keepCapacity: false)
 PiConsoleBold();
 
 println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 67 - Supporting up to Specification 2XII")
+println("Edition 1, Build 68 - Supporting up to Specification 2XII")
 println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>")
 
+func screenResize () {
+
+    ++blueprints
+    
+    masterSpaces.removeAll(keepCapacity: false)
+    masterScreen = codeScreen(xsize: x, ysize: y)
+
+}
 
 while true {
     
@@ -169,14 +177,22 @@ while true {
     prompts++
     
     if code == "clean" {
-    
-        ++blueprints
         
         PiConsoleClean()
         
-        masterSpaces.removeAll(keepCapacity: false)
-        masterScreen = codeScreen(xsize: x, ysize: y)
+        screenResize()
         
+    } else if code == "reset" {
+        
+        screenResize()
+        
+    } else if code == "resize" {
+        
+        print("  x= "); x = readLine().toInt();
+        print("  y= "); y = readLine().toInt();
+        
+        screenResize()
+    
     } else if code == "pwd" {
         
         println("\n--> \(masterScreen.mainPath)")
@@ -218,6 +234,9 @@ while true {
         println("  ⎪ λ dump     : Prints the spaces")
         println("  ⎪ λ pwd      : codeScreen.mainPath")
         println("  ⎪ λ cls      : Terminal clean")
+        println("  ⎪ λ clean    : Reset + CLS")
+        println("  ⎪ λ reset    : Resets the screen into a new blueprint")
+        println("  ⎪ λ resize   : Resizes the ")
         println("  ⎪ λ print    : Prints the codeScreen")
         println("  ⎪ λ title    : Shows the codeScreen.title")
         println("  ⎪ λ help     : Shows this help")

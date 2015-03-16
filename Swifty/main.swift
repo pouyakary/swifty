@@ -29,13 +29,13 @@ func replInput () -> String {
     var result = ""
     var specialCharactersNumbers = [ "/\\*":0, "(":0 , "[":0, "{":0 , "*\\/":0, ")":0 , "]":0, "}":0 ]
     
-    PiConsoleBlue(); PiConsoleBold(); print("\nλ "); PiConsoleReset(); PiConsoleBold()
+    PiConsoleBlue(); PiConsoleBold(); print("\nλ "); PiConsoleWhite()
     
     while whileControlForREPLInput {
         
         let tempInput = readLine();
         
-        PiConsoleReset()
+        colorReset()
         
         result += tempInput
         
@@ -55,12 +55,23 @@ func replInput () -> String {
             whileControlForREPLInput = false
             
         } else {
-            PiConsoleBlue(); PiConsoleBold(); print("→ "); PiConsoleReset(); PiConsoleBold()
+            PiConsoleBlue(); PiConsoleBold(); print("→ "); PiConsoleWhite()
         }
     }
     return result
 }
 
+
+//
+// Color reset
+//
+
+func colorReset () {
+
+    PiConsoleReset()
+    PiConsoleWhite()
+
+}
 
 //
 // PRINT MATRIX
@@ -79,7 +90,7 @@ func printMatrix (#result: codeScreen) {
             switch ( color ) {
             
             case 1:
-                PiConsoleBlue()
+                PiConsoleGreen()
                 
             case 2:
                 PiConsoleCayan()
@@ -91,17 +102,22 @@ func printMatrix (#result: codeScreen) {
                 PiConsoleRed()
                 
             default:
-                PiConsoleYellow()
+                
+                PiConsoleBlue()
             
             }
             
             print("\(color) ")
             
-            PiConsoleReset()
+            colorReset()
         }
     }
     
-    println("\n\nFinal title: '\(result.title)'")
+    print("\n\nFinal title: '")
+    PiConsoleYellow(); PiConsoleGreen()
+    print("\(result.title)")
+    colorReset()
+    print("'\n")
 }
 
 
@@ -119,7 +135,7 @@ func printError (#result: codeScreen) {
         i++
     }
     
-    PiConsoleReset()
+    colorReset()
 }
 
 
@@ -158,8 +174,17 @@ masterSpaces.removeAll(keepCapacity: false)
 
 PiConsoleBold();
 
+println("\n  ____          _  __ _               ")
+println(" / ___|_      _(_)/ _| |_ _   _       ")
+println(" \\___ \\ \\ /\\ / / | |_| __| | | |  ")
+println("  ___) \\ V  V /| |  _| |_| |_| |     ")
+println(" |____/ \\_/\\_/ |_|_|  \\__|\\__, |  ")
+println("                          |___/       ")
+
+colorReset()
+
 println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 69 - Supporting up to Specification 2XII")
+println("Edition 1, Build 70 - Supporting up to Specification 2XII")
 println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>")
 
 func screenResize () {
@@ -195,7 +220,7 @@ while true {
     
     } else if code == "pwd" {
         
-        println("\n--> \(masterScreen.mainPath)")
+        titleWriteLine(masterScreen.mainPath)
     
     } else if code == "cls" {
         
@@ -261,17 +286,17 @@ while true {
                 
             if tempResult.itsNotACondition {
                 
-                println("\n--> \(tempResult.result)")
+                titleWriteLine("\(tempResult.result)")
                     
             } else {
                     
                 if tempResult.result == 1 {
                     
-                    println("\n--> Right")
+                    titleWriteLine("Right")
                     
                 } else {
                     
-                    println("\n--> Wrong")
+                    print("\n--> "); PiConsoleRed(); PiConsoleBold(); println("Wrong"); colorReset()
                         
                 }
             }

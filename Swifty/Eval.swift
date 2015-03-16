@@ -60,7 +60,9 @@ import Foundation
                 --arendelle.i
                 
                 if screen.errors.count == 0 {
-                     println("\n--> \(screen.title)")
+                    
+                    titleWriteLine(screen.title)
+
                 }
                
     

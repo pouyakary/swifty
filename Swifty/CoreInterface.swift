@@ -31,3 +31,9 @@ func spaceInput (#text: String, inout #screen: codeScreen) -> NSNumber {
         return 0
     }
 }
+
+func titleWriteLine (text: String) {
+
+    print("\n--> "); PiConsoleGreen(); PiConsoleBold(); println(text); colorReset()
+
+}

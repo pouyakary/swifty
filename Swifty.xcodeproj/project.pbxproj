@@ -11,7 +11,7 @@
 		A62792B71A3E4F9E0086C664 /* SpaceEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62792B61A3E4F9E0086C664 /* SpaceEvaluator.swift */; };
 		A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */; };
 		A6822B061A83E32700A23FC3 /* spaceOverwriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6822B051A83E32700A23FC3 /* spaceOverwriter.swift */; };
-		A6897EC81A263D850074966A /* console.m in Sources */ = {isa = PBXBuildFile; fileRef = A6897EC71A263D850074966A /* console.m */; };
+		A6897EC81A263D850074966A /* PiConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = A6897EC71A263D850074966A /* PiConsole.m */; };
 		A696E0B71A508D8700E213D2 /* FunctionSpaceLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A696E0B61A508D8700E213D2 /* FunctionSpaceLexer.swift */; };
 		A69813241A517324000D67A4 /* FunctionEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69813231A517324000D67A4 /* FunctionEvaluator.swift */; };
 		A698A16C1A78063200594411 /* TimeSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698A16B1A78063200594411 /* TimeSystem.swift */; };
@@ -72,7 +72,7 @@
 		A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePartOpenCloseParser.swift; sourceTree = "<group>"; };
 		A6822B051A83E32700A23FC3 /* spaceOverwriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spaceOverwriter.swift; sourceTree = "<group>"; };
 		A6897EC61A263D840074966A /* Swifty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swifty-Bridging-Header.h"; sourceTree = "<group>"; };
-		A6897EC71A263D850074966A /* console.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = console.m; sourceTree = "<group>"; };
+		A6897EC71A263D850074966A /* PiConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PiConsole.m; sourceTree = "<group>"; };
 		A696E0B61A508D8700E213D2 /* FunctionSpaceLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionSpaceLexer.swift; sourceTree = "<group>"; };
 		A69813231A517324000D67A4 /* FunctionEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionEvaluator.swift; sourceTree = "<group>"; };
 		A698A16B1A78063200594411 /* TimeSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeSystem.swift; path = DDMathParser/TimeSystem.swift; sourceTree = "<group>"; };
@@ -177,6 +177,7 @@
 		A696E0B11A5055A100E213D2 /* Pi */ = {
 			isa = PBXGroup;
 			children = (
+				A6897EC71A263D850074966A /* PiConsole.m */,
 				A6E7EA301A19D07600192409 /* PI.swift */,
 				A6F879751A8563BA005ADC0D /* PiTryCatch.m */,
 				A6F879771A8563D7005ADC0D /* PiTryCatch.h */,
@@ -215,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				A696E0B11A5055A100E213D2 /* Pi */,
-				A6897EC71A263D850074966A /* console.m */,
 				A6E23C991A154E350057DB7B /* Swifty */,
 				A6E23C981A154E350057DB7B /* Products */,
 				A6897EC61A263D840074966A /* Swifty-Bridging-Header.h */,
@@ -422,7 +422,7 @@
 				A6FB5EFB1A27AA8700FE7161 /* _DDPrecisionFunctionEvaluator.m in Sources */,
 				A6A506DC1A285D3500962A9B /* MathEvaluator.swift in Sources */,
 				A60A75091A29B85C00576F13 /* ConditonEvaluator.swift in Sources */,
-				A6897EC81A263D850074966A /* console.m in Sources */,
+				A6897EC81A263D850074966A /* PiConsole.m in Sources */,
 				A6FB5F021A27AA8700FE7161 /* DDMathOperator.m in Sources */,
 				A6FB5EF61A27AA8700FE7161 /* _DDGroupTerm.m in Sources */,
 				A6FB5EF21A27AA8700FE7161 /* _DDDecimalFunctions.m in Sources */,

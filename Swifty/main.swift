@@ -33,7 +33,7 @@ func replInput () -> String {
     
     while whileControlForREPLInput {
         
-        let tempInput = readLine();
+        let tempInput = PiConsoleReadLine();
         
         colorReset()
         
@@ -78,12 +78,21 @@ func colorReset () {
 //
 
 func printMatrix (#result: codeScreen) {
-
-    println("\nFinal Matrix in size of #i=\(x) and #j=\(y) (finished at #x:\(result.x) #y:\(result.y)) :")
     
-    //println("Matrix for the code \'" + arendelle.code + "\':")
+    print("\n    ┌ "); for var lineI1 = 0; lineI1 < x; lineI1++ { print("  ") }; print("┐")
+    
     for var i = 0; i < y; i++ {
-        print("\n   ")
+        
+        if floor(Double(y)/2) == Double(i) {
+        
+            print("\n--> │ ")
+            
+        } else {
+        
+            print("\n    │ ")
+        
+        }
+
         for var j = 0; j < x; j++ {
             var color = result.screen[j,i]
             
@@ -111,13 +120,12 @@ func printMatrix (#result: codeScreen) {
             
             colorReset()
         }
+        print("⎪")
     }
     
-    print("\n\nFinal title: '")
-    PiConsoleYellow(); PiConsoleGreen()
-    print("\(result.title)")
+    print("\n    └ "); for var lineI1 = 0; lineI1 < x; lineI1++ { print("  ") }; println("┘")
+
     colorReset()
-    print("'\n")
 }
 
 
@@ -184,7 +192,7 @@ println("                          |___/       ")
 colorReset()
 
 println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 70 - Supporting up to Specification 2XII")
+println("Edition 1, Build 71 - Supporting up to Specification 2XII")
 println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>")
 
 func screenResize () {
@@ -213,8 +221,8 @@ while true {
         
     } else if code == "resize" {
         
-        print("  x= "); x = readLine().toInt();
-        print("  y= "); y = readLine().toInt();
+        print("  x= "); x = PiConsoleReadLine().toInt();
+        print("  y= "); y = PiConsoleReadLine().toInt();
         
         screenResize()
     

@@ -11,7 +11,7 @@ import Foundation
 func spaceInput (#text: String, inout #screen: codeScreen) -> NSNumber {
     print("--> \(text)")
 
-    let result = readLine()
+    let result = PiConsoleReadLine()
     
     let regTest = result =~ "[0-9\\.]+"
     

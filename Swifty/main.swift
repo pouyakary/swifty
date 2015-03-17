@@ -174,7 +174,7 @@ func compilerBroken () {
  * ::::: R E P L ::::: *
  * ------------------- */
 
-var x = 40, y = 30; var prompts = 0, fails = 0, blueprints = 1, directs = 0, directFails = 0, prints = 0, dumps = 0
+var x = 34, y = 21; var prompts = 0, fails = 0, blueprints = 1, directs = 0, directFails = 0, prints = 0, dumps = 0
 var masterScreen = codeScreen(xsize: x, ysize: y)
 var whileControl = true
 var masterSpaces: [String:[NSNumber]] = ["arendelle":[0]]
@@ -192,7 +192,7 @@ println("                          |___/       ")
 colorReset()
 
 println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 71 - Supporting up to Specification 2XII")
+println("Edition 1, Build 72 - Supporting up to Specification 2XII")
 println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>")
 
 func screenResize () {
@@ -243,7 +243,7 @@ while true {
         PiConsoleReset()
         break
         
-    } else if code == "print" {
+    } else if code == "matrix" {
     
         prints++
         printMatrix(result: masterScreen)
@@ -251,7 +251,7 @@ while true {
     } else if code == "title" {
         
         prints++
-        println("\n  \(masterScreen.title)")
+        titleWriteLine(masterScreen.title)
     
     } else if code == "dump" {
         
@@ -270,7 +270,7 @@ while true {
         println("  ⎪ λ clean    : Reset + CLS")
         println("  ⎪ λ reset    : Resets the screen into a new blueprint")
         println("  ⎪ λ resize   : Resizes the ")
-        println("  ⎪ λ print    : Prints the codeScreen")
+        println("  ⎪ λ matrix   : Prints the matrix")
         println("  ⎪ λ title    : Shows the codeScreen.title")
         println("  ⎪ λ help     : Shows this help")
     

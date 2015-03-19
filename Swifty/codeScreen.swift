@@ -24,7 +24,7 @@ struct codeScreen {
         
     }
     
-    //--- Screen ---------------------------------------sw----
+    //--- Screen -------------------------------------------
     var screen = PIArray2D (cols: 10, rows: 10)
     
     
@@ -35,6 +35,9 @@ struct codeScreen {
     //--- Title --------------------------------------------
     var title:String = "Arendelle"
     
+    
+    //--- Stop ---------------------------------------------
+    var stop = false
     
     //--- Func Name ----------------------------------------
     var funcName = "main"

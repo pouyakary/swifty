@@ -32,7 +32,7 @@ import Foundation
         }
         
         
-        while arendelle.i < arendelle.codeSize() && screen.whileSign {
+        while arendelle.i < arendelle.codeSize() && screen.whileSign && !screen.stop {
             
             var command = Character(arendelle.readAtI().toString().lowercaseString)
             

@@ -110,7 +110,7 @@ import Foundation
                 screen.whileSign = false
                 
             case "w":
-                NSThread.sleepForTimeInterval(0.1)
+                NSThread.sleepForTimeInterval(0.001)
                 
             case "s":
                 report("Stop-Clean command is no longer supported by Arendelle compilers", &screen)

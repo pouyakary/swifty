@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Arendelle Language. All rights reserved.
 //
 
+//
+// BUILD 80
+//
+
 
 //
 //  THIS VERSION OF SWIFTY SUPPORTS ARENDELLE 
@@ -72,6 +76,31 @@ func currentYear () -> Int {
     return components.year
 }
 
+
+func colorWriter (text: String) {
+
+    PiConsoleReset()
+    print(" ⎪ ")
+    PiConsoleBlue()
+    
+    for index in text {
+    
+        switch arc4random_uniform(2) {
+            
+        case 1:
+            PiConsoleBold()
+            
+        default:
+            PiConsoleReset()
+            PiConsoleBlue()
+            
+        }
+        
+        print(index)
+    }
+    
+    println()
+}
 
 
 //
@@ -194,20 +223,12 @@ var whileControl = true
 var masterSpaces: [String:[NSNumber]] = ["arendelle":[0]]
 masterSpaces.removeAll(keepCapacity: false)
 
-PiConsoleBold();
 
-println("\n  ____          _  __ _             ")
-println(" / ___|_      _(_)/ _| |_ _   _       ")
-println(" \\___ \\ \\ /\\ / / | |_| __| | | |  ")
-println("  ___) \\ V  V /| |  _| |_| |_| |     ")
-println(" |____/ \\_/\\_/ |_|_|  \\__|\\__, |  ")
-println("                          |___/       ")
+println("")
+colorWriter("S W I F T Y")
+colorWriter("A R E N D E L L E")
+colorWriter("C O M P I L E R")
 
-colorReset()
-
-println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 79 - Supporting up to Specification 2XII")
-println("Copyright 2014-\(currentYear()) Pouya Kary <k@arendelle.org>")
 
 func screenResize () {
 
@@ -274,19 +295,22 @@ while true {
         
     } else if code == "help" {
         
-        println("")
-        println("  ⎪ Swifty - Arendelle Apple Core's REPL\n  ⎪")
-        println("  ⎪ λ [code]   : Evalautes the [code]")
-        println("  ⎪ λ = [expr] : Evaluates the [expr]")
-        println("  ⎪ λ dump     : Prints the spaces")
-        println("  ⎪ λ pwd      : codeScreen.mainPath")
-        println("  ⎪ λ cls      : Terminal clean")
-        println("  ⎪ λ clean    : Reset + CLS")
-        println("  ⎪ λ reset    : Resets the screen into a new blueprint")
-        println("  ⎪ λ resize   : Resizes the ")
-        println("  ⎪ λ matrix   : Prints the matrix")
-        println("  ⎪ λ title    : Shows the codeScreen.title")
-        println("  ⎪ λ help     : Shows this help")
+        println("                                                        ")
+        println("  ⎪ REPL for Swifty: Arendelle's Apple Core             ")
+        println("  ⎪ Edition 1, Build 80, Supporting Specification 2XII  ")
+        println("  ⎪ Copyright 2014-\(currentYear()) Pouya Kary <k@arendelle.org>")
+        println("  ⎪                                                     ")
+        println("  ⎪ λ [code]   : Evalautes the [code]                   ")
+        println("  ⎪ λ = [expr] : Evaluates the [expr]                   ")
+        println("  ⎪ λ dump     : Prints the spaces                      ")
+        println("  ⎪ λ pwd      : codeScreen.mainPath                    ")
+        println("  ⎪ λ cls      : Terminal clean                         ")
+        println("  ⎪ λ clean    : Reset + CLS                            ")
+        println("  ⎪ λ reset    : Resets the screen into a new blueprint ")
+        println("  ⎪ λ resize   : Resizes the                            ")
+        println("  ⎪ λ matrix   : Prints the matrix                      ")
+        println("  ⎪ λ title    : Shows the codeScreen.title             ")
+        println("  ⎪ λ help     : Shows this help                        ")
     
     } else if code.hasPrefix("= ") {
         

@@ -17,8 +17,6 @@
 
 import Foundation
 
-
-
 /* ------------------------------- *
  * ::::: R E P L   I N P U T ::::: *
  * ------------------------------- */
@@ -63,7 +61,21 @@ func replInput () -> String {
 
 
 //
-// Color reset
+// COPYRIGHT YEAR MAKER
+//
+
+func currentYear () -> Int {
+    
+    let flags: NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
+    let date = NSDate()
+    let components = NSCalendar.currentCalendar().components(flags, fromDate: date)
+    return components.year
+}
+
+
+
+//
+// COLOR RESET
 //
 
 func colorReset () {
@@ -170,9 +182,11 @@ func compilerBroken () {
 }
 
 
-/* ------------------- *
- * ::::: R E P L ::::: *
- * ------------------- */
+/* ─────────────────────────────────────────── *
+ * :::::::::: S W I F T Y   R E P L :::::::::: *
+ * ─────────────────────────────────────────── */
+
+
 
 var x = 34, y = 21; var prompts = 0, fails = 0, blueprints = 1, directs = 0, directFails = 0, prints = 0, dumps = 0
 var masterScreen = codeScreen(xsize: x, ysize: y)
@@ -182,7 +196,7 @@ masterSpaces.removeAll(keepCapacity: false)
 
 PiConsoleBold();
 
-println("\n  ____          _  __ _               ")
+println("\n  ____          _  __ _             ")
 println(" / ___|_      _(_)/ _| |_ _   _       ")
 println(" \\___ \\ \\ /\\ / / | |_| __| | | |  ")
 println("  ___) \\ V  V /| |  _| |_| |_| |     ")
@@ -192,8 +206,8 @@ println("                          |___/       ")
 colorReset()
 
 println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 77 - Supporting up to Specification 2XII")
-println("Copyright 2014-2015 Pouya Kary <k@arendelle.org>")
+println("Edition 1, Build 78 - Supporting up to Specification 2XII")
+println("Copyright 2014-\(currentYear()) Pouya Kary <k@arendelle.org>")
 
 func screenResize () {
 
@@ -332,4 +346,7 @@ while true {
     }
 }
 
-// done
+//
+// DONE
+//
+

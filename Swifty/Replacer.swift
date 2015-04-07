@@ -9,6 +9,9 @@
 
 import Foundation
 
+/* ───────────────────────────────────────────────── *
+ * :::::::::: S W I F Y   R E P L A C E R :::::::::: *
+ * ───────────────────────────────────────────────── */
 
 func spaceReplacerWithEvaluation (#name: String, #spaceParts: [String], #simpleSpaceOrNot: Bool, #numberOfErrors: Int, inout #screen: codeScreen, inout spaces: [String:[NSNumber]]) -> String {
     
@@ -135,8 +138,10 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
     
     
     var replaceString = "";
+
     
     while expression.whileCondtion() {
+
         
         var command = expression.readAtI()
         
@@ -206,41 +211,67 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             
         case "!":
             
-            cleanPart()
+            //
+            // FIXING THE != PROBLEM @7028.19.2.28
+            //
             
-            let funcParts = functionLexer(arendelle: &expression, screen: &screen)
-            let result = funcEval(funcParts: funcParts, screen: &screen, spaces: &spaces)
+            var stupidBool = false;
             
-            if funcParts.index != "0" {
+            if expression.whileCondtion() {
                 
-                let index = mathEval(stringExpression: funcParts.index, screen: &screen, spaces: &spaces)
-                
-                if index.itsNotACondition == true &&  index.doesItHaveErros == false && index.result.integerValue >= 0 && index.result.integerValue < result.count {
+                expression.i++;
+
+                if expression.readAtI() == "=" {
                     
-                    collection.append("\(result[index.result.integerValue])")
+                    cleanPart()
+                    collection.append("!=")
+                    stupidBool = true;
+                    expression.i++;
                     
                 } else {
-                    if index.result.integerValue < 0 || index.result.integerValue >= result.count {
-                        report("Index of function !\(funcParts.name)() out of range", &screen)
-                    } else if index.itsNotACondition == false {
-                        report("Condition found in index of function !\(funcParts.name)()", &screen)
+                    
+                    expression.i--;
+                    
+                }
+            }
+        
+            
+            if !stupidBool {
+            
+                cleanPart()
+                
+                let funcParts = functionLexer(arendelle: &expression, screen: &screen)
+                let result = funcEval(funcParts: funcParts, screen: &screen, spaces: &spaces)
+                
+                if funcParts.index != "0" {
+                    
+                    let index = mathEval(stringExpression: funcParts.index, screen: &screen, spaces: &spaces)
+                    
+                    if index.itsNotACondition == true &&  index.doesItHaveErros == false && index.result.integerValue >= 0 && index.result.integerValue < result.count {
+                        
+                        collection.append("\(result[index.result.integerValue])")
+                        
                     } else {
-                        report("Bad expression for index of function !\(funcParts.name)()", &screen)
+                        if index.result.integerValue < 0 || index.result.integerValue >= result.count {
+                            report("Index of function !\(funcParts.name)() out of range", &screen)
+                        } else if index.itsNotACondition == false {
+                            report("Condition found in index of function !\(funcParts.name)()", &screen)
+                        } else {
+                            report("Bad expression for index of function !\(funcParts.name)()", &screen)
+                        }
+                        
+                        collection.append("0");
                     }
                     
-                    collection.append("0");
+                } else {
+                    
+                    collection.append("\(result[0])")
+                    
                 }
-                
-            } else {
-                
-                collection.append("\(result[0])")
-                
             }
+  
             
             
-            
-            
-    
             
             
         //
@@ -331,7 +362,7 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
     }
     
     
-    //for line in collection { println("--> '\(line)'") }
+    // for line in collection { println("--> '\(line)'") }
     
     var result = ""; for str in collection { result += str }; return result
 }

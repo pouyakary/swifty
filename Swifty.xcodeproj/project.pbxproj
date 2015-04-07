@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A60A75091A29B85C00576F13 /* ConditonEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A75081A29B85C00576F13 /* ConditonEvaluator.swift */; };
-		A6133A641AD43AB700CFABCB /* Regexes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6133A631AD43AB700CFABCB /* Regexes.swift */; };
 		A62792B71A3E4F9E0086C664 /* SpaceEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62792B61A3E4F9E0086C664 /* SpaceEvaluator.swift */; };
 		A62F6C9E1A21C1F400D4B91A /* OnePartOpenCloseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */; };
 		A6822B061A83E32700A23FC3 /* spaceOverwriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6822B051A83E32700A23FC3 /* spaceOverwriter.swift */; };
@@ -69,7 +68,6 @@
 
 /* Begin PBXFileReference section */
 		A60A75081A29B85C00576F13 /* ConditonEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditonEvaluator.swift; sourceTree = "<group>"; };
-		A6133A631AD43AB700CFABCB /* Regexes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regexes.swift; sourceTree = "<group>"; };
 		A62792B61A3E4F9E0086C664 /* SpaceEvaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceEvaluator.swift; sourceTree = "<group>"; };
 		A62F6C9D1A21C1F400D4B91A /* OnePartOpenCloseParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePartOpenCloseParser.swift; sourceTree = "<group>"; };
 		A6822B051A83E32700A23FC3 /* spaceOverwriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spaceOverwriter.swift; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 				A6E2B06D1A15EB390025C2E9 /* Engine */,
 				A6E23C9A1A154E350057DB7B /* main.swift */,
 				A6E23A451A3ECC35001581D5 /* CoreInterface.swift */,
-				A6133A631AD43AB700CFABCB /* Regexes.swift */,
 			);
 			path = Swifty;
 			sourceTree = "<group>";
@@ -400,7 +397,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6FB5EF71A27AA8700FE7161 /* _DDNumberExpression.m in Sources */,
-				A6133A641AD43AB700CFABCB /* Regexes.swift in Sources */,
 				A6E59D651A289DC90088729A /* RND.swift in Sources */,
 				A6FB5F071A27AA8700FE7161 /* DDTypes.m in Sources */,
 				A6FB5EFF1A27AA8700FE7161 /* DDExpression.m in Sources */,

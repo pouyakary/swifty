@@ -296,7 +296,7 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
                 
                 var command = expression.readAtI()
                 
-                if String(command) =~ "[a-zA-Z\(rule)]" {
+                if String(command) =~ "[a-zA-Z0-9\(rule)]" {
                     replaceString.append(command)
                     
                 } else if command == "[" {

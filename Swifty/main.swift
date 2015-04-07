@@ -206,7 +206,7 @@ println("                          |___/       ")
 colorReset()
 
 println("\nSwifty : Apple Core REPL for Arendelle")
-println("Edition 1, Build 78 - Supporting up to Specification 2XII")
+println("Edition 1, Build 79 - Supporting up to Specification 2XII")
 println("Copyright 2014-\(currentYear()) Pouya Kary <k@arendelle.org>")
 
 func screenResize () {

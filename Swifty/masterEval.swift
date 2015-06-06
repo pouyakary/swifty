@@ -31,6 +31,62 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
             result += "\"" + onePartOpenCloseParser(openCloseCommand: "\"", spaces: &spaces, arendelle: &theCode, screen: &screen, preprocessorState: true) + "\""
             --theCode.i
             
+        
+        case "*" :
+            ++theCode.i
+            currentChar = Array(theCode.code)[theCode.i]
+            
+            //
+            // HYPHEN ASTERISKS COMMENT REMOVER
+            //
+            
+            if currentChar == "-" {
+             
+                theCode.i++
+                var whileControl = true
+                
+                while theCode.i < theCode.code.utf16Count && whileControl {
+                    
+                    currentChar = Array(theCode.code)[theCode.i]
+                    
+                    if currentChar == "-" {
+                        
+                        theCode.i++
+                        
+                        if theCode.i < theCode.code.utf16Count {
+                            
+                            currentChar = Array(theCode.code)[theCode.i]
+                            
+                            if currentChar == "*" {
+                                
+                                whileControl = false
+                                
+                            } else {
+                                
+                                theCode.i++
+                                currentChar = Array(theCode.code)[theCode.i]
+                                
+                            }
+                        }
+                    }
+                    
+                    theCode.i++
+                }
+                
+                if whileControl == true { report("Unfinished *- ... -* comment", &screen) }
+            //
+            // ARE WE WRONG
+            //
+            
+            } else {
+            
+                result += "*"
+            
+            }
+        
+            theCode.i--
+        
+        
         case "/" :
             ++theCode.i
             currentChar = Array(theCode.code)[theCode.i]

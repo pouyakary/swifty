@@ -168,14 +168,14 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             
                 if space.name.hasPrefix("$") {
                     
-                    let spaceValue = spaceInput(text: "Sign stored space '\(space.name)' at index '\(space.index)' with a number:", screen: &screen)
+                    let spaceValue = spaceInput(text: "Sign stored space '\(space.name)' at index '\(space.index)' with a number: ", screen: &screen)
                     
                     saveNumberToStoredSpace(number: [spaceValue], toSpace: space.name.replace("$", withString: ""))
                     
                     // simple space
                     
                 } else {
-                    let spaceValue = spaceInput(text: "Sign space '@\(space.name)' at index '\(space.index)' with a number:", screen: &screen)
+                    let spaceValue = spaceInput(text: "Sign space '@\(space.name)' at index '\(space.index)' with a number: ", screen: &screen)
                     saveToSpace(spaceName: space.name, indexAtSpace: space.index, valueToSave: spaceValue, spaces: &spaces)
                 }
             

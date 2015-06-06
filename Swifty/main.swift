@@ -7,8 +7,10 @@
 //
 
 //
-// BUILD 80
+// BUILD 81
 //
+
+let build_number = 81;
 
 
 //
@@ -21,9 +23,9 @@
 
 import Foundation
 
-/* ------------------------------- *
- * ::::: R E P L   I N P U T ::::: *
- * ------------------------------- */
+/* ───────────────────────────────────────── *
+ * :::::::::: R E P L   I N P U T :::::::::: *
+ * ───────────────────────────────────────── */
 
 func replInput () -> String {
 
@@ -31,7 +33,7 @@ func replInput () -> String {
     var result = ""
     var specialCharactersNumbers = [ "/\\*":0, "(":0 , "[":0, "{":0 , "*\\/":0, ")":0 , "]":0, "}":0 ]
     
-    PiConsoleBlue(); PiConsoleBold(); print("\nλ "); PiConsoleWhite()
+    PiConsoleBlue(); PiConsoleBold(); print("\nλ "); PiConsoleReset()
     
     while whileControlForREPLInput {
         
@@ -57,7 +59,7 @@ func replInput () -> String {
             whileControlForREPLInput = false
             
         } else {
-            PiConsoleBlue(); PiConsoleBold(); print("→ "); PiConsoleWhite()
+            PiConsoleBlue(); PiConsoleBold(); print("→ "); PiConsoleReset()
         }
     }
     return result
@@ -80,7 +82,7 @@ func currentYear () -> Int {
 func colorWriter (text: String) {
 
     PiConsoleReset()
-    print(" ⎪ ")
+    print("  ⎪ ")
     PiConsoleBlue()
     
     for index in text {
@@ -110,7 +112,6 @@ func colorWriter (text: String) {
 func colorReset () {
 
     PiConsoleReset()
-    PiConsoleWhite()
 
 }
 
@@ -224,7 +225,7 @@ var masterSpaces: [String:[NSNumber]] = ["arendelle":[0]]
 masterSpaces.removeAll(keepCapacity: false)
 
 
-println("")
+println()
 colorWriter("S W I F T Y")
 colorWriter("A R E N D E L L E")
 colorWriter("C O M P I L E R")
@@ -273,12 +274,12 @@ while true {
     
         prompts--
         
-        println("\n  ⎪ ♨︎ Season Information\n  ⎪ → prompts: \(prompts - fails) successful of \(prompts)\n  ⎪ → blueprints: total of \(blueprints)\n  ⎪ → direct mathEval access: \(directs - directFails) successful of \(directs)\n  ⎪ → matrix prints: \(prints)\n  ⎪ → dumps: \(dumps)\n\n  Goodbye!\n\n")
+        println("\n  ⎪ ♨︎ Season Information\n  ⎪ → prompts: \(prompts - fails) successful of \(prompts)\n  ⎪ → blueprints: total of \(blueprints)\n  ⎪ → direct mathEval access: \(directs - directFails) successful of \(directs)\n  ⎪ → printed grid matrices: \(prints)\n  ⎪ → dumps: \(dumps)\n\n  Goodbye!\n\n")
         
         PiConsoleReset()
         break
         
-    } else if code == "matrix" {
+    } else if code == "grid" {
     
         prints++
         printMatrix(result: masterScreen)
@@ -295,22 +296,22 @@ while true {
         
     } else if code == "help" {
         
-        println("                                                        ")
-        println("  ⎪ REPL for Swifty: Arendelle's Apple Core             ")
-        println("  ⎪ Edition 1, Build 80, Supporting Specification 2XII  ")
-        println("  ⎪ Copyright 2014-\(currentYear()) Pouya Kary <k@arendelle.org>")
-        println("  ⎪                                                     ")
-        println("  ⎪ λ [code]   : Evalautes the [code]                   ")
-        println("  ⎪ λ = [expr] : Evaluates the [expr]                   ")
-        println("  ⎪ λ dump     : Prints the spaces                      ")
-        println("  ⎪ λ pwd      : codeScreen.mainPath                    ")
-        println("  ⎪ λ cls      : Terminal clean                         ")
-        println("  ⎪ λ clean    : Reset + CLS                            ")
-        println("  ⎪ λ reset    : Resets the screen into a new blueprint ")
-        println("  ⎪ λ resize   : Resizes the                            ")
-        println("  ⎪ λ matrix   : Prints the matrix                      ")
-        println("  ⎪ λ title    : Shows the codeScreen.title             ")
-        println("  ⎪ λ help     : Shows this help                        ")
+        println("                                                                           ")
+        println("  ⎪ Core Developer REPL for Swifty: Arendelle's Apple Core                 ")
+        println("  ⎪ Edition 1, Build \(build_number), Supporting up to specification 2XII  ")
+        println("  ⎪ Copyright 2014-\(currentYear()) Pouya Kary <k@arendelle.org>           ")
+        println("  ⎪                                                                        ")
+        println("  ⎪ λ [Command-Zone] : Evalautes the given [Command-Zone]                  ")
+        println("  ⎪ λ = [MEL]        : Evaluates the given [MEL]                           ")
+        println("  ⎪ λ dump           : Prints the spaces                                   ")
+        println("  ⎪ λ pwd            : codeScreen.mainPath                                 ")
+        println("  ⎪ λ cls            : Terminal clean                                      ")
+        println("  ⎪ λ clean          : Reset + CLS                                         ")
+        println("  ⎪ λ reset          : Resets the screen into a new blueprint              ")
+        println("  ⎪ λ resize         : Resizes the                                         ")
+        println("  ⎪ λ grid           : Prints the Grid Matrix                              ")
+        println("  ⎪ λ title          : Shows the codeScreen.title                          ")
+        println("  ⎪ λ help           : Shows this help                                     ")
     
     } else if code.hasPrefix("= ") {
         

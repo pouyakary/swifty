@@ -12,6 +12,8 @@
 	<dict>
 		<key>39279107AD2F8780C922F5C02C70C144C803D5C8</key>
 		<string>https://github.com/arendelle/swifty.git</string>
+		<key>71B9C1C5889995AF72690F9664C93129F1151FF6</key>
+		<string>https://github.com/karysystems/foundation.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Swifty.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>39279107AD2F8780C922F5C02C70C144C803D5C8</key>
 		<string>../..</string>
+		<key>71B9C1C5889995AF72690F9664C93129F1151FF6</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/arendelle/swifty.git</string>
@@ -28,6 +32,14 @@
 	<string>39279107AD2F8780C922F5C02C70C144C803D5C8</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>71B9C1C5889995AF72690F9664C93129F1151FF6</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

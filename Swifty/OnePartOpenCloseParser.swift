@@ -8,161 +8,252 @@
 
 import Foundation
 
-func onePartOpenCloseParser (#openCloseCommand:Character, inout #spaces: [String:[NSNumber]], inout #arendelle: Arendelle, inout #screen: codeScreen, #preprocessorState: Bool) -> String {
 
-    // going to the right char
-    ++arendelle.i
+/* ────────────────────────────────────────────────────────────────────────────────────────────────────────────── *
+ * :::::::::::::::::::::::::::::::::::::::::: S W I F T Y   L E X E R S ::::::::::::::::::::::::::::::::::::::::: *
+ * ────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+func onePartOpenCloseParser ( #openCloseCommand: Character , inout #spaces: [ String : [ NSNumber ]] , inout #arendelle: Arendelle , inout #screen: codeScreen , #preprocessorState: Bool ) -> String {
     
-    // our result
-    var result:String = ""
+    //
+    // ─── VARS ───────────────────────────────────────────────────────────────────────────────────────────
+    //
     
-    // value replacing controller
-    var replace:Bool = false
+        // • • • • •
     
-    // corrent char
-    var charToRead:Character
+        ++arendelle.i // going to the right char
     
-    while arendelle.whileCondtion() {
+        // • • • • •
     
-        // corrent char
-        charToRead = arendelle.readAtI()
+        var result: String = "" // our result
+    
+        // • • • • •
+    
+        var replace: Bool = false // value replacing controller
+    
+        // • • • • •
+    
+        var charToRead: Character // corrent char
+    
+    
+    
+    //
+    // ─── BODY ───────────────────────────────────────────────────────────────────────────────────────────
+    //
+
+        while arendelle.whileCondtion() {
+            
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         
-        switch charToRead {
+                // • • • • •
+            
+                charToRead = arendelle.readAtI() // corrent char
+            
+                // • • • • •
         
-        case openCloseCommand :
-            arendelle.i++
-            return result
+                switch charToRead {
+        
+                    case openCloseCommand :
+                        
+                        arendelle.i++
             
-        case "|" :
-            var replacerParts = openCloseLexer(openCommand: "|", arendelle: &arendelle, screen: &screen)
-            var replacerOnePart = ""
-            for part in replacerParts { replacerOnePart += part }
+                        return result
+                    
             
-            if preprocessorState == true {
-                result += "|"
-                result += replacerOnePart
-                result += "|"
+                    case "|" : //= charToRead
+                        
+                        // • • • • •
+                        
+                        var replacerParts = openCloseLexer(
+                            
+                            
+                            openCommand: "|"        ,
+                            
+                              arendelle: &arendelle ,
+                            
+                                 screen: &screen
+                            
+                            
+                        ) //end of var replacerParts = openCloseLexer
+                        
+                        
+                        // • • • • •
+                        
+                        var replacerOnePart = ""
+                        
+                        // • • • • •
+                        
+                        for part in replacerParts {
+                            
+                            
+                            replacerOnePart += part
+                            
+                        
+                        } //end of for part in replacerParts
+                        
+                        // • • • • •
+            
+                        if preprocessorState == true {
+                            
+                            // • • • • •
+                            
+                            result += "|\( replacerOnePart )|"
+                            
+                            // • • • • •
                 
-                if arendelle.i >= arendelle.codeSize() {
-                    report("Unfinished string interpolation | ... | found", &screen)
-                }
+                            if arendelle.i >= arendelle.codeSize( ) {
+                                
+                                
+                                report( "Unfinished string interpolation | ... | found" , &screen )
+                                
+                                
+                            } //of if arendelle.i >= arendelle.codeSize()
+                            
                 
-            } else {
-                if replacerOnePart != "" {
+                        } else { //of if preprocessorState == true
+                            
+                            // • • • • •
+                            
+                            if replacerOnePart != "" {
                     
-                    result += mathEval(stringExpression: replacerOnePart, screen: &screen, spaces: &spaces).result.stringValue
+                                result += mathEval(
+                                    
+                                    stringExpression: replacerOnePart   ,
+                                    
+                                              screen: &screen           ,
+                                    
+                                              spaces: &spaces
+                                    
+                                ).result.stringValue
+                                
+                            // • • • • •
                     
-                } else {
-                    var errtext = ""
+                            } else { //of if replacerOnePart != ""
+                                
+                                
+                                // • • • • •
+                                
+                                var errtext = ""
+                                
+                                // • • • • •
                     
-                    if result.utf16Count > 10 {
-                        
-                        
-                        
-                    } else {
-                        
-                        errtext = result
-                        
-                    }
+                                if result.utf16Count <= 10 {
+                                    
+                                    errtext = result
+                                    
+                                } //end of if result.utf16Count <= 10
+                                
+                                // • • • • •
                     
-                    screen.errors.append("Empty string interpolation found: \"\(result)| ... |")
-                }
-            }
+                                screen.errors.append( "Empty string interpolation found: \"\( result )| ... |" )
+                                
+                                
+                            } //end of if replacerOnePart != ""
+                            
+                            
+                        } //end of if preprocessorState == true
+                        
+                        
+                        // • • • • •
+                        
+                        --arendelle.i
+                    
+                
             
-            --arendelle.i
+                    case "\\" : //= charToRead
+                        
+                        // • • • • •
             
-        case "\\" :
+                        if arendelle.whileCondtion( ) {
+                            
+                            // • • • • •
             
-            if arendelle.whileCondtion() {
+                            arendelle.i++
+                            
+                            charToRead = arendelle.readAtI( )
+                            
+                            // • • • • •
+                
+                            switch charToRead {
+                    
+                                case "n" : //= charToRead
+                                    
+                                    result += "\n"
+                    
+                                
+                                case "t" : //= charToRead
+                                    
+                                    result += "   " // 1 tab in Arendelle == 3 white spaces;
+                    
+                                
+                                case "\"" : //= charToRead
+                                    
+                                    result += "\""
+                                
+                    
+                                case "'" : //= charToRead
+                                    
+                                    result += "'"
+                                
+                    
+                                case "\\" : //= charToRead
+                                    
+                                    result += "\\"
+                                
+                    
+                                case "|" : //= charToRead
+                                    
+                                    result += "|"
+                                
+                    
+                                default : //= charToRead
+                                    
+                                    report( "Bad escape sequence: '\\\( charToRead )'", &screen )
+                                
+                                
+                                } //end of charToRead
+            
+                            
+                        } else { //= arendelle.whileCondtion( )
+            
+                            
+                            report( "Unfinished \( openCloseCommand )...\( openCloseCommand ) grammar found" , &screen )
+                            
+                            return "BadGrammar"
+                            
+            
+                        } //end of if arendelle.whileCondtion( )
+                    
+            
+                    default: //= charToRead
+                        
+                        
+                        result.append( charToRead )
+                    
+        
+                } //end of switch charToRead
+            
+                // • • • • •
             
                 arendelle.i++
-                charToRead = arendelle.readAtI()
-                
-                switch charToRead {
-                    
-                case "n" :
-                    result += "\n"
-                    
-                case "t" :
-                    result += "   " // 1 tab in Arendelle == 3 white spaces;
-                    
-                case "\"" :
-                    result += "\""
-                    
-                case "'"  :
-                    result += "'"
-                    
-                case "\\" :
-                    result += "\\"
-                    
-                case "|" :
-                    result += "|"
-                    
-                    
-                /* 
-                    
-                    /* ----------------------------------------------------------------------- *
-                     * ::::: I N   C A S E   O F   S W I F T   I N T E R P O L A T I O N ::::: *
-                     * ----------------------------------------------------------------------- */
-                    
-                case "(" :
-                    var replacerParts = openCloseLexer(openCommand: "(", arendelle: &arendelle, screen: &screen)
-                    var replacerOnePart = ""
-                    for part in replacerParts { replacerOnePart += part }
-                    
-                    if preprocessorState == true {
-                        result += "\\("
-                        result += replacerOnePart
-                        result += ")"
-                        
-                        if arendelle.i >= arendelle.codeSize() {
-                            report("Unfinished string interpolation \\( ... ) found", &screen)
-                        }
-                        
-                    } else {
-                        if replacerOnePart != "" {
-                            
-                            result += mathEval(stringExpression: replacerOnePart, screen: &screen, spaces: &spaces).result.stringValue
-                            
-                        } else {
-                            var errtext = ""
-                            
-                            if result.utf16Count > 10 {
-                            
-                                
-                            
-                            } else {
-                            
-                                errtext = result
-                            
-                            }
-                            
-                            screen.errors.append("Empty string interpolation found: \"\(result)\\()...\"")
-                        }
-                    }
-                    
-                    --arendelle.i */
-                    
-                default:
-                    report("Bad escape sequence: '\\\(charToRead)'", &screen)
-                }
             
-            } else {
             
-                report("Unfinished \(openCloseCommand)...\(openCloseCommand) grammar found", &screen)
-                return "BadGrammar"
-            
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    
             }
-            
-        default:
-            result.append(charToRead)
-        
-        }
-        
-        arendelle.i++
     
-    }
+    // ────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+        report( "Unfinished \( openCloseCommand )...\( openCloseCommand ) grammar found" , &screen )
     
-    report("Unfinished \(openCloseCommand)...\(openCloseCommand) grammar found", &screen)
-    return "BadGrammar"
-}
+        return "BadGrammar"
+    
+    
+    // ────────────────────────────────────────────────────────────────────────────────────────────────────
+
+    
+} //end of func onePartOpenCloseParser
+
+
+

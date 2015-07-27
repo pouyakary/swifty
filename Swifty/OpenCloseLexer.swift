@@ -8,78 +8,233 @@
 
 import Foundation
 
-func openCloseLexer ( #openCommand: Character, inout #arendelle: Arendelle, inout #screen: codeScreen) -> [String] {
-    
-    ++arendelle.i
-                        
-    var command:Character
-                        
-    var arg:String = ""
-    var args:[String] = []
-    var whileControl = true
-    var openCloseDictionary:[Character:Character] = [ "{":"}", "(":")", "[":"]" , "<":">", "|":"|" ]
-    let closeCommand = openCloseDictionary[openCommand]!
-    
-    while arendelle.whileCondtion() && whileControl {
-        
-        command = arendelle.readAtI()
-                            
-        switch command {
-                                
-        case "," :
-            args.append(arg)
-            arg=""
-            
-        
-        case "'", "\"" :
-            var spaces : [String:[NSNumber]] = ["return":[0]]
-            arg += "\(command)\(onePartOpenCloseParser(openCloseCommand: command, spaces: &spaces, arendelle: &arendelle, screen: &screen, preprocessorState: true))\(command)"
-            --arendelle.i
-            
-            
-        case "[", "(", "{" :
-                                
-            let innerOpenCommand = command
-            let innerCloseCommand = openCloseDictionary[innerOpenCommand]
-            let newCode = openCloseLexer(openCommand: innerOpenCommand, arendelle: &arendelle, screen: &screen)
-            var result:String = ""
-                                
-            switch newCode.count {
-                                    
-            case 1:
-                result = newCode[0]
-                                    
-            case 2:
-                result = newCode[0] + "," + newCode[1]
-                                    
-            case 3:
-                result = newCode[0] + "," + newCode[1] + "," + newCode[2]
-                                    
-            default:
-                report("Grammar with more than 3 parts", &screen)
-                return["BadGrammar"] 
-                                    
-            }
-                                
-            arg += String(innerOpenCommand) + result + String(innerCloseCommand!)
-            --arendelle.i
-                                
-        case closeCommand :
-            args.append(arg)
-            whileControl = false
-                                
-        default:
-            arg.append(command)
-                                
-        }
-        
-        ++arendelle.i
-    }
-    
-    if args.count == 0 { args.append("BadGrammar") }
-                        
-    if whileControl == true { report ("Unfinished grammar found", &screen) }
-    
-    return args
 
+/* ────────────────────────────────────────────────────────────────────────────────────────────────────────────── *
+ * :::::::::::::::::::::::::::::::::::::::::: S W I F T Y   L E X E R S ::::::::::::::::::::::::::::::::::::::::: *
+ * ────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+func openCloseLexer ( #openCommand: Character , inout #arendelle: Arendelle , inout #screen: codeScreen ) -> [ String ] {
+    
+    //
+    // ─── FUNCTION VARS ──────────────────────────────────────────────────────────────────────────────────
+    //
+
+        // • • • • •
+    
+        ++arendelle.i
+    
+        // • • • • •
+                        
+        var command: Character
+                        
+        var arg: String = ""
+    
+        var args: [ String ] = [ ]
+    
+        var whileControl = true
+    
+        // • • • • •
+    
+        var openCloseDictionary: [ Character : Character ] = [
+        
+            "{" : "}" ,
+        
+            "(" : ")" ,
+        
+            "[" : "]" ,
+            
+            "<" : ">" ,
+        
+            "|" : "|"
+            
+        ] //end of var openCloseDictionary: [ Character : Character ] = [
+    
+        // • • • • •
+    
+        let closeCommand = openCloseDictionary[ openCommand ]!
+    
+    
+    //
+    // ─── MAIN LOOP ──────────────────────────────────────────────────────────────────────────────────────
+    //
+    
+    
+        while arendelle.whileCondtion( ) && whileControl {
+            
+            // • • • • •
+        
+            command = arendelle.readAtI( )
+            
+            // • • • • •
+                            
+            switch command {
+                
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                
+                
+                case "," : //= command
+            
+                    args.append(arg)
+            
+                    arg=""
+            
+                
+                
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        
+                
+                case "'", "\"" : //= command
+                    
+                    // • • • • •
+                
+                    var spaces : [ String : [ NSNumber ] ] = [ "return" : [ 0 ] ]
+                    
+                    // • • • • •
+                    
+                    let argPart = onePartOpenCloseParser(
+                        
+                         openCloseCommand: command      ,
+                        
+                                   spaces: &spaces      ,
+                        
+                                arendelle: &arendelle   ,
+                        
+                                   screen: &screen      ,
+                        
+                        preprocessorState: true
+                    
+                    ) //end of let argPart = onePartOpenCloseParser
+                    
+                    // • • • • •
+            
+                    arg += "\(command)\(argPart)\(command)"
+                    
+                    // • • • • •
+            
+                    --arendelle.i
+            
+                
+                
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                
+                
+                case "[", "(", "{" : //= command
+                    
+                    // • • • • •
+                    
+                    let innerOpenCommand = command
+            
+                    let innerCloseCommand = openCloseDictionary[ innerOpenCommand ]
+                    
+                    var result : String = ""
+                    
+                    // • • • • •
+            
+                    let newCode = openCloseLexer(
+                        
+                        openCommand: innerOpenCommand   ,
+                        
+                          arendelle: &arendelle         ,
+                        
+                             screen: &screen
+                    
+                    ) //end of let newCode = openCloseLexer
+                    
+                    // • • • • •
+                    
+                    switch newCode.count {
+                                    
+                        case 1: //= newCode.count
+                    
+                            result = newCode[ 0 ]
+                        
+                                    
+                        case 2: //= newCode.count
+                    
+                            result = newCode[ 0 ] + "," + newCode[ 1 ]
+                        
+                                    
+                        case 3: //= newCode.count
+                    
+                            result = newCode[ 0 ] + "," + newCode[ 1 ] + "," + newCode[ 2 ]
+                        
+                                    
+                        default: //= newCode.count
+                    
+                            report( "Grammar with more than 3 parts" , &screen )
+                
+                            return[ "BadGrammar" ]
+                        
+                                    
+                    } //end of switch newCode.count {
+                    
+                    // • • • • •
+                    
+                    arg += String( innerOpenCommand ) + result + String( innerCloseCommand! )
+                    
+                    // • • • • •
+            
+                    --arendelle.i
+            
+            
+                
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                
+                
+                case closeCommand : //= command
+            
+                    args.append( arg )
+            
+                    whileControl = false
+                
+                
+                
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            
+                                
+                default : //= command
+            
+                    arg.append( command )
+                
+                
+                } //end of switch command
+            
+            
+            
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        
+            
+            ++arendelle.i
+            
+            
+        } //end of while arendelle.whileCondtion( ) && whileControl
+    
+    
+    //
+    // ─── FINAL ──────────────────────────────────────────────────────────────────────────────────────────
+    //
+    
+        // • • • • •
+    
+        if args.count == 0 {
+            
+            args.append( "BadGrammar" )
+    
+        } //end of if args.count == 0
+    
+        // • • • • •
+                        
+        if whileControl == true {
+            
+            report ( "Unfinished grammar found" , &screen )
+    
+        } //end of if whileControl == true
+    
+        // • • • • •
+    
+        return args
+    
+    
+    // ────────────────────────────────────────────────────────────────────────────────────────────────────
+    
 }

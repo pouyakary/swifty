@@ -10,12 +10,12 @@
 // BUILD 81
 //
 
-let build_number = 81;
+let build_number = 86;
 
 
 //
 //  THIS VERSION OF SWIFTY SUPPORTS ARENDELLE 
-//  UP TO ARENDELLE SPECIFICATION 2XII
+//  UP TO ARENDELLE SPECIFICATION 2XIV
 //
 
 

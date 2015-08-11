@@ -183,6 +183,18 @@ func replacer (#expressionString: String, inout #spaces: [String:[NSNumber]], in
             case "n" :
                 replaceString = "\(screen.n)"
                 
+            case "c" :
+                var color = 0;
+                
+                if screen.x < screen.screen.colCount() && screen.y < screen.screen.rowCount() {
+                
+                    color = screen.screen[ screen.x , screen.y ]
+                
+                }
+                
+                replaceString = "\(color)"
+                
+                
             case "pi" :
                 replaceString = "3.141592653589"
                 

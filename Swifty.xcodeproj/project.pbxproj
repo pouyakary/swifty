@@ -366,6 +366,7 @@
 		A6E23C8F1A154E350057DB7B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Arendelle Language";
 				TargetAttributes = {

@@ -32,7 +32,7 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
             --theCode.i
             
         
-        case "*" :
+        case "(" :
             ++theCode.i
             currentChar = Array(theCode.code)[theCode.i]
             
@@ -40,7 +40,7 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
             // HYPHEN ASTERISKS COMMENT REMOVER
             //
             
-            if currentChar == "-" {
+            if currentChar == "*" {
              
                 theCode.i++
                 var whileControl = true
@@ -49,7 +49,7 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
                     
                     currentChar = Array(theCode.code)[theCode.i]
                     
-                    if currentChar == "-" {
+                    if currentChar == "*" {
                         
                         theCode.i++
                         
@@ -57,7 +57,7 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
                             
                             currentChar = Array(theCode.code)[theCode.i]
                             
-                            if currentChar == "*" {
+                            if currentChar == ")" {
                                 
                                 whileControl = false
                                 
@@ -73,14 +73,16 @@ func preprocessor (#codeToBeSpaceFixed: String, inout #screen: codeScreen) -> St
                     theCode.i++
                 }
                 
-                if whileControl == true { report("Unfinished *- ... -* comment", &screen) }
+                if whileControl == true { report("Unfinished (* ... *) comment", &screen) }
+                
+                
             //
             // ARE WE WRONG
             //
             
             } else {
             
-                result += "*"
+                result += "("
             
             }
         

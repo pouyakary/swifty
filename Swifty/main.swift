@@ -10,7 +10,7 @@
 // BUILD 81
 //
 
-let build_number = 86;
+let build_number = 87;
 
 
 //
@@ -172,6 +172,32 @@ func printMatrix (#result: codeScreen) {
 
 
 //
+// Generate Gird File String
+//
+
+func generateGridFileString ( #screen: codeScreen ) -> String {
+
+    var result : String = ""
+    
+    for var i = 0; i < y; ++i {
+    
+        for var j = 0; j < x - 1; ++j {
+        
+            result += "\( screen.screen[ j , i ] ), "
+        
+        }
+        
+        result += "\( screen.screen[ x - 1 , i ] );\n"
+    
+    }
+    
+    
+    return result;
+
+}
+
+
+//
 // PRINT ERROR
 //
 
@@ -296,70 +322,106 @@ while true {
         
     } else if code == "help" {
         
-        println("                                                                           ")
-        println("  ⎪ Core Developer REPL for Swifty: Arendelle's Apple Core                 ")
-        println("  ⎪ Edition 1, Build \(build_number), Supporting up to specification 2XII  ")
-        println("  ⎪ Copyright 2014-\(currentYear()) Pouya Kary <k@arendelle.org>           ")
-        println("  ⎪                                                                        ")
-        println("  ⎪ λ [Command-Zone] : Evalautes the given [Command-Zone]                  ")
-        println("  ⎪ λ = [MEL]        : Evaluates the given [MEL]                           ")
-        println("  ⎪ λ dump           : Prints the spaces                                   ")
-        println("  ⎪ λ pwd            : codeScreen.mainPath                                 ")
-        println("  ⎪ λ cls            : Terminal clean                                      ")
-        println("  ⎪ λ clean          : Reset + CLS                                         ")
-        println("  ⎪ λ reset          : Resets the screen into a new blueprint              ")
-        println("  ⎪ λ resize         : Resizes the                                         ")
-        println("  ⎪ λ grid           : Prints the Grid Matrix                              ")
-        println("  ⎪ λ title          : Shows the codeScreen.title                          ")
-        println("  ⎪ λ help           : Shows this help                                     ")
+        println( "                                                                           " )
+        println( "  ⎪ Core Developer REPL for Swifty: Arendelle's Apple Core                 " )
+        println( "  ⎪ Edition 1, Build \(build_number), Supporting up to specification 2XII  " )
+        println( "  ⎪ Copyright 2014-\(currentYear()) Pouya Kary <k@arendelle.org>           " )
+        println( "  ⎪                                                                        " )
+        println( "  ⎪ λ [Command-Zone] : Evalautes the given [Command-Zone]                  " )
+        println( "  ⎪ λ = [MEL]        : Evaluates the given [MEL]                           " )
+        println( "  ⎪ λ dump           : Prints the spaces                                   " )
+        println( "  ⎪ λ pwd            : codeScreen.mainPath                                 " )
+        println( "  ⎪ λ cls            : Terminal clean                                      " )
+        println( "  ⎪ λ clean          : Reset + CLS                                         " )
+        println( "  ⎪ λ reset          : Resets the screen into a new blueprint              " )
+        println( "  ⎪ λ resize         : Resizes the                                         " )
+        println( "  ⎪ λ grid           : Prints the Grid Matrix                              " )
+        println( "  ⎪ λ title          : Shows the codeScreen.title                          " )
+        println( "  ⎪ λ help           : Shows this help                                     " )
     
     } else if code.hasPrefix("= ") {
         
         directs++
         
-        var tempScreen = codeScreen(xsize: x, ysize: y)
+        var tempScreen = codeScreen( xsize: x , ysize: y)
 
-        var expr =  preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen).removeFromStart("=");
+        var expr =  preprocessor( codeToBeSpaceFixed: code , screen: &tempScreen ).removeFromStart( "=" );
             
-        var tempResult = mathEval(stringExpression: expr, screen: &tempScreen, spaces: &masterSpaces)
+        var tempResult = mathEval( stringExpression: expr , screen: &tempScreen , spaces: &masterSpaces )
             
         if ( tempScreen.errors.count > 0 ) {
                 
             directFails++
                 
-            printError(result: tempScreen)
+            printError( result: tempScreen )
                 
         } else {
                 
             if tempResult.itsNotACondition {
                 
-                titleWriteLine("\(tempResult.result)")
+                titleWriteLine( "\( tempResult.result )" )
                     
             } else {
                     
                 if tempResult.result == 1 {
                     
-                    titleWriteLine("Right")
+                    titleWriteLine( "Right" )
                     
                 } else {
                     
-                    print("\n--> "); PiConsoleRed(); PiConsoleBold(); println("Wrong"); colorReset()
+                    print( "\n--> " ); PiConsoleRed( ); PiConsoleBold( ); println( "Wrong" ); colorReset( )
                         
                 }
             }
         }
+        
+        
+    } else if code.hasPrefix( "save " ) {
+        
+        let arg = code.removeFromStart( "save " )
+        
+        let gridFileURL = NSURL( fileURLWithPath: "\( NSHomeDirectory( ) )/\( arg ).grid" )
+        
+        let gridText = generateGridFileString( screen: masterScreen )
+        
+        let error = gridText.writeToURL( gridFileURL! , atomically: true , encoding: NSUTF8StringEncoding , error: nil )
+        
+        
+        print("\n--> ")
+        
+        if !error {
+            
+            PiConsoleRed()
+        
+            println("✘ Failde to export the Grid")
+            
+            PiConsoleReset()
+            
+        
+        } else {
+            
+            PiConsoleGreen()
+            
+            println("✓ Grid exported")
+            
+            PiConsoleReset()
+            
+        }
+        
     
     } else {
 
         var tempScreen = masterScreen
-        var tempArendelle = Arendelle(code: preprocessor(codeToBeSpaceFixed: code, screen: &tempScreen))
+        
+        var tempArendelle = Arendelle( code: preprocessor( codeToBeSpaceFixed: code , screen: &tempScreen ) )
+        
         var tempSpaces = masterSpaces
             
-        eval(&tempArendelle, &tempScreen, &tempSpaces);
+        eval( &tempArendelle , &tempScreen , &tempSpaces )
             
         if tempScreen.errors.count > 0 {
                 
-            printError(result: tempScreen)
+            printError( result: tempScreen)
                 
         } else {
                 

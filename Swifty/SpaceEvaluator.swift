@@ -208,10 +208,10 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
             if ( grammarParts[1].hasPrefix("\"") && grammarParts[1].hasSuffix("\"") ) ||
                ( grammarParts[1].hasPrefix("'") && grammarParts[1].hasSuffix("'") ){
                 
-                var spaceInputArendelleFortmat = Arendelle(code: grammarParts[1])
+                var spaceInputArendelleFormat = Arendelle(code: grammarParts[1])
                 var stringSing = "\"" as Character ; if grammarParts[1].hasPrefix("'") { stringSing = "'"; }
             
-                let spaceInputText = onePartOpenCloseParser(openCloseCommand: stringSing, spaces: &spaces, arendelle: &spaceInputArendelleFortmat, screen: &screen, preprocessorState:false)
+                let spaceInputText = onePartOpenCloseParser(openCloseCommand: stringSing, spaces: &spaces, arendelle: &spaceInputArendelleFormat, screen: &screen, preprocessorState:false)
                 var spaceValue = spaceInput(text: spaceInputText, screen: &screen)
                 
                 // if it's stored space
@@ -263,7 +263,7 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 // STORED SPACE
                 //
                     
-                } else if grammarParts[0].hasPrefix("$") {
+                } else {
                     
                     if checkIfStoredSpaceExists(spaceName: space.name, screen: &screen) {
                     
@@ -287,24 +287,6 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                     }
                 
                 }
-                
-                
-                
-            //
-            // ( space , @copyAFullSpaceToSpace )
-            //
-            
-            } else if regexMatchForPartTwo.items.count == 1 && regexMatchForPartTwo.items[0] == grammarParts[1] {
-                
-                let toBeCopiedArray = spaceOverwriterWithID(grammarParts[1], &spaces, &screen)
-                
-                if grammarParts[0].hasPrefix("$") {
-                    saveNumberToStoredSpace(number: toBeCopiedArray, toSpace: grammarParts[0].replace("$", withString: ""))
-                } else {
-                    spaces["@\(grammarParts[0])"] = toBeCopiedArray
-                }
-
-                
                 
             //
             // ( space , 1; 1; 2; 3; 5; 8; 13; 21; 34; 55 )
@@ -397,24 +379,45 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                 
             } else {
                 
-                let spaceValue = mathEval(stringExpression: grammarParts[1], screen: &screen, spaces: &spaces)
+                let isItAFullSpaceToSpaceCopyRegexChecker = grammarParts[ 1 ] =~ "@[a-zA-Z][a-zA-Z0-9_]"
+                var isItASpaceToSpaceCopy = false
                 
-                if spaceValue.doesItHaveErros == false {
+                if isItAFullSpaceToSpaceCopyRegexChecker.items.count == 1 {
+                    if isItAFullSpaceToSpaceCopyRegexChecker.items[ 0 ] == grammarParts[ 0 ] {
+                        isItASpaceToSpaceCopy = true
+                    }
+                }
+                
+                
+                if isItASpaceToSpaceCopy {
                     
-                    if spaceValue.itsNotACondition == true {
+                    let toBeCopiedArray = spaceOverwriterWithID(grammarParts[1], &spaces, &screen)
+                    
+                    if grammarParts[0].hasPrefix("$") {
+                        saveNumberToStoredSpace(number: toBeCopiedArray, toSpace: grammarParts[0].replace("$", withString: ""))
+                    } else {
+                        spaces["@\(grammarParts[0])"] = toBeCopiedArray
+                    }
+                
+                } else {
+                    
+                    let spaceValue = mathEval(stringExpression: grammarParts[1], screen: &screen, spaces: &spaces)
+                    
+                    if spaceValue.doesItHaveErros == false {
                         
-                        
-                        //
-                        // INIT OF SPACE WITH 2 PARTS
-                        //
-                        
+                        if spaceValue.itsNotACondition == true {
+                            
+                            //
+                            // INIT OF SPACE WITH 2 PARTS
+                            //
+                            
                             // if it's stored space
-                        
+                            
                             if space.name.hasPrefix("$") {
-                            
+                                
                                 saveNumberToStoredSpace(number: [spaceValue.result], toSpace: grammarParts[0].replace("$", withString: ""))
-                            
-                            // simple space
+                                
+                                // simple space
                                 
                             } else {
                                 
@@ -422,19 +425,22 @@ func spaceEval (#grammarParts: [String], inout #screen: codeScreen, inout #space
                                 spaceResult = space.name
                                 
                             }
-                        
-                        
-                        //
-                        // END OF SPACE WITH 2 PARTS
-                        //
+                            
+                            
+                            //
+                            // END OF SPACE WITH 2 PARTS
+                            //
+                            
+                        } else {
+                            report("Unaccepted using of conditions in space value: '\(grammarParts[1])'", &screen)
+                        }
                         
                     } else {
-                        report("Unaccepted using of conditions in space value: '\(grammarParts[1])'", &screen)
+                        report("Bad expression: '\(grammarParts[1])'", &screen)
                     }
                     
-                } else {
-                    report("Bad expression: '\(grammarParts[1])'", &screen)
                 }
+
             }
         
         } else {

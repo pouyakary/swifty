@@ -11,7 +11,8 @@ Core Arendelle: Apple-Tech (Swift / Objective-C / C) based compiler for Arendell
 
 ```
 Swifty - Apple based port of Arendelle
-Copyright (c) 2014 Pouya Kary <k@arendelle.org>
+   Copyright (c) 2014-2016 Kary Foundation, Inc.
+   Author: Pouya Kary <k@karyfoundation.org>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
